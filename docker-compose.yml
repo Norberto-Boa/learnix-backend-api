@@ -1,0 +1,30 @@
+services:
+  db:
+    image: bitnami/postgresql
+    container_name: learnix_db
+    restart: always
+    environment:
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_DATABASE=learnix_db
+      - POSTGRESQL_TIMEZONE=Africa/Maputo
+      - ALLOW_EMPTY_PASSWORD=no
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/bitnami/postgresql
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: learnix_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '8080:80'
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+    driver: local
