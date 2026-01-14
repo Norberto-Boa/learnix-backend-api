@@ -32,12 +32,18 @@ importers:
       '@prisma/client':
         specifier: 7.2.0
         version: 7.2.0(prisma@7.2.0(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3))(typescript@5.9.3)
+<<<<<<< HEAD
       bcrypt:
         specifier: 6.0.0
         version: 6.0.0
       passport:
         specifier: 0.7.0
         version: 0.7.0
+=======
+      bcryptjs:
+        specifier: 3.0.3
+        version: 3.0.3
+>>>>>>> 01d1b7dda5cee4b56ccd8ce63e5e8151af2076ff
       passport-jwt:
         specifier: 4.0.1
         version: 4.0.1
@@ -1389,9 +1395,15 @@ packages:
     resolution: {integrity: sha512-B0xUquLkiGLgHhpPBqvl7GWegWBUNuujQ6kXd/r1U38ElPT6Ok8KZ8e+FpUGEc2ZoRQUzq/aUnaKFc/svWUGSg==}
     hasBin: true
 
+<<<<<<< HEAD
   bcrypt@6.0.0:
     resolution: {integrity: sha512-cU8v/EGSrnH+HnxV2z0J7/blxH8gq7Xh2JFT6Aroax7UohdmiJJlxApMxtKfuI7z68NvvVcmR78k2LbT6efhRg==}
     engines: {node: '>= 18'}
+=======
+  bcryptjs@3.0.3:
+    resolution: {integrity: sha512-GlF5wPWnSa/X5LKM1o0wz0suXIINz1iHRLvTS+sLyi7XPbe5ycmYI3DlZqVGZZtDgl4DmasFg7gOB3JYbphV5g==}
+    hasBin: true
+>>>>>>> 01d1b7dda5cee4b56ccd8ce63e5e8151af2076ff
 
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
@@ -4989,10 +5001,14 @@ snapshots:
 
   baseline-browser-mapping@2.9.14: {}
 
+<<<<<<< HEAD
   bcrypt@6.0.0:
     dependencies:
       node-addon-api: 8.5.0
       node-gyp-build: 4.8.4
+=======
+  bcryptjs@3.0.3: {}
+>>>>>>> 01d1b7dda5cee4b56ccd8ce63e5e8151af2076ff
 
   bl@4.1.0:
     dependencies:

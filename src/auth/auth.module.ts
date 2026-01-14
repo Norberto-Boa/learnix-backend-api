@@ -14,11 +14,19 @@ import { AuthController } from './auth.controller';
     PassportModule,
     JwtModule.registerAsync({
       imports: [EnvModule],
+<<<<<<< HEAD
       inject: [EnvModule],
       global: true,
       useFactory(env: EnvService) {
         return {
           secret: env.get('JWT_SECRET'),
+=======
+      inject: [EnvService],
+      global: true,
+      useFactory(env: EnvService) {
+        return {
+          secret: env.get('JWT_SECRET_KEY'),
+>>>>>>> 01d1b7dda5cee4b56ccd8ce63e5e8151af2076ff
           signOptions: { expiresIn: '1h' },
         };
       },
