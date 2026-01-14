@@ -13,3 +13,22 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// USERS AND ROLES
+enum ROLE{
+  ADMIN
+  MANAGER
+  SECRETARIA
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role ROLE @default(SECRETARIA)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
