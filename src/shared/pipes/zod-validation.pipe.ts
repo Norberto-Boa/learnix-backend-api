@@ -3,7 +3,7 @@ import {
   type ArgumentMetadata,
   type PipeTransform,
 } from '@nestjs/common';
-import type { ZodSchema } from 'zod';
+import { ZodError, type ZodSchema } from 'zod';
 
 export class ZodValidationPipe implements PipeTransform {
   constructor(private schema: ZodSchema) {}
@@ -13,7 +13,11 @@ export class ZodValidationPipe implements PipeTransform {
       const parsedValue = this.schema.parse(value);
       return parsedValue;
     } catch (error) {
-      throw new BadRequestException('Validation failed');
+      if (error instanceof ZodError) {
+        throw new BadRequestException(error.flatten());
+      }
+
+      throw error;
     }
   }
 }
