@@ -7,6 +7,7 @@ import { EnvService } from '../env/env.service';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
+import { JwtAuthGuard } from './guard/auth.guard';
 
 @Module({
   imports: [
@@ -24,8 +25,8 @@ import { AuthController } from './auth.controller';
       },
     }),
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, JwtAuthGuard],
   controllers: [AuthController],
-  exports: [AuthService],
+  exports: [AuthService, JwtAuthGuard],
 })
 export class AuthModule {}
