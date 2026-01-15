@@ -7,9 +7,10 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
 import { JwtAuthGuard } from './auth/guard/auth.guard';
+import { SchoolsModule } from './schools/schools.module';
 
 @Module({
-  imports: [EnvModule, PrismaModule, UsersModule, AuthModule],
+  imports: [EnvModule, PrismaModule, UsersModule, AuthModule, SchoolsModule],
   providers: [
     {
       provide: APP_GUARD,
