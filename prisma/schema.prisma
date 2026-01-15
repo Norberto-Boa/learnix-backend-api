@@ -20,9 +20,24 @@ datasource db {
 
 // USERS AND ROLES
 enum ROLE{
+  SUPERADMIN
   ADMIN
   MANAGER
-  SECRETARIA
+  CLERK
+}
+
+model School{
+  id String @id @default(uuid())
+  name String
+  nuit String @unique
+  slug String @unique
+  status String
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("schools")
 }
 
 model User {
@@ -30,7 +45,7 @@ model User {
   name String
   email String @unique
   password String
-  role ROLE @default(SECRETARIA)
+  role ROLE @default(CLERK)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
