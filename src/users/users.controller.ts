@@ -20,12 +20,22 @@ import * as bcrypt from 'bcryptjs';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import { CreateUserSchema, type CreateUserDto } from './dto/create-user.dto';
 import type z from 'zod';
+import {
+  ApiAcceptedResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('user')
 export class UsersController {
   constructor(private usersService: UsersService) {}
-  @UseGuards(JwtAuthGuard)
   @Get('me')
+  @ApiOperation({ summary: 'Profile route, that returns users data' })
+  @ApiResponse({
+    status: 200,
+    description: 'Succesfully accessed user data',
+    type: UserBaseDto,
+  })
   async getMe(@GetUser('id') id: string) {
     const user = await this.usersService.findUserById(id);
 
