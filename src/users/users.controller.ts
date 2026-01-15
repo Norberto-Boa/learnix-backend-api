@@ -26,7 +26,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  async getMe(@GetUser('userId') id: string) {
+  async getMe(@GetUser('id') id: string) {
     const user = await this.usersService.findUserById(id);
 
     if (!user) {

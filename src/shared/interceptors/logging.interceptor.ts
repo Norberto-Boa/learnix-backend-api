@@ -14,17 +14,21 @@ export class LoggingInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const request = context.switchToHttp().getRequest();
-    const { method, url, user } = request;
-    const now = Date.now();
 
-    const userId = user
-      ? `User: ${user.id} (Escola: ${user.schoolId || 'SaaS'})`
-      : 'Public/Guest';
+    const now = Date.now();
 
     return next.handle().pipe(
       tap(() => {
+        const req = context.switchToHttp().getRequest();
+        const { method, url, user } = req;
+
+        const userLabel = user
+          ? `User: ${user.id} (Escola: ${user.schoolId ?? 'SaaS'})`
+          : 'Public/Guest';
+
         const delay = Date.now() - now;
-        this.logger.log(`${method} ${url} | ${userId} | +${delay}ms`);
+
+        this.logger.log(`${method} ${url} | ${userLabel} | +${delay}ms`);
       }),
     );
   }

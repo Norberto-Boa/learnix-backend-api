@@ -11,12 +11,14 @@ import { AuthService } from './auth.service';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import { loginSchema, type LoginDto } from './dto/login.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from './decorators/public.decorator';
 
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @Post('login')
   @ApiOperation({ summary: 'Login that returns a JWT token' })
   @ApiResponse({ status: 200, description: 'Successfully Logged in' })
