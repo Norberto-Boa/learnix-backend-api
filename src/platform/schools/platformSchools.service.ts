@@ -1,27 +1,47 @@
+import { AuditService } from '@/audit/audit.service';
 import type { SchoolCreateInput } from '@/generated/prisma/models';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()
 export class PlatformSchoolsService {
-  constructor(private prismaService: PrismaService) {}
+  private entity = 'SCHOOL';
+
+  constructor(
+    private prismaService: PrismaService,
+    private auditService: AuditService,
+  ) {}
 
   async create(
     { name, nuit, slug, status }: SchoolCreateInput,
-    userId: string,
+    performedByUserId: string,
   ) {
-    const school = await this.prismaService.school.create({
-      data: {
-        name,
-        nuit,
-        slug,
-        status,
-      },
-    });
+    return await this.prismaService.$transaction(async (tx) => {
+      const school = await this.prismaService.school.create({
+        data: {
+          name,
+          nuit,
+          slug,
+          status,
+        },
+      });
 
-    return {
-      message: 'School succesfully created',
-      escolaId: school.id,
-    };
+      await this.auditService.log(
+        {
+          action: 'CREATE_SCHOOL',
+          entity: this.entity,
+          entityId: school.id,
+          userId: performedByUserId,
+          schoolId: school.id,
+          newData: {
+            id: school.id,
+            nuit: school.nuit,
+          },
+        },
+        tx,
+      );
+
+      return school;
+    });
   }
 }

@@ -42,7 +42,7 @@ export class PlatformSchoolsController {
 
     const slug = await this.generateUniqueSlug(name);
 
-    const school = this.platformSchoolsService.create(
+    const school = await this.platformSchoolsService.create(
       {
         name: name,
         nuit: nuit,
@@ -51,6 +51,8 @@ export class PlatformSchoolsController {
       },
       id,
     );
+
+    return school;
   }
 
   private slugifySchoolName(name: string): string {
@@ -71,6 +73,7 @@ export class PlatformSchoolsController {
 
     while (await this.coreSchoolsService.findSchoolByslug(slug)) {
       slug = `${baseSlug}-${count}`;
+      count++;
     }
 
     return slug;

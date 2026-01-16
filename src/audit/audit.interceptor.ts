@@ -4,10 +4,11 @@ import {
   type ExecutionContext,
   type NestInterceptor,
 } from '@nestjs/common';
-import type { Reflector } from '@nestjs/core';
-import type { AuditService } from './audit.service';
+import { Reflector } from '@nestjs/core';
+import { AuditService } from './audit.service';
 import { type Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AUDIT_METADATA_KEY } from './audit.decorator';
 
 @Injectable()
 export class AuditInterceptor implements NestInterceptor {
@@ -17,7 +18,10 @@ export class AuditInterceptor implements NestInterceptor {
   ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const auditOptions = this.reflector.get('audit', context.getHandler());
+    const auditOptions = this.reflector.get(
+      AUDIT_METADATA_KEY,
+      context.getHandler(),
+    );
 
     if (!auditOptions) {
       return next.handle();
