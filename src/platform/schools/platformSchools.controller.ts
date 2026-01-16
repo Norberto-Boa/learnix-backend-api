@@ -3,6 +3,7 @@ import {
   ConflictException,
   Controller,
   Post,
+  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { PlatformSchoolsService } from './platformSchools.service';
@@ -14,7 +15,7 @@ import {
 import { SchoolsService } from '@/schools/schools.service';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
-import { CreateUserSchema } from '@/users/dto/create-user.dto';
+import { RolesGuard } from '@/auth/guard/roles.guard';
 
 @Controller()
 export class PlatformSchoolsController {
@@ -25,6 +26,7 @@ export class PlatformSchoolsController {
 
   @Post()
   @Roles('SUPERADMIN')
+  @UseGuards(RolesGuard)
   @UsePipes()
   async create(
     @Body(new ZodValidationPipe(createSchoolSchema))
