@@ -1,3 +1,4 @@
+import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import type {
@@ -18,7 +19,8 @@ interface saveStudent {
 export class AuditLogRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async save(data: saveStudent) {
-    return this.prismaService.auditLog.create({ data });
+  async save(data: saveStudent, tx?: TransactionClient) {
+    const client = tx ?? this.prismaService;
+    return client.auditLog.create({ data });
   }
 }

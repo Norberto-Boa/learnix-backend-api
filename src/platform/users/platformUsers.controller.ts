@@ -17,10 +17,12 @@ import { GetUser } from '@/auth/decorators/get-user.decorator';
 import * as bcrypt from 'bcryptjs';
 import { SchoolsService } from '@/schools/schools.service';
 import { RolesGuard } from '@/auth/guard/roles.guard';
+import { PlatformUsersService } from './platformUsers.service';
 
 @Controller()
 export class PlatformUsersController {
   constructor(
+    private platformUsersService: PlatformUsersService,
     private coreUsersService: UsersService,
     private coreSchoolsService: SchoolsService,
   ) {}
@@ -56,13 +58,16 @@ export class PlatformUsersController {
     const defaultPassword = 'Admin123';
     const hashedPassword = await bcrypt.hash(defaultPassword, 8);
 
-    const user = await this.coreUsersService.create({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-      schoolId,
-    });
+    const user = await this.platformUsersService.create(
+      {
+        name,
+        email,
+        password: hashedPassword,
+        role,
+        schoolId,
+      },
+      id,
+    );
 
     return user;
   }

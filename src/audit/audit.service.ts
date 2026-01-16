@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuditLogRepository } from './repositories/audit-log.repository';
+import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 
 interface AuditData {
   action: string;
@@ -15,17 +16,20 @@ interface AuditData {
 export class AuditService {
   constructor(private auditLogsRepository: AuditLogRepository) {}
 
-  async log(data: AuditData) {
-    return await this.auditLogsRepository.save({
-      action: data.action,
-      entity: data.entity,
-      schoolId: data.schoolId,
-      userId: data.userId,
-      entityId: data.entityId ?? undefined,
-      payload: {
-        before: data.oldData,
-        after: data.newData,
-      } as any,
-    });
+  async log(data: AuditData, tx?: TransactionClient) {
+    return await this.auditLogsRepository.save(
+      {
+        action: data.action,
+        entity: data.entity,
+        schoolId: data.schoolId,
+        userId: data.userId,
+        entityId: data.entityId ?? undefined,
+        payload: {
+          before: data.oldData,
+          after: data.newData,
+        } as any,
+      },
+      tx,
+    );
   }
 }
