@@ -10,4 +10,5 @@
  */
 export type * from './models/School'
 export type * from './models/User'
+export type * from './models/AuditLog'
 export type * from './commonInputTypes'

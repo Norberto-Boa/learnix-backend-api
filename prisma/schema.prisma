@@ -34,6 +34,8 @@ model School{
   status String
 
   users User[]
+  auditLogs AuditLog[]
+
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,5 +56,23 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  auditLogs AuditLog[]
+
   @@map("users")
+}
+
+model AuditLog{
+  id String @id @default(uuid())
+  action String
+  entity String
+  entityId String?
+  payload Json
+
+  schoolId String
+  school School @relation(fields: [schoolId], references: [id])
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
 }

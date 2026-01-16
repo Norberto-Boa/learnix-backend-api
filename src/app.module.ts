@@ -9,11 +9,13 @@ import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
 import { JwtAuthGuard } from './auth/guard/auth.guard';
 import { SchoolsModule } from './schools/schools.module';
 import { PlatformModule } from './platform/platform.module';
+import { AuditModule } from './audit/audit.module';
 
 @Module({
   imports: [
     EnvModule,
     PrismaModule,
+    AuditModule,
     UsersModule,
     AuthModule,
     SchoolsModule,
