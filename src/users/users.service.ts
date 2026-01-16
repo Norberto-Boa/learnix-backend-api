@@ -1,7 +1,15 @@
 import type { User } from '@/generated/prisma/browser';
-import type { Prisma } from '@/generated/prisma/client';
+import type { Prisma, ROLE } from '@/generated/prisma/client';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+
+interface CreateUserInput {
+  name: string;
+  email: string;
+  password: string;
+  role: ROLE;
+  schoolId: string;
+}
 
 @Injectable()
 export class UsersService {
@@ -33,13 +41,14 @@ export class UsersService {
     });
   }
 
-  async create({ email, name, password, role }: Prisma.UserCreateInput) {
+  async create({ email, name, password, role, schoolId }: CreateUserInput) {
     return await this.prisma.user.create({
       data: {
         email,
         name,
         password,
         role,
+        schoolId,
       },
     });
   }

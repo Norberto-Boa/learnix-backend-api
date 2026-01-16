@@ -20,4 +20,12 @@ export class SchoolsService {
       },
     });
   }
+
+  async findSchoolById(id: string) {
+    return await this.prismaService.school.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
 }

@@ -5,7 +5,7 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
-import { PlatformSchoolsService } from './schools.service';
+import { PlatformSchoolsService } from './platformSchools.service';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import {
   createSchoolSchema,

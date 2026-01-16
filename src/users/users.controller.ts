@@ -66,6 +66,7 @@ export class UsersController {
       name: data.name,
       password: hashedPassword,
       role: data.role,
+      schoolId: data.schoolId,
     });
 
     return user;
