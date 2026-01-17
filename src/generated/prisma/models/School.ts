@@ -32,6 +32,7 @@ export type SchoolMinAggregateOutputType = {
   status: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type SchoolMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type SchoolMaxAggregateOutputType = {
   status: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type SchoolCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type SchoolCountAggregateOutputType = {
   status: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type SchoolMinAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type SchoolMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type SchoolMaxAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type SchoolCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type SchoolCountAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type SchoolGroupByOutputType = {
   status: string
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: SchoolCountAggregateOutputType | null
   _min: SchoolMinAggregateOutputType | null
   _max: SchoolMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type SchoolWhereInput = {
   status?: Prisma.StringFilter<"School"> | string
   createdAt?: Prisma.DateTimeFilter<"School"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"School"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"School"> | Date | string | null
   users?: Prisma.UserListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }
@@ -210,6 +218,7 @@ export type SchoolOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
 }
@@ -225,6 +234,7 @@ export type SchoolWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"School"> | string
   createdAt?: Prisma.DateTimeFilter<"School"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"School"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"School"> | Date | string | null
   users?: Prisma.UserListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
 }, "id" | "nuit" | "slug">
@@ -237,6 +247,7 @@ export type SchoolOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SchoolCountOrderByAggregateInput
   _max?: Prisma.SchoolMaxOrderByAggregateInput
   _min?: Prisma.SchoolMinOrderByAggregateInput
@@ -253,6 +264,7 @@ export type SchoolScalarWhereWithAggregatesInput = {
   status?: Prisma.StringWithAggregatesFilter<"School"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"School"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"School"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"School"> | Date | string | null
 }
 
 export type SchoolCreateInput = {
@@ -263,6 +275,7 @@ export type SchoolCreateInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   users?: Prisma.UserCreateNestedManyWithoutSchoolInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
 }
@@ -275,6 +288,7 @@ export type SchoolUncheckedCreateInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
 }
@@ -287,6 +301,7 @@ export type SchoolUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
 }
@@ -299,6 +314,7 @@ export type SchoolUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
 }
@@ -311,6 +327,7 @@ export type SchoolCreateManyInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type SchoolUpdateManyMutationInput = {
@@ -321,6 +338,7 @@ export type SchoolUpdateManyMutationInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SchoolUncheckedUpdateManyInput = {
@@ -331,6 +349,7 @@ export type SchoolUncheckedUpdateManyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SchoolCountOrderByAggregateInput = {
@@ -341,6 +360,7 @@ export type SchoolCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type SchoolMaxOrderByAggregateInput = {
@@ -351,6 +371,7 @@ export type SchoolMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type SchoolMinOrderByAggregateInput = {
@@ -361,6 +382,7 @@ export type SchoolMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type SchoolNullableScalarRelationFilter = {
@@ -379,6 +401,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type SchoolCreateNestedOneWithoutUsersInput = {
@@ -419,6 +445,7 @@ export type SchoolCreateWithoutUsersInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutSchoolInput
 }
 
@@ -430,6 +457,7 @@ export type SchoolUncheckedCreateWithoutUsersInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutSchoolInput
 }
 
@@ -457,6 +485,7 @@ export type SchoolUpdateWithoutUsersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUpdateManyWithoutSchoolNestedInput
 }
 
@@ -468,6 +497,7 @@ export type SchoolUncheckedUpdateWithoutUsersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
@@ -479,6 +509,7 @@ export type SchoolCreateWithoutAuditLogsInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   users?: Prisma.UserCreateNestedManyWithoutSchoolInput
 }
 
@@ -490,6 +521,7 @@ export type SchoolUncheckedCreateWithoutAuditLogsInput = {
   status: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   users?: Prisma.UserUncheckedCreateNestedManyWithoutSchoolInput
 }
 
@@ -517,6 +549,7 @@ export type SchoolUpdateWithoutAuditLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUpdateManyWithoutSchoolNestedInput
 }
 
@@ -528,6 +561,7 @@ export type SchoolUncheckedUpdateWithoutAuditLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   users?: Prisma.UserUncheckedUpdateManyWithoutSchoolNestedInput
 }
 
@@ -579,6 +613,7 @@ export type SchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   users?: boolean | Prisma.School$usersArgs<ExtArgs>
   auditLogs?: boolean | Prisma.School$auditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.SchoolCountOutputTypeDefaultArgs<ExtArgs>
@@ -592,6 +627,7 @@ export type SchoolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["school"]>
 
 export type SchoolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -602,6 +638,7 @@ export type SchoolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["school"]>
 
 export type SchoolSelectScalar = {
@@ -612,9 +649,10 @@ export type SchoolSelectScalar = {
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type SchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "nuit" | "slug" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["school"]>
+export type SchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "nuit" | "slug" | "status" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["school"]>
 export type SchoolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.School$usersArgs<ExtArgs>
   auditLogs?: boolean | Prisma.School$auditLogsArgs<ExtArgs>
@@ -637,6 +675,7 @@ export type $SchoolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     status: string
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["school"]>
   composites: {}
 }
@@ -1069,6 +1108,7 @@ export interface SchoolFieldRefs {
   readonly status: Prisma.FieldRef<"School", 'String'>
   readonly createdAt: Prisma.FieldRef<"School", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"School", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"School", 'DateTime'>
 }
     
 
