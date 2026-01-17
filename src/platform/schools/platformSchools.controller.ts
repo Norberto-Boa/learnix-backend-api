@@ -3,6 +3,7 @@ import {
   ConflictException,
   Controller,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   UseGuards,
@@ -62,7 +63,7 @@ export class PlatformSchoolsController {
   async update(
     @Body(new ZodValidationPipe(updateSchoolSchema))
     { name, status }: UpdateSchoolDTO,
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @GetUser('id') userId: string,
   ) {
     const school = this.platformSchoolsService.update(
