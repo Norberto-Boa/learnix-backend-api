@@ -6,7 +6,7 @@ import type {
   JsonNullClass,
 } from '@prisma/client/runtime/client';
 
-interface saveStudent {
+interface saveLog {
   action: string;
   entity: string;
   entityId?: string;
@@ -19,7 +19,7 @@ interface saveStudent {
 export class AuditLogRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async save(data: saveStudent, tx?: TransactionClient) {
+  async save(data: saveLog, tx?: TransactionClient) {
     const client = tx ?? this.prismaService;
     return client.auditLog.create({ data });
   }
