@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@generated-prisma';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
+import { softDeleteExtension } from './extensions/soft-delete.extension';
 
 @Injectable()
 export class PrismaService
@@ -24,6 +25,8 @@ export class PrismaService
 
   async onModuleInit() {
     await this.$connect();
+
+    this.$extends(softDeleteExtension());
   }
 
   async onModuleDestroy() {

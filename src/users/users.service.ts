@@ -25,7 +25,7 @@ export class UsersService {
 
   async findUserById(
     id: string,
-  ): Promise<Omit<User, 'password' | 'schoolId'> | null> {
+  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
     return await this.prisma.user.findUnique({
       where: {
         id,
@@ -37,6 +37,7 @@ export class UsersService {
         createdAt: true,
         role: true,
         updatedAt: true,
+        status: true,
       },
     });
   }
