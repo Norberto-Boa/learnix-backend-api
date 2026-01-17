@@ -20,6 +20,7 @@ import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { UpdateSchoolDTO, updateSchoolSchema } from './dto/update-school.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 export class PlatformSchoolsController {
@@ -31,6 +32,9 @@ export class PlatformSchoolsController {
   @Post()
   @Roles('SUPERADMIN')
   @UseGuards(RolesGuard)
+  @ApiOperation({ summary: 'Creates a new school for the SaaS ecossystem' })
+  @ApiResponse({ status: 200, description: 'School successfully created' })
+  @ApiResponse({ status: 409, description: 'Nuit already in use!' })
   @UsePipes()
   async create(
     @Body(new ZodValidationPipe(createSchoolSchema))
@@ -59,6 +63,9 @@ export class PlatformSchoolsController {
   @Patch(':id')
   @Roles('SUPERADMIN')
   @UseGuards(RolesGuard)
+  @ApiOperation({ summary: 'Updates a school on the SaaS ecossystem' })
+  @ApiResponse({ status: 200, description: 'School successfully updated' })
+  @ApiResponse({ status: 404, description: 'School not found' })
   @UsePipes()
   async update(
     @Body(new ZodValidationPipe(updateSchoolSchema))
