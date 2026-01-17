@@ -1,5 +1,6 @@
 import type {
   SchoolCreateInput,
+  SchoolUpdateInput,
   TransactionClient,
 } from '@/generated/prisma/internal/prismaNamespace';
 import { PrismaService } from '@/prisma/prisma.service';
@@ -33,12 +34,26 @@ export class SchoolsRepository {
     });
   }
 
-  async create({ name, slug, nuit }: SchoolCreateInput, tx: TransactionClient) {
+  async save({ name, slug, nuit }: SchoolCreateInput, tx: TransactionClient) {
     return tx.school.create({
       data: {
         name,
         nuit,
         slug,
+        status,
+      },
+    });
+  }
+
+  async update(
+    id: string,
+    { name, status }: SchoolUpdateInput,
+    tx: TransactionClient,
+  ) {
+    return tx.school.update({
+      where: { id },
+      data: {
+        name,
         status,
       },
     });

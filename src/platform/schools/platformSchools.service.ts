@@ -1,8 +1,12 @@
 import { AuditService } from '@/audit/audit.service';
-import type { SchoolCreateInput } from '@/generated/prisma/models';
+import type {
+  SchoolCreateInput,
+  SchoolUpdateInput,
+} from '@/generated/prisma/models';
 import { PrismaService } from '@/prisma/prisma.service';
 import { SchoolsRepository } from '@/schools/schools.repositories';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { generateUniqueSlug } from './utils/generate-unique-slug';
 
 @Injectable()
 export class PlatformSchoolsService {
@@ -19,7 +23,7 @@ export class PlatformSchoolsService {
     performedByUserId: string,
   ) {
     return await this.prismaService.$transaction(async (tx) => {
-      const school = await this.schoolsRepository.create(
+      const school = await this.schoolsRepository.save(
         {
           name,
           nuit,
@@ -71,6 +75,45 @@ export class PlatformSchoolsService {
       );
 
       return { success: true };
+    });
+  }
+
+  async update(
+    id: string,
+    { name, status }: SchoolUpdateInput,
+    performeByUserId: string,
+  ) {
+    const school = await this.schoolsRepository.findById(id);
+    if (!school) throw new NotFoundException('School not found!');
+    let slug;
+    if (name && typeof name === 'string' && name !== school.name) {
+      slug = await generateUniqueSlug(name, this.schoolsRepository);
+    }
+
+    return await this.prismaService.$transaction(async (tx) => {
+      const updatedSchool = await this.schoolsRepository.update(
+        id,
+        { name, status, slug: slug ? slug : undefined },
+        tx,
+      );
+
+      this.auditService.log({
+        action: 'UPDATE_SCHOOL',
+        entity: 'SCHOOL',
+        schoolId: school.id,
+        userId: performeByUserId,
+        entityId: school.id,
+        oldData: {
+          name: school.name,
+          status: school.status,
+          slug: school.slug,
+        },
+        newData: {
+          name: updatedSchool.name,
+          status: updatedSchool.status,
+          slug: updatedSchool.slug,
+        },
+      });
     });
   }
 }
