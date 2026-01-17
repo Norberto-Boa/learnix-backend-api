@@ -47,7 +47,7 @@ export class SchoolsRepository {
 
   async update(
     id: string,
-    { name, status }: SchoolUpdateInput,
+    { name, status, slug }: SchoolUpdateInput,
     tx: TransactionClient,
   ) {
     return tx.school.update({
@@ -55,6 +55,7 @@ export class SchoolsRepository {
       data: {
         name,
         status,
+        slug,
       },
     });
   }

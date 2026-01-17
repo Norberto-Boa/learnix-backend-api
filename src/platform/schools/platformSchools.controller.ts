@@ -2,6 +2,8 @@ import {
   Body,
   ConflictException,
   Controller,
+  Param,
+  Patch,
   Post,
   UseGuards,
   UsePipes,
@@ -16,6 +18,7 @@ import { SchoolsService } from '@/schools/schools.service';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import { RolesGuard } from '@/auth/guard/roles.guard';
+import { UpdateSchoolDTO, updateSchoolSchema } from './dto/update-school.dto';
 
 @Controller()
 export class PlatformSchoolsController {
@@ -40,13 +43,10 @@ export class PlatformSchoolsController {
       throw new ConflictException('Escola com mesmo nuit ja existe!');
     }
 
-    const slug = await this.generateUniqueSlug(name);
-
     const school = await this.platformSchoolsService.create(
       {
         name: name,
         nuit: nuit,
-        slug: slug,
         status: 'ACTIVO',
       },
       id,
@@ -55,27 +55,22 @@ export class PlatformSchoolsController {
     return school;
   }
 
-  private slugifySchoolName(name: string): string {
-    return name
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-');
-  }
+  @Patch(':id')
+  @Roles('SUPERADMIN')
+  @UseGuards(RolesGuard)
+  @UsePipes()
+  async update(
+    @Body(new ZodValidationPipe(updateSchoolSchema))
+    { name, status }: UpdateSchoolDTO,
+    @Param('id') id: string,
+    @GetUser('id') userId: string,
+  ) {
+    const school = this.platformSchoolsService.update(
+      id,
+      { name, status },
+      userId,
+    );
 
-  private async generateUniqueSlug(name): Promise<string> {
-    const baseSlug = this.slugifySchoolName(name);
-    let slug = baseSlug;
-    let count = 1;
-
-    while (await this.coreSchoolsService.findSchoolByslug(slug)) {
-      slug = `${baseSlug}-${count}`;
-      count++;
-    }
-
-    return slug;
+    return school;
   }
 }

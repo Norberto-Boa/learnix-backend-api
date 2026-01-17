@@ -19,9 +19,11 @@ export class PlatformSchoolsService {
   ) {}
 
   async create(
-    { name, nuit, slug, status }: SchoolCreateInput,
+    { name, nuit, status }: Omit<SchoolCreateInput, 'slug'>,
     performedByUserId: string,
   ) {
+    const slug = await generateUniqueSlug(name, this.schoolsRepository);
+
     return await this.prismaService.$transaction(async (tx) => {
       const school = await this.schoolsRepository.save(
         {
@@ -87,10 +89,13 @@ export class PlatformSchoolsService {
     if (!school) throw new NotFoundException('School not found!');
     let slug;
     if (name && typeof name === 'string' && name !== school.name) {
+      console.log(name);
       slug = await generateUniqueSlug(name, this.schoolsRepository);
     }
 
     return await this.prismaService.$transaction(async (tx) => {
+      console.log(slug);
+
       const updatedSchool = await this.schoolsRepository.update(
         id,
         { name, status, slug: slug ? slug : undefined },
@@ -114,6 +119,8 @@ export class PlatformSchoolsService {
           slug: updatedSchool.slug,
         },
       });
+
+      return updatedSchool;
     });
   }
 }
