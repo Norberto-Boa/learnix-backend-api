@@ -11,10 +11,7 @@ import {
 } from '@nestjs/common';
 import { PlatformSchoolsService } from './platformSchools.service';
 import { Roles } from '@/auth/decorators/roles.decorator';
-import {
-  createSchoolSchema,
-  type CreateSchoolDTO,
-} from './dto/create-school.dto';
+import { createSchoolSchema, CreateSchoolDTO } from './dto/create-school.dto';
 import { SchoolsService } from '@/schools/schools.service';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
