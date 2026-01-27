@@ -25,6 +25,7 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
+import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 
 @Controller('user')
 export class UsersController {
@@ -53,6 +54,7 @@ export class UsersController {
   async create(
     @Body(new ZodValidationPipe(CreateUserSchema)) data: CreateUserDto,
     @GetUser('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
   ) {
     const doesUserWithSameEmailExist = await this.usersService.findUserByEmail(
       data.email,
@@ -62,15 +64,12 @@ export class UsersController {
       throw new ConflictException('User with same email already exists');
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 8);
-
     const user = await this.usersService.create(
       {
         email: data.email,
         name: data.name,
-        password: hashedPassword,
         role: data.role,
-        schoolId: data.schoolId,
+        schoolId: schoolId,
       },
       id,
     );

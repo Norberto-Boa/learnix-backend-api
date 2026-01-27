@@ -1,9 +1,10 @@
 import type { User } from '@/generated/prisma/browser';
-import type { Prisma, ROLE } from '@/generated/prisma/client';
+import type { ROLE } from '@/generated/prisma/client';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import type { UsersRepository } from './repository/users-repository';
-import type { AuditService } from '@/audit/audit.service';
+import { UsersRepository } from './repository/users-repository';
+import { AuditService } from '@/audit/audit.service';
+import * as bcrypt from 'bcryptjs';
 
 interface CreateUserInput {
   name: string;
@@ -23,7 +24,7 @@ export class UsersService {
 
   async findUserByEmail(
     email: string,
-  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
+  ): Promise<Omit<User, 'deletedAt'> | null> {
     return await this.usersRepository.findByEmail(email);
   }
 
@@ -34,16 +35,19 @@ export class UsersService {
   }
 
   async create(
-    { email, name, password, role, schoolId }: CreateUserInput,
+    { email, name, role, schoolId }: Omit<CreateUserInput, 'password'>,
     performedByUserId: string,
   ) {
+    const password = 'AdminLearnix123';
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     return await this.prismaService.$transaction(async (tx) => {
       const user = await this.usersRepository.save({
         name,
         email,
-        password,
+        password: hashedPassword,
         role,
-        schoolId: performedByUserId,
+        schoolId,
       });
 
       await this.auditService.log(

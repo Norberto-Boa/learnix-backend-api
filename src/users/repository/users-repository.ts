@@ -1,7 +1,7 @@
 import type { User } from '@/generated/prisma/client';
 import type { ROLE } from '@/generated/prisma/enums';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 
 interface saveUser {
@@ -56,20 +56,11 @@ export class UsersRepository {
   async findByEmail(
     email: string,
     tx?: TransactionClient,
-  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
+  ): Promise<Omit<User, 'deletedAt'> | null> {
     const client = tx ?? this.prismaService;
     return await client.user.findUnique({
       where: {
         email,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        createdAt: true,
-        role: true,
-        updatedAt: true,
-        status: true,
       },
     });
   }

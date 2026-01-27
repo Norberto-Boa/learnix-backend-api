@@ -9,10 +9,12 @@ export const GetSchoolId = createParamDecorator(
     const request = ctx.switchToHttp().getRequest();
     const user = request.user;
 
-    if (!user || (!user.escolaId && user.role !== 'SUPERADMIN')) {
-      throw new ForbiddenException('Usuario nao esta registado');
+    if (!user || (!user.schoolId && user.role !== 'SUPERADMIN')) {
+      throw new ForbiddenException(
+        'Usuario nao esta registado em nenhuma escola',
+      );
     }
 
-    return user.escolaId;
+    return user.schoolId;
   },
 );
