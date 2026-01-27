@@ -21,31 +21,16 @@ export class UsersService {
     private auditService: AuditService,
   ) {}
 
-  async findUserByEmail(email: string): Promise<User | null> {
-    return this.prismaService.user.findUnique({
-      where: {
-        email,
-      },
-    });
+  async findUserByEmail(
+    email: string,
+  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
+    return await this.usersRepository.findByEmail(email);
   }
 
   async findUserById(
     id: string,
   ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
-    return await this.prismaService.user.findUnique({
-      where: {
-        id,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        createdAt: true,
-        role: true,
-        updatedAt: true,
-        status: true,
-      },
-    });
+    return await this.usersRepository.findById(id);
   }
 
   async create(
