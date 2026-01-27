@@ -43,7 +43,7 @@ export class UsersService {
         email,
         password,
         role,
-        schoolId,
+        schoolId: performedByUserId,
       });
 
       await this.auditService.log(

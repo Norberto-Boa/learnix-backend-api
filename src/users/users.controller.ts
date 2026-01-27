@@ -49,8 +49,11 @@ export class UsersController {
   @Post('create')
   @Roles('ADMIN')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @UsePipes(new ZodValidationPipe(CreateUserSchema))
-  async create(@Body() data: CreateUserDto) {
+  @UsePipes()
+  async create(
+    @Body(new ZodValidationPipe(CreateUserSchema)) data: CreateUserDto,
+    @GetUser('id') id: string,
+  ) {
     const doesUserWithSameEmailExist = await this.usersService.findUserByEmail(
       data.email,
     );
@@ -61,13 +64,16 @@ export class UsersController {
 
     const hashedPassword = await bcrypt.hash(data.password, 8);
 
-    const user = await this.usersService.create({
-      email: data.email,
-      name: data.name,
-      password: hashedPassword,
-      role: data.role,
-      schoolId: data.schoolId,
-    });
+    const user = await this.usersService.create(
+      {
+        email: data.email,
+        name: data.name,
+        password: hashedPassword,
+        role: data.role,
+        schoolId: data.schoolId,
+      },
+      id,
+    );
 
     return user;
   }
