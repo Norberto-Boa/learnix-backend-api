@@ -32,23 +32,11 @@ export class UsersRepository {
     });
   }
 
-  async findById(
-    id: string,
-    tx?: TransactionClient,
-  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
+  async findById(id: string, tx?: TransactionClient): Promise<User | null> {
     const client = tx ?? this.prismaService;
     return await client.user.findUnique({
       where: {
         id,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        createdAt: true,
-        role: true,
-        updatedAt: true,
-        status: true,
       },
     });
   }
@@ -56,7 +44,7 @@ export class UsersRepository {
   async findByEmail(
     email: string,
     tx?: TransactionClient,
-  ): Promise<Omit<User, 'deletedAt'> | null> {
+  ): Promise<User | null> {
     const client = tx ?? this.prismaService;
     return await client.user.findUnique({
       where: {

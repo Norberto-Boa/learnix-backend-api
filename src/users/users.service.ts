@@ -22,15 +22,11 @@ export class UsersService {
     private auditService: AuditService,
   ) {}
 
-  async findUserByEmail(
-    email: string,
-  ): Promise<Omit<User, 'deletedAt'> | null> {
+  async findUserByEmail(email: string): Promise<User | null> {
     return await this.usersRepository.findByEmail(email);
   }
 
-  async findUserById(
-    id: string,
-  ): Promise<Omit<User, 'password' | 'schoolId' | 'deletedAt'> | null> {
+  async findUserById(id: string): Promise<User | null> {
     return await this.usersRepository.findById(id);
   }
 
