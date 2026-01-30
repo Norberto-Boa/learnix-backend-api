@@ -32,3 +32,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model AcademicYear
+ * 
+ */
+export type AcademicYear = Prisma.AcademicYearModel

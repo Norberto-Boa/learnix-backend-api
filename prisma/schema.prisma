@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -19,7 +19,7 @@ datasource db {
 }
 
 // USERS AND ROLES
-enum ROLE{
+enum ROLE {
   SUPERADMIN
   ADMIN
   MANAGER
@@ -31,59 +31,81 @@ enum STATUS {
   SUSPENDED
 }
 
-model School{
-  id String @id @default(uuid())
-  name String
-  nuit String @unique
-  slug String @unique
+model School {
+  id     String @id @default(uuid())
+  name   String
+  nuit   String @unique
+  slug   String @unique
   status String
 
-  users User[]
-  auditLogs AuditLog[]
+  users         User[]
+  auditLogs     AuditLog[]
+  academicYears AcademicYear[]
 
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt DateTime? 
-
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   @@map("schools")
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
   password String
-  role ROLE @default(CLERK)
-  status STATUS @default(ACTIVE)
-  
-  schoolId String?
-  school School? @relation(fields: [schoolId], references: [id])
+  role     ROLE   @default(CLERK)
+  status   STATUS @default(ACTIVE)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt DateTime? 
+  schoolId String?
+  school   School? @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   auditLogs AuditLog[]
 
   @@map("users")
 }
 
-model AuditLog{
-  id String @id @default(uuid())
-  action String
-  entity String
+model AuditLog {
+  id       String  @id @default(uuid())
+  action   String
+  entity   String
   entityId String?
-  payload Json
+  payload  Json
 
   schoolId String
-  school School @relation(fields: [schoolId], references: [id])
+  school   School @relation(fields: [schoolId], references: [id])
 
   userId String
-  user User @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
 
   @@map("audit_logs")
+}
+
+model AcademicYear {
+  id String @id @default(uuid())
+
+  year  Int
+  label String
+
+  startDate DateTime
+  endDate   DateTime
+
+  isActive Boolean @default(false)
+  isClosed Boolean @default(false)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([year, schoolId])
+  @@map("academic_years")
 }
