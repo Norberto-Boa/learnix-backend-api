@@ -41,4 +41,12 @@ export class AcademicYearsRepository {
       },
     });
   }
+
+  async deactivateAll(schoolId: string, tx: Prisma.TransactionClient) {
+    const client = tx ?? this.prismaService;
+    return await client.academicYear.updateMany({
+      where: { schoolId, isActive: true },
+      data: { isActive: false },
+    });
+  }
 }
