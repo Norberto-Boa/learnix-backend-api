@@ -114,4 +114,38 @@ export class AcademicYearsService {
       return activated;
     });
   }
+
+  async deactivateAcademicYear(
+    id: string,
+    schoolId: string,
+    performedByUserId: string,
+  ) {
+    const academicYear = await this.academicYearsRepository.findById(id);
+    if (!academicYear || academicYear.schoolId !== schoolId) {
+      throw new ConflictException('Academic year not found.');
+    }
+
+    return await this.prismaService.$transaction(async (tx) => {
+      const deactivated = await this.academicYearsRepository.deactivate(
+        schoolId,
+        id,
+        tx,
+      );
+
+      await this.auditLogsService.log(
+        {
+          action: 'DEACTIVATE_ACADEMIC_YEAR',
+          entity: 'ACADEMIC_YEAR',
+          schoolId: schoolId,
+          userId: performedByUserId,
+          oldData: { academicYear },
+          newData: { deactivated },
+          entityId: id,
+        },
+        tx,
+      );
+
+      return deactivated;
+    });
+  }
 }
