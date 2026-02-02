@@ -69,4 +69,26 @@ export class InMemoryAcademicYearsRepository implements Partial<AcademicYearsRep
 
     return { count };
   }
+
+  async activate(
+    schoolId: string,
+    id: string,
+    tx: TransactionClient,
+  ): Promise<AcademicYear> {
+    const index = this.items.findIndex(
+      (item) => item.id === id && item.schoolId === schoolId && !item.deletedAt,
+    );
+
+    if (index === -1) {
+      throw new Error('Record to update not found');
+    }
+
+    this.items[index] = {
+      ...this.items[index],
+      isActive: true,
+      updatedAt: new Date(),
+    };
+
+    return this.items[index];
+  }
 }

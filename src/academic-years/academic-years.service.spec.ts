@@ -113,4 +113,50 @@ describe('AcademicYearsService (In-Memory)', () => {
     expect(activeYears.length).toBe(1);
     expect(activeYears[0].id).toBe(second.id);
   });
+
+  it('should deactivate other academic years when activating an academic year', async () => {
+    await service.create(
+      {
+        year: 2024,
+        label: '2024',
+        startDate: new Date('2024-09-01'),
+        endDate: new Date('2025-06-30'),
+      },
+      'school-123',
+      'user-456',
+    );
+
+    await service.create(
+      {
+        year: 2025,
+        label: '2025',
+        startDate: new Date('2025-09-01'),
+        endDate: new Date('2026-06-30'),
+        isActive: true,
+      },
+      'school-123',
+      'user-456',
+    );
+
+    await service.create(
+      {
+        year: 2026,
+        label: '2026',
+        startDate: new Date('2026-09-01'),
+        endDate: new Date('2027-06-30'),
+      },
+      'school-123',
+      'user-456',
+    );
+
+    const activated = await service.activateAcademicYear(
+      inMemoryRespository.items[2].id,
+      'school-123',
+      'user-456',
+    );
+
+    expect(activated.isActive).toBe(true);
+    expect(activated.label).toBe('2026');
+    expect(inMemoryRespository.items[1].isActive).toBe(false);
+  });
 });
