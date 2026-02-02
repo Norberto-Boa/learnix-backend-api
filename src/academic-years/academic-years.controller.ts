@@ -9,7 +9,7 @@ import {
 } from './dto/create-academic-year.dto';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
-import type { AcademicYearsService } from './academic-years.service';
+import { AcademicYearsService } from './academic-years.service';
 
 @ApiTags('School / Academic Years')
 @Controller('school/academic-years')

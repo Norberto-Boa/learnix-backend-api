@@ -12,6 +12,7 @@ import { PlatformModule } from './platform/platform.module';
 import { AuditModule } from './audit/audit.module';
 import { TransformInterceptor } from './shared/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './shared/filters/http-exception.filter';
+import { AcademicYearsModule } from './academic-years/academic-years.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AllExceptionsFilter } from './shared/filters/http-exception.filter';
     AuthModule,
     SchoolsModule,
     PlatformModule,
+    AcademicYearsModule,
   ],
   providers: [
     {
