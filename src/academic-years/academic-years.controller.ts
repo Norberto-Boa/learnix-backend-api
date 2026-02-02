@@ -1,7 +1,14 @@
 import { Roles } from '@/auth/decorators/roles.decorator';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
   createAcademicYearSchema,
@@ -10,6 +17,10 @@ import {
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 import { AcademicYearsService } from './academic-years.service';
+import {
+  activateAcademicYearSchema,
+  ActivateAcademicYearDTO,
+} from './dto/activate-academic-year-params.dto';
 
 @ApiTags('School / Academic Years')
 @Controller('school/academic-years')
@@ -27,6 +38,22 @@ export class AcademicYearsController {
   ) {
     return await this.academicYearService.create(
       { label, year, endDate, startDate, isActive },
+      schoolId,
+      userId,
+    );
+  }
+
+  @Patch(':id/activate')
+  @Roles('ADMIN', 'MANAGER')
+  @UseGuards(RolesGuard)
+  async activateAcademicYear(
+    @Param(new ZodValidationPipe(activateAcademicYearSchema))
+    params: ActivateAcademicYearDTO,
+    @GetUser('id') userId: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return await this.academicYearService.activateAcademicYear(
+      params.id,
       schoolId,
       userId,
     );

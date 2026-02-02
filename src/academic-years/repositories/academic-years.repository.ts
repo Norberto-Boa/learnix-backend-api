@@ -16,7 +16,7 @@ export class AcademicYearsRepository {
   constructor(private prismaService: PrismaService) {}
 
   async findById(id: string) {
-    return this.prismaService.academicYear.findUnique({
+    return await this.prismaService.academicYear.findUnique({
       where: { id },
     });
   }
