@@ -23,8 +23,14 @@
         "./src/*"
       ],
       "@generated-prisma": [
-        "src/generated/prisma/client"
+        "./src/generated/prisma/client"
+      ],
+      "@test/*": [
+        "test/*"
       ]
-    }
+    },
+    "types": [
+      "vitest/globals"
+    ]
   }
 }
