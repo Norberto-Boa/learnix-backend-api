@@ -2,12 +2,13 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@/generated/prisma/client';
 
-interface SaveAcademicYearInput {
+export interface SaveAcademicYearInput {
   year: number;
   label: string;
   startDate: Date;
   endDate: Date;
   schoolId: string;
+  isActive?: boolean;
 }
 
 @Injectable()
@@ -27,7 +28,14 @@ export class AcademicYearsRepository {
   }
 
   async save(
-    { year, label, startDate, endDate, schoolId }: SaveAcademicYearInput,
+    {
+      year,
+      label,
+      startDate,
+      endDate,
+      schoolId,
+      isActive,
+    }: SaveAcademicYearInput,
     tx: Prisma.TransactionClient,
   ) {
     const client = tx ?? this.prismaService;
@@ -38,6 +46,7 @@ export class AcademicYearsRepository {
         startDate,
         endDate,
         schoolId,
+        isActive: isActive ?? false,
       },
     });
   }

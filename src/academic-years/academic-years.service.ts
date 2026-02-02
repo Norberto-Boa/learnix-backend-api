@@ -1,8 +1,8 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateAcademicYearDTO } from './dto/create-academic-year.dto';
-import type { PrismaService } from '@/prisma/prisma.service';
-import type { AcademicYearsRepository } from './repositories/academic-years.repository';
-import type { AuditService } from '@/audit/audit.service';
+import { PrismaService } from '@/prisma/prisma.service';
+import { AcademicYearsRepository } from './repositories/academic-years.repository';
+import { AuditService } from '@/audit/audit.service';
 
 @Injectable()
 export class AcademicYearsService {
@@ -48,6 +48,7 @@ export class AcademicYearsService {
           label,
           startDate,
           schoolId,
+          isActive,
         },
         tx,
       );
