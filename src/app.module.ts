@@ -13,6 +13,7 @@ import { AuditModule } from './audit/audit.module';
 import { TransformInterceptor } from './shared/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './shared/filters/http-exception.filter';
 import { AcademicYearsModule } from './academic-years/academic-years.module';
+import { DocumentTypesModule } from './document-types/document-types.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AcademicYearsModule } from './academic-years/academic-years.module';
     SchoolsModule,
     PlatformModule,
     AcademicYearsModule,
+    DocumentTypesModule,
   ],
   providers: [
     {
