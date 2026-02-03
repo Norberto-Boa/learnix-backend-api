@@ -6,13 +6,18 @@ export interface CreateDocumentTypeData {
   schoolId: string;
 }
 
-export interface DocumentTypesRepository {
-  create(data: CreateDocumentTypeData): Promise<DocumentTypeDomain>;
-  findById(id: string, schoolId: string): Promise<DocumentTypeDomain | null>;
-  findByType(
+export abstract class DocumentTypesRepository {
+  abstract create(data: CreateDocumentTypeData): Promise<DocumentTypeDomain>;
+  abstract findById(
+    id: string,
+    schoolId: string,
+  ): Promise<DocumentTypeDomain | null>;
+  abstract findByType(
     type: string,
     schoolId: string,
   ): Promise<DocumentTypeDomain | null>;
-  findManyBySchool(schoolId: string): Promise<DocumentTypeDomain[] | []>;
-  softDelete(id: string, schoolId: string): Promise<void>;
+  abstract findManyBySchool(
+    schoolId: string,
+  ): Promise<DocumentTypeDomain[] | []>;
+  abstract softDelete(id: string, schoolId: string): Promise<void>;
 }
