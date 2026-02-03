@@ -1,9 +1,10 @@
+import type { AuditContext } from '@/audit/domain/audit-context';
 import type { DocumentType } from '../domain/document-type';
 
 export interface CreateDocumentTypeUseCase {
   execute(
     data: { type: string; label: string },
-    schoolId: string,
+    auditContext: AuditContext,
   ): Promise<DocumentType>;
 }
 
