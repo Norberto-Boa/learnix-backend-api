@@ -26,6 +26,11 @@ enum ROLE {
   CLERK
 }
 
+enum STUDENT_STATUS {
+  ACTIVE
+  INACTIVE
+}
+
 enum STATUS {
   ACTIVE
   SUSPENDED
@@ -41,6 +46,8 @@ model School {
   users         User[]
   auditLogs     AuditLog[]
   academicYears AcademicYear[]
+  documentTypes documentType[]
+  students      Student[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -60,11 +67,11 @@ model User {
   schoolId String?
   school   School? @relation(fields: [schoolId], references: [id])
 
+  auditLogs AuditLog[]
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-
-  auditLogs AuditLog[]
 
   @@map("users")
 }
@@ -108,4 +115,45 @@ model AcademicYear {
 
   @@unique([year, schoolId])
   @@map("academic_years")
+}
+
+model documentType {
+  id String @id @default(uuid())
+
+  type  String
+  label String
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  students Student[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([type, schoolId])
+  @@map("document_types")
+}
+
+model Student {
+  id                 String         @id @default(uuid())
+  name               String
+  registrationNumber String
+  dateOfBirth        DateTime
+  status             STUDENT_STATUS @default(ACTIVE)
+  documentNumber     String
+  documentTypeId     String
+  documentType       documentType   @relation(fields: [documentTypeId], references: [id])
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([registrationNumber, schoolId])
+  @@unique([documentNumber, schoolId])
+  @@map("students")
 }
