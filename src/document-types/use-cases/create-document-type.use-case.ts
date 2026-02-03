@@ -2,11 +2,13 @@ import type { AuditContext } from '@/audit/domain/audit-context';
 import { DocumentTypeAlreadyExistsError } from '../errors/document-type-already-exists.error';
 import { DocumentTypesRepository } from '../repositories/document-types.repository';
 import type { DocumentTypeDomain } from '../domain/document-type';
+import { Injectable } from '@nestjs/common';
 interface CreateDocumetTypeRequest {
   type: string;
   label: string;
 }
 
+@Injectable()
 export class CreateDocumentTypeUseCase {
   constructor(private documentTypesRepository: DocumentTypesRepository) {}
 
