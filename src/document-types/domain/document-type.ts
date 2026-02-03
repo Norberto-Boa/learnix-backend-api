@@ -1,4 +1,4 @@
-export interface DocumentType {
+export interface DocumentTypeDomain {
   id: string;
   type: string;
   label: string;

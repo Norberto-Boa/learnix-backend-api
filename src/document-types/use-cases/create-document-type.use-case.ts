@@ -1,6 +1,7 @@
 import type { AuditContext } from '@/audit/domain/audit-context';
 import { DocumentTypeAlreadyExistsError } from '../errors/document-type-already-exists.error';
 import { DocumentTypesRepository } from '../repositories/document-types.repository';
+import type { DocumentTypeDomain } from '../domain/document-type';
 interface CreateDocumetTypeRequest {
   type: string;
   label: string;
@@ -12,7 +13,7 @@ export class CreateDocumentTypeUseCase {
   async execute(
     data: CreateDocumetTypeRequest,
     auditContext: AuditContext,
-  ): Promise<DocumentType> {
+  ): Promise<DocumentTypeDomain> {
     const { schoolId } = auditContext;
 
     const doesDocumentTypeAlreadyExists =

@@ -1,5 +1,5 @@
 import type { AuditContext } from '@/audit/domain/audit-context';
-import type { DocumentType } from '../domain/document-type';
+import type { DocumentTypeDomain } from '../domain/document-type';
 
 export interface CreateDocumentTypeUseCase {
   execute(
