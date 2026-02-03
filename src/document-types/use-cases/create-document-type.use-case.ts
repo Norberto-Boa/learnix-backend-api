@@ -1,3 +1,4 @@
+import type { AuditContext } from '@/audit/domain/audit-context';
 import { DocumentTypeAlreadyExistsError } from '../errors/document-type-already-exists.error';
 import { DocumentTypesRepository } from '../repositories/document-types.repository';
 interface CreateDocumetTypeRequest {
@@ -10,8 +11,10 @@ export class CreateDocumentTypeUseCase {
 
   async execute(
     data: CreateDocumetTypeRequest,
-    schoolId: string,
+    auditContext: AuditContext,
   ): Promise<DocumentType> {
+    const { schoolId } = auditContext;
+
     const doesDocumentTypeAlreadyExists =
       await this.documentTypesRepository.findByType(data.type, schoolId);
 
