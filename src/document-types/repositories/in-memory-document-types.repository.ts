@@ -23,4 +23,46 @@ export class InMemoryDocumentTypeRepository implements DocumentTypesRepository {
 
     return documentType;
   }
+
+  async findById(
+    id: string,
+    schoolId: string,
+  ): Promise<DocumentTypeDomain | null> {
+    return (
+      this.items.find(
+        (item) =>
+          item.id === id && item.schoolId === schoolId && !item.deletedAt,
+      ) ?? null
+    );
+  }
+
+  async findByType(
+    type: string,
+    schoolId: string,
+  ): Promise<DocumentTypeDomain | null> {
+    return (
+      this.items.find(
+        (item) =>
+          item.type === type && item.schoolId === schoolId && !item.deletedAt,
+      ) ?? null
+    );
+  }
+
+  async findManyBySchool(schoolId: string): Promise<DocumentTypeDomain[] | []> {
+    return this.items.filter((item) => {
+      if (item.schoolId !== schoolId) return false;
+      if (item.deletedAt) return false;
+      return true;
+    });
+  }
+
+  async softDelete(id: string, schoolId: string): Promise<void> {
+    const item = this.items.find(
+      (item) => item.id === id && item.schoolId === schoolId,
+    );
+
+    if (item && !item.deletedAt) {
+      item.deletedAt = new Date();
+    }
+  }
 }
