@@ -17,8 +17,9 @@ import { RolesGuard } from '@/auth/guard/roles.guard';
 @Controller('document-types')
 export class DocumentTypesController {
   constructor(
-    private prismaService: PrismaService,
-    private auditService: AuditService,
+    private readonly prismaService: PrismaService,
+    private readonly auditService: AuditService,
+    private readonly createDocumentTypeUseCase: CreateDocumentTypeUseCase,
   ) {}
 
   @Post()
@@ -30,11 +31,8 @@ export class DocumentTypesController {
     @GetUser('id') userId: string,
     @GetSchoolId('schoolId') schoolId: string,
   ) {
-    const repository = new PrismaDocumentTypesRepository(this.prismaService);
-    const createDocumentTypeUseCase = new CreateDocumentTypeUseCase(repository);
-
     return this.prismaService.$transaction(async (tx) => {
-      const documentType = await createDocumentTypeUseCase.execute(
+      const documentType = await this.createDocumentTypeUseCase.execute(
         { label, type },
         { schoolId: schoolId, performedByUserId: userId },
       );
