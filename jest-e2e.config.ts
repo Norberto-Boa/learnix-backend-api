@@ -1,6 +1,7 @@
 import type { Config } from 'jest';
 
 const config: Config = {
+  preset: 'ts-jest',
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: '.',
   testRegex: '.e2e-spec.ts$',
