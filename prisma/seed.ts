@@ -22,7 +22,7 @@ async function main() {
       name: 'Administrador Inicial',
       email: 'admin@escola.com',
       password: senhaHash,
-      role: 'ADMIN', // Certifique-se que o Enum no seu schema tem 'ADMIN'
+      role: 'SUPERADMIN', // Certifique-se que o Enum no seu schema tem 'ADMIN'
     },
   });
 

@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 
 import { createTestApp } from '@test/create-test-app';
 import { PrismaService } from '@/prisma/prisma.service';
+import { authenticateAsSuperAdmin } from '../helpers/auth.e2e';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
@@ -18,8 +19,11 @@ describe('POST /document-types (e2e)', () => {
   });
 
   it('creates a document type', async () => {
+    const { token } = await authenticateAsSuperAdmin(app);
+
     const res = await request(app.getHttpServer())
       .post('/document-types')
+      .set('Authorization', `Bearer ${token}`)
       .send({
         type: 'BI',
         label: 'Bilhete de Identidade',
