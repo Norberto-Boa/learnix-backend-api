@@ -1,13 +1,15 @@
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import type {
   CreateDocumentTypeData,
   DocumentTypesRepository,
 } from './document-types.repository';
 import type { DocumentTypeDomain } from '../domain/document-type';
-import type { Prisma } from '@/generated/prisma/client';
+import { Prisma } from '@/generated/prisma/client';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class PrismaDocumentTypesRepository implements DocumentTypesRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(
     data: CreateDocumentTypeData,

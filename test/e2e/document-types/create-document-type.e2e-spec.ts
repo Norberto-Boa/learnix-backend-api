@@ -3,9 +3,9 @@ import { INestApplication } from '@nestjs/common';
 
 import { createTestApp } from '@test/create-test-app';
 import { PrismaService } from '@/prisma/prisma.service';
-import { authenticateAsSuperAdmin } from '../helpers/auth.e2e';
 import { schoolFactory } from '../factories/school.factory';
 import { userFactory } from '../factories/user.factory';
+import { authenticate } from '../helpers/auth.e2e';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
@@ -32,6 +32,26 @@ describe('POST /document-types (e2e)', () => {
       }),
     });
 
+    const token = await authenticate({
+      app,
+      email: admin.email,
+      password: 'admin123',
+    });
+
+    console.log(await prisma.documentType.count());
+
+    const response = await request(app.getHttpServer())
+      .post('/document-types')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        type: 'BI',
+        label: 'Bilhete de Identidade',
+      });
+
+    console.log(response.body);
+    expect(response.status).toBe(201);
+
+    expect(token).toBeDefined();
     expect(admin).toBeDefined();
     expect(admin.id).toBeDefined();
   });

@@ -34,7 +34,10 @@ export class SchoolsRepository {
     });
   }
 
-  async save({ name, slug, nuit }: SchoolCreateInput, tx: TransactionClient) {
+  async save(
+    { name, slug, nuit, status }: SchoolCreateInput,
+    tx: TransactionClient,
+  ) {
     return tx.school.create({
       data: {
         name,
