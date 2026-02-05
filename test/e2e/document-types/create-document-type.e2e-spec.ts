@@ -74,7 +74,7 @@ describe('POST /document-types (e2e)', () => {
     expect(admin.id).toBeDefined();
   });
 
-  it('does not allow duplicate document types per scholl', async () => {
+  it('does not allow duplicate document types per school', async () => {
     const response = await request(app.getHttpServer())
       .post('/document-types')
       .set('Authorization', `Bearer ${token}`)
@@ -94,5 +94,33 @@ describe('POST /document-types (e2e)', () => {
       });
 
     expect(responseFailed.status).toBe(409);
+  });
+
+  it('does not allow clerk to create a document type', async () => {
+    const clerk = await prisma.user.create({
+      data: userFactory({
+        role: 'CLERK',
+        schoolId: school.id,
+      }),
+    });
+
+    const token_clerk = await authenticate({
+      app,
+      email: clerk.email,
+      password: 'admin123',
+    });
+
+    const response = await request(app.getHttpServer())
+      .post('/document-types')
+      .set('Authorization', `Bearer ${token_clerk}`)
+      .send({
+        type: 'BI',
+        label: 'Bilhete de Identidade',
+      });
+
+    console.log(response);
+
+    expect(response.status).toBe(403);
+    expect(response.body.success).toBe(false);
   });
 });
