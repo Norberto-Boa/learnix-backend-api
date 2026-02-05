@@ -19,11 +19,11 @@ export default async function () {
   process.env.DATABASE_URL = `postgresql://test:test@${host}:${port}/test`;
   process.env.JWT_SECRET_KEY ??= 'e2e-secret-key';
 
-  // Apply migrations to the container DB
   execSync('npx prisma migrate deploy', {
     stdio: 'inherit',
   });
 
-  // Make container accessible in teardown
+  execSync('npx prisma db seed', { stdio: 'inherit' });
+
   (global as any).__POSTGRES_CONTAINER__ = postgres;
 }
