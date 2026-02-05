@@ -5,6 +5,7 @@ import { createTestApp } from '@test/create-test-app';
 import { PrismaService } from '@/prisma/prisma.service';
 import { authenticateAsSuperAdmin } from '../helpers/auth.e2e';
 import { schoolFactory } from '../factories/school.factory';
+import { userFactory } from '../factories/user.factory';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
@@ -20,13 +21,18 @@ describe('POST /document-types (e2e)', () => {
   });
 
   it('creates a document type', async () => {
-    const schoolData = schoolFactory();
-
     const school = await prisma.school.create({
-      data: schoolData,
+      data: schoolFactory(),
     });
 
-    expect(school).toBeDefined();
-    expect(school.id).toBeDefined();
+    const admin = await prisma.user.create({
+      data: userFactory({
+        role: 'ADMIN',
+        schoolId: school.id,
+      }),
+    });
+
+    expect(admin).toBeDefined();
+    expect(admin.id).toBeDefined();
   });
 });
