@@ -5,15 +5,54 @@ import { createTestApp } from '@test/create-test-app';
 import { PrismaService } from '@/prisma/prisma.service';
 import { schoolFactory } from '../factories/school.factory';
 import { userFactory } from '../factories/user.factory';
-import { authenticate } from '../helpers/auth.e2e';
+import { authenticate, type AuthResult } from '../helpers/auth.e2e';
+import type { UserDelegate } from '@/generated/prisma/models';
+import type { School, User } from '@/generated/prisma/client';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
+  let admin: User;
+  let school: School;
+  let token: AuthResult;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     app = await createTestApp();
     prisma = app.get(PrismaService);
+
+    school = await prisma.school.create({
+      data: schoolFactory(),
+    });
+
+    admin = await prisma.user.create({
+      data: userFactory({
+        role: 'ADMIN',
+        schoolId: school.id,
+      }),
+    });
+
+    token = await authenticate({
+      app,
+      email: admin.email,
+      password: 'admin123',
+    });
+  });
+
+  afterEach(async () => {
+    await prisma.$executeRawUnsafe(`
+    DO $$ DECLARE
+    r RECORD;
+  BEGIN
+    FOR r IN (
+      SELECT tablename
+      FROM pg_tables
+      WHERE schemaname = 'public'
+        AND tablename <> '_prisma_migrations'
+    ) LOOP
+      EXECUTE 'TRUNCATE TABLE "' || r.tablename || '" CASCADE';
+    END LOOP;
+  END $$;
+  `);
   });
 
   afterAll(async () => {
@@ -21,25 +60,6 @@ describe('POST /document-types (e2e)', () => {
   });
 
   it('creates a document type', async () => {
-    const school = await prisma.school.create({
-      data: schoolFactory(),
-    });
-
-    const admin = await prisma.user.create({
-      data: userFactory({
-        role: 'ADMIN',
-        schoolId: school.id,
-      }),
-    });
-
-    const token = await authenticate({
-      app,
-      email: admin.email,
-      password: 'admin123',
-    });
-
-    console.log(await prisma.documentType.count());
-
     const response = await request(app.getHttpServer())
       .post('/document-types')
       .set('Authorization', `Bearer ${token}`)
@@ -48,11 +68,31 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
-    console.log(response.body);
     expect(response.status).toBe(201);
-
     expect(token).toBeDefined();
     expect(admin).toBeDefined();
     expect(admin.id).toBeDefined();
+  });
+
+  it('does not allow duplicate document types per scholl', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/document-types')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        type: 'BI',
+        label: 'Bilhete de Identidade',
+      });
+
+    expect(response.status).toBe(201);
+
+    const responseFailed = await request(app.getHttpServer())
+      .post('/document-types')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        type: 'BI',
+        label: 'Bilhete de Identidade',
+      });
+
+    expect(responseFailed.status).toBe(409);
   });
 });
