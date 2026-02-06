@@ -8,6 +8,8 @@ interface TestAuditLogParams {
   userId: string;
 }
 
+interface CountAuditLogsParams extends TestAuditLogParams {}
+
 interface expectAuditCountUnchaged extends TestAuditLogParams {
   beforeCount: number;
 }
@@ -50,4 +52,21 @@ export async function expectAuditCountUnchaged({
   });
 
   expect(afterCount).toBe(beforeCount);
+}
+
+export async function countAuditLogs({
+  prisma,
+  action,
+  entity,
+  schoolId,
+  userId,
+}: CountAuditLogsParams) {
+  return await prisma.auditLog.count({
+    where: {
+      action,
+      entity,
+      schoolId,
+      userId,
+    },
+  });
 }
