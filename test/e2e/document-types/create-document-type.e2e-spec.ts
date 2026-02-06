@@ -8,7 +8,11 @@ import { userFactory } from '../factories/user.factory';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import type { UserDelegate } from '@/generated/prisma/models';
 import type { School, User } from '@/generated/prisma/client';
-import { expectAuditCountUnchaged, testAuditLog } from '../helpers/audit.e2e';
+import {
+  countAuditLogs,
+  expectAuditCountUnchaged,
+  testAuditLog,
+} from '../helpers/audit.e2e';
 import { DOCUMENT_TYPE_AUDIT_ACTIONS } from '@/document-types/constants/document-type-audit-actions';
 
 describe('POST /document-types (e2e)', () => {
@@ -92,14 +96,14 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
-    const beforeCount = await prisma.auditLog.count({
-      where: {
-        action: 'CREATE_DOCUMENT_TYPE',
-        entity: 'DOCUMENT_TYPE',
-        schoolId: school.id,
-        userId: admin.id,
-      },
+    const beforeCount = await countAuditLogs({
+      prisma,
+      action: 'CREATE_DOCUMENT_TYPE',
+      entity: 'DOCUMENT_TYPE',
+      schoolId: school.id,
+      userId: admin.id,
     });
+
     expect(response.status).toBe(201);
 
     const responseFailed = await request(app.getHttpServer())
@@ -142,8 +146,6 @@ describe('POST /document-types (e2e)', () => {
         type: 'BI',
         label: 'Bilhete de Identidade',
       });
-
-    console.log(response);
 
     expect(response.status).toBe(403);
     expect(response.body.success).toBe(false);
