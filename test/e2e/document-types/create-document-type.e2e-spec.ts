@@ -139,6 +139,14 @@ describe('POST /document-types (e2e)', () => {
       password: 'admin123',
     });
 
+    const beforeCount = await countAuditLogs({
+      prisma,
+      action: 'CREATE_DOCUMENT_TYPE',
+      entity: 'DOCUMENT_TYPE',
+      schoolId: school.id,
+      userId: admin.id,
+    });
+
     const response = await request(app.getHttpServer())
       .post('/document-types')
       .set('Authorization', `Bearer ${token_clerk}`)
@@ -147,6 +155,14 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
+    await expectAuditCountUnchaged({
+      prisma,
+      action: DOCUMENT_TYPE_AUDIT_ACTIONS.CREATE,
+      entity: 'DOCUMENT_TYPE',
+      schoolId: school.id,
+      userId: admin.id,
+      beforeCount,
+    });
     expect(response.status).toBe(403);
     expect(response.body.success).toBe(false);
   });
