@@ -8,7 +8,7 @@ import { userFactory } from '../factories/user.factory';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import type { UserDelegate } from '@/generated/prisma/models';
 import type { School, User } from '@/generated/prisma/client';
-import { testAuditLog } from '../helpers/audit.e2e';
+import { expectAuditCountUnchaged, testAuditLog } from '../helpers/audit.e2e';
 import { DOCUMENT_TYPE_AUDIT_ACTIONS } from '@/document-types/constants/document-type-audit-actions';
 
 describe('POST /document-types (e2e)', () => {
@@ -92,6 +92,14 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
+    const beforeCount = await prisma.auditLog.count({
+      where: {
+        action: 'CREATE_DOCUMENT_TYPE',
+        entity: 'DOCUMENT_TYPE',
+        schoolId: school.id,
+        userId: admin.id,
+      },
+    });
     expect(response.status).toBe(201);
 
     const responseFailed = await request(app.getHttpServer())
@@ -102,6 +110,14 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
+    await expectAuditCountUnchaged({
+      prisma,
+      action: DOCUMENT_TYPE_AUDIT_ACTIONS.CREATE,
+      entity: 'DOCUMENT_TYPE',
+      schoolId: school.id,
+      userId: admin.id,
+      beforeCount,
+    });
     expect(responseFailed.status).toBe(409);
   });
 
