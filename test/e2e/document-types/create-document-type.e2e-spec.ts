@@ -8,6 +8,8 @@ import { userFactory } from '../factories/user.factory';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import type { UserDelegate } from '@/generated/prisma/models';
 import type { School, User } from '@/generated/prisma/client';
+import { testAuditLog } from '../helpers/audit.e2e';
+import { DOCUMENT_TYPE_AUDIT_ACTIONS } from '@/document-types/constants/document-type-audit-actions';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
@@ -68,6 +70,13 @@ describe('POST /document-types (e2e)', () => {
         label: 'Bilhete de Identidade',
       });
 
+    await testAuditLog({
+      prisma,
+      action: DOCUMENT_TYPE_AUDIT_ACTIONS.CREATE,
+      entity: 'DOCUMENT_TYPE',
+      schoolId: school.id,
+      userId: admin.id,
+    });
     expect(response.status).toBe(201);
     expect(token).toBeDefined();
     expect(admin).toBeDefined();
