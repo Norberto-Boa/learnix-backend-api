@@ -38,12 +38,17 @@ export type AuditLog = Prisma.AuditLogModel
  */
 export type AcademicYear = Prisma.AcademicYearModel
 /**
- * Model documentType
+ * Model DocumentType
  * 
  */
-export type documentType = Prisma.documentTypeModel
+export type DocumentType = Prisma.DocumentTypeModel
 /**
  * Model Student
  * 
  */
 export type Student = Prisma.StudentModel
+/**
+ * Model StudentDocument
+ * 
+ */
+export type StudentDocument = Prisma.StudentDocumentModel

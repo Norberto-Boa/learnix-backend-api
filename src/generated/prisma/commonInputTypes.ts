@@ -260,11 +260,28 @@ export type BoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
+export type EnumGENDERFilter<$PrismaModel = never> = {
+  equals?: $Enums.GENDER | Prisma.EnumGENDERFieldRefInput<$PrismaModel>
+  in?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGENDERFilter<$PrismaModel> | $Enums.GENDER
+}
+
 export type EnumSTUDENT_STATUSFilter<$PrismaModel = never> = {
   equals?: $Enums.STUDENT_STATUS | Prisma.EnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   in?: $Enums.STUDENT_STATUS[] | Prisma.ListEnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   notIn?: $Enums.STUDENT_STATUS[] | Prisma.ListEnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumSTUDENT_STATUSFilter<$PrismaModel> | $Enums.STUDENT_STATUS
+}
+
+export type EnumGENDERWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GENDER | Prisma.EnumGENDERFieldRefInput<$PrismaModel>
+  in?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGENDERWithAggregatesFilter<$PrismaModel> | $Enums.GENDER
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGENDERFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGENDERFilter<$PrismaModel>
 }
 
 export type EnumSTUDENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {
@@ -509,11 +526,28 @@ export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolFilter<$PrismaModel>
 }
 
+export type NestedEnumGENDERFilter<$PrismaModel = never> = {
+  equals?: $Enums.GENDER | Prisma.EnumGENDERFieldRefInput<$PrismaModel>
+  in?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGENDERFilter<$PrismaModel> | $Enums.GENDER
+}
+
 export type NestedEnumSTUDENT_STATUSFilter<$PrismaModel = never> = {
   equals?: $Enums.STUDENT_STATUS | Prisma.EnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   in?: $Enums.STUDENT_STATUS[] | Prisma.ListEnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   notIn?: $Enums.STUDENT_STATUS[] | Prisma.ListEnumSTUDENT_STATUSFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumSTUDENT_STATUSFilter<$PrismaModel> | $Enums.STUDENT_STATUS
+}
+
+export type NestedEnumGENDERWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GENDER | Prisma.EnumGENDERFieldRefInput<$PrismaModel>
+  in?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GENDER[] | Prisma.ListEnumGENDERFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGENDERWithAggregatesFilter<$PrismaModel> | $Enums.GENDER
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGENDERFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGENDERFilter<$PrismaModel>
 }
 
 export type NestedEnumSTUDENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {

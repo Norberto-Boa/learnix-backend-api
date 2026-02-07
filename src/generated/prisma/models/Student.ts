@@ -29,9 +29,8 @@ export type StudentMinAggregateOutputType = {
   name: string | null
   registrationNumber: string | null
   dateOfBirth: Date | null
+  gender: $Enums.GENDER | null
   status: $Enums.STUDENT_STATUS | null
-  documentNumber: string | null
-  documentTypeId: string | null
   schoolId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,9 +42,8 @@ export type StudentMaxAggregateOutputType = {
   name: string | null
   registrationNumber: string | null
   dateOfBirth: Date | null
+  gender: $Enums.GENDER | null
   status: $Enums.STUDENT_STATUS | null
-  documentNumber: string | null
-  documentTypeId: string | null
   schoolId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -57,9 +55,8 @@ export type StudentCountAggregateOutputType = {
   name: number
   registrationNumber: number
   dateOfBirth: number
+  gender: number
   status: number
-  documentNumber: number
-  documentTypeId: number
   schoolId: number
   createdAt: number
   updatedAt: number
@@ -73,9 +70,8 @@ export type StudentMinAggregateInputType = {
   name?: true
   registrationNumber?: true
   dateOfBirth?: true
+  gender?: true
   status?: true
-  documentNumber?: true
-  documentTypeId?: true
   schoolId?: true
   createdAt?: true
   updatedAt?: true
@@ -87,9 +83,8 @@ export type StudentMaxAggregateInputType = {
   name?: true
   registrationNumber?: true
   dateOfBirth?: true
+  gender?: true
   status?: true
-  documentNumber?: true
-  documentTypeId?: true
   schoolId?: true
   createdAt?: true
   updatedAt?: true
@@ -101,9 +96,8 @@ export type StudentCountAggregateInputType = {
   name?: true
   registrationNumber?: true
   dateOfBirth?: true
+  gender?: true
   status?: true
-  documentNumber?: true
-  documentTypeId?: true
   schoolId?: true
   createdAt?: true
   updatedAt?: true
@@ -188,9 +182,8 @@ export type StudentGroupByOutputType = {
   name: string
   registrationNumber: string
   dateOfBirth: Date
+  gender: $Enums.GENDER
   status: $Enums.STUDENT_STATUS
-  documentNumber: string
-  documentTypeId: string
   schoolId: string
   createdAt: Date
   updatedAt: Date
@@ -223,15 +216,14 @@ export type StudentWhereInput = {
   name?: Prisma.StringFilter<"Student"> | string
   registrationNumber?: Prisma.StringFilter<"Student"> | string
   dateOfBirth?: Prisma.DateTimeFilter<"Student"> | Date | string
+  gender?: Prisma.EnumGENDERFilter<"Student"> | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFilter<"Student"> | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFilter<"Student"> | string
-  documentTypeId?: Prisma.StringFilter<"Student"> | string
   schoolId?: Prisma.StringFilter<"Student"> | string
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
-  documentType?: Prisma.XOR<Prisma.DocumentTypeScalarRelationFilter, Prisma.documentTypeWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  studentDocuments?: Prisma.StudentDocumentListRelationFilter
 }
 
 export type StudentOrderByWithRelationInput = {
@@ -239,46 +231,42 @@ export type StudentOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   registrationNumber?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  documentNumber?: Prisma.SortOrder
-  documentTypeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  documentType?: Prisma.documentTypeOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
+  studentDocuments?: Prisma.StudentDocumentOrderByRelationAggregateInput
 }
 
 export type StudentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   registrationNumber_schoolId?: Prisma.StudentRegistrationNumberSchoolIdCompoundUniqueInput
-  documentNumber_schoolId?: Prisma.StudentDocumentNumberSchoolIdCompoundUniqueInput
   AND?: Prisma.StudentWhereInput | Prisma.StudentWhereInput[]
   OR?: Prisma.StudentWhereInput[]
   NOT?: Prisma.StudentWhereInput | Prisma.StudentWhereInput[]
   name?: Prisma.StringFilter<"Student"> | string
   registrationNumber?: Prisma.StringFilter<"Student"> | string
   dateOfBirth?: Prisma.DateTimeFilter<"Student"> | Date | string
+  gender?: Prisma.EnumGENDERFilter<"Student"> | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFilter<"Student"> | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFilter<"Student"> | string
-  documentTypeId?: Prisma.StringFilter<"Student"> | string
   schoolId?: Prisma.StringFilter<"Student"> | string
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
-  documentType?: Prisma.XOR<Prisma.DocumentTypeScalarRelationFilter, Prisma.documentTypeWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-}, "id" | "registrationNumber_schoolId" | "documentNumber_schoolId">
+  studentDocuments?: Prisma.StudentDocumentListRelationFilter
+}, "id" | "registrationNumber_schoolId">
 
 export type StudentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   registrationNumber?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  documentNumber?: Prisma.SortOrder
-  documentTypeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -296,9 +284,8 @@ export type StudentScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Student"> | string
   registrationNumber?: Prisma.StringWithAggregatesFilter<"Student"> | string
   dateOfBirth?: Prisma.DateTimeWithAggregatesFilter<"Student"> | Date | string
+  gender?: Prisma.EnumGENDERWithAggregatesFilter<"Student"> | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSWithAggregatesFilter<"Student"> | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringWithAggregatesFilter<"Student"> | string
-  documentTypeId?: Prisma.StringWithAggregatesFilter<"Student"> | string
   schoolId?: Prisma.StringWithAggregatesFilter<"Student"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Student"> | Date | string
@@ -310,13 +297,13 @@ export type StudentCreateInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  documentType: Prisma.documentTypeCreateNestedOneWithoutStudentsInput
   school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
+  studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateInput = {
@@ -324,13 +311,13 @@ export type StudentUncheckedCreateInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
-  documentTypeId: string
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUpdateInput = {
@@ -338,13 +325,13 @@ export type StudentUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  documentType?: Prisma.documentTypeUpdateOneRequiredWithoutStudentsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
+  studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateInput = {
@@ -352,13 +339,13 @@ export type StudentUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  documentTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateManyInput = {
@@ -366,9 +353,8 @@ export type StudentCreateManyInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
-  documentTypeId: string
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -380,8 +366,8 @@ export type StudentUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -392,9 +378,8 @@ export type StudentUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  documentTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,19 +401,13 @@ export type StudentRegistrationNumberSchoolIdCompoundUniqueInput = {
   schoolId: string
 }
 
-export type StudentDocumentNumberSchoolIdCompoundUniqueInput = {
-  documentNumber: string
-  schoolId: string
-}
-
 export type StudentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   registrationNumber?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  documentNumber?: Prisma.SortOrder
-  documentTypeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -440,9 +419,8 @@ export type StudentMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   registrationNumber?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  documentNumber?: Prisma.SortOrder
-  documentTypeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -454,13 +432,17 @@ export type StudentMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   registrationNumber?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  documentNumber?: Prisma.SortOrder
-  documentTypeId?: Prisma.SortOrder
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+}
+
+export type StudentScalarRelationFilter = {
+  is?: Prisma.StudentWhereInput
+  isNot?: Prisma.StudentWhereInput
 }
 
 export type StudentCreateNestedManyWithoutSchoolInput = {
@@ -505,50 +487,26 @@ export type StudentUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.StudentScalarWhereInput | Prisma.StudentScalarWhereInput[]
 }
 
-export type StudentCreateNestedManyWithoutDocumentTypeInput = {
-  create?: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput> | Prisma.StudentCreateWithoutDocumentTypeInput[] | Prisma.StudentUncheckedCreateWithoutDocumentTypeInput[]
-  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutDocumentTypeInput | Prisma.StudentCreateOrConnectWithoutDocumentTypeInput[]
-  createMany?: Prisma.StudentCreateManyDocumentTypeInputEnvelope
-  connect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-}
-
-export type StudentUncheckedCreateNestedManyWithoutDocumentTypeInput = {
-  create?: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput> | Prisma.StudentCreateWithoutDocumentTypeInput[] | Prisma.StudentUncheckedCreateWithoutDocumentTypeInput[]
-  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutDocumentTypeInput | Prisma.StudentCreateOrConnectWithoutDocumentTypeInput[]
-  createMany?: Prisma.StudentCreateManyDocumentTypeInputEnvelope
-  connect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-}
-
-export type StudentUpdateManyWithoutDocumentTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput> | Prisma.StudentCreateWithoutDocumentTypeInput[] | Prisma.StudentUncheckedCreateWithoutDocumentTypeInput[]
-  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutDocumentTypeInput | Prisma.StudentCreateOrConnectWithoutDocumentTypeInput[]
-  upsert?: Prisma.StudentUpsertWithWhereUniqueWithoutDocumentTypeInput | Prisma.StudentUpsertWithWhereUniqueWithoutDocumentTypeInput[]
-  createMany?: Prisma.StudentCreateManyDocumentTypeInputEnvelope
-  set?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  disconnect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  delete?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  connect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  update?: Prisma.StudentUpdateWithWhereUniqueWithoutDocumentTypeInput | Prisma.StudentUpdateWithWhereUniqueWithoutDocumentTypeInput[]
-  updateMany?: Prisma.StudentUpdateManyWithWhereWithoutDocumentTypeInput | Prisma.StudentUpdateManyWithWhereWithoutDocumentTypeInput[]
-  deleteMany?: Prisma.StudentScalarWhereInput | Prisma.StudentScalarWhereInput[]
-}
-
-export type StudentUncheckedUpdateManyWithoutDocumentTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput> | Prisma.StudentCreateWithoutDocumentTypeInput[] | Prisma.StudentUncheckedCreateWithoutDocumentTypeInput[]
-  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutDocumentTypeInput | Prisma.StudentCreateOrConnectWithoutDocumentTypeInput[]
-  upsert?: Prisma.StudentUpsertWithWhereUniqueWithoutDocumentTypeInput | Prisma.StudentUpsertWithWhereUniqueWithoutDocumentTypeInput[]
-  createMany?: Prisma.StudentCreateManyDocumentTypeInputEnvelope
-  set?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  disconnect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  delete?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  connect?: Prisma.StudentWhereUniqueInput | Prisma.StudentWhereUniqueInput[]
-  update?: Prisma.StudentUpdateWithWhereUniqueWithoutDocumentTypeInput | Prisma.StudentUpdateWithWhereUniqueWithoutDocumentTypeInput[]
-  updateMany?: Prisma.StudentUpdateManyWithWhereWithoutDocumentTypeInput | Prisma.StudentUpdateManyWithWhereWithoutDocumentTypeInput[]
-  deleteMany?: Prisma.StudentScalarWhereInput | Prisma.StudentScalarWhereInput[]
+export type EnumGENDERFieldUpdateOperationsInput = {
+  set?: $Enums.GENDER
 }
 
 export type EnumSTUDENT_STATUSFieldUpdateOperationsInput = {
   set?: $Enums.STUDENT_STATUS
+}
+
+export type StudentCreateNestedOneWithoutStudentDocumentsInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutStudentDocumentsInput, Prisma.StudentUncheckedCreateWithoutStudentDocumentsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutStudentDocumentsInput
+  connect?: Prisma.StudentWhereUniqueInput
+}
+
+export type StudentUpdateOneRequiredWithoutStudentDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutStudentDocumentsInput, Prisma.StudentUncheckedCreateWithoutStudentDocumentsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutStudentDocumentsInput
+  upsert?: Prisma.StudentUpsertWithoutStudentDocumentsInput
+  connect?: Prisma.StudentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutStudentDocumentsInput, Prisma.StudentUpdateWithoutStudentDocumentsInput>, Prisma.StudentUncheckedUpdateWithoutStudentDocumentsInput>
 }
 
 export type StudentCreateWithoutSchoolInput = {
@@ -556,12 +514,12 @@ export type StudentCreateWithoutSchoolInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  documentType: Prisma.documentTypeCreateNestedOneWithoutStudentsInput
+  studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutSchoolInput = {
@@ -569,12 +527,12 @@ export type StudentUncheckedCreateWithoutSchoolInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
-  documentTypeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutSchoolInput = {
@@ -611,65 +569,80 @@ export type StudentScalarWhereInput = {
   name?: Prisma.StringFilter<"Student"> | string
   registrationNumber?: Prisma.StringFilter<"Student"> | string
   dateOfBirth?: Prisma.DateTimeFilter<"Student"> | Date | string
+  gender?: Prisma.EnumGENDERFilter<"Student"> | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFilter<"Student"> | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFilter<"Student"> | string
-  documentTypeId?: Prisma.StringFilter<"Student"> | string
   schoolId?: Prisma.StringFilter<"Student"> | string
   createdAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Student"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Student"> | Date | string | null
 }
 
-export type StudentCreateWithoutDocumentTypeInput = {
+export type StudentCreateWithoutStudentDocumentsInput = {
   id?: string
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
 }
 
-export type StudentUncheckedCreateWithoutDocumentTypeInput = {
+export type StudentUncheckedCreateWithoutStudentDocumentsInput = {
   id?: string
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
 }
 
-export type StudentCreateOrConnectWithoutDocumentTypeInput = {
+export type StudentCreateOrConnectWithoutStudentDocumentsInput = {
   where: Prisma.StudentWhereUniqueInput
-  create: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutStudentDocumentsInput, Prisma.StudentUncheckedCreateWithoutStudentDocumentsInput>
 }
 
-export type StudentCreateManyDocumentTypeInputEnvelope = {
-  data: Prisma.StudentCreateManyDocumentTypeInput | Prisma.StudentCreateManyDocumentTypeInput[]
-  skipDuplicates?: boolean
+export type StudentUpsertWithoutStudentDocumentsInput = {
+  update: Prisma.XOR<Prisma.StudentUpdateWithoutStudentDocumentsInput, Prisma.StudentUncheckedUpdateWithoutStudentDocumentsInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutStudentDocumentsInput, Prisma.StudentUncheckedCreateWithoutStudentDocumentsInput>
+  where?: Prisma.StudentWhereInput
 }
 
-export type StudentUpsertWithWhereUniqueWithoutDocumentTypeInput = {
-  where: Prisma.StudentWhereUniqueInput
-  update: Prisma.XOR<Prisma.StudentUpdateWithoutDocumentTypeInput, Prisma.StudentUncheckedUpdateWithoutDocumentTypeInput>
-  create: Prisma.XOR<Prisma.StudentCreateWithoutDocumentTypeInput, Prisma.StudentUncheckedCreateWithoutDocumentTypeInput>
+export type StudentUpdateToOneWithWhereWithoutStudentDocumentsInput = {
+  where?: Prisma.StudentWhereInput
+  data: Prisma.XOR<Prisma.StudentUpdateWithoutStudentDocumentsInput, Prisma.StudentUncheckedUpdateWithoutStudentDocumentsInput>
 }
 
-export type StudentUpdateWithWhereUniqueWithoutDocumentTypeInput = {
-  where: Prisma.StudentWhereUniqueInput
-  data: Prisma.XOR<Prisma.StudentUpdateWithoutDocumentTypeInput, Prisma.StudentUncheckedUpdateWithoutDocumentTypeInput>
+export type StudentUpdateWithoutStudentDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
+  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
 }
 
-export type StudentUpdateManyWithWhereWithoutDocumentTypeInput = {
-  where: Prisma.StudentScalarWhereInput
-  data: Prisma.XOR<Prisma.StudentUpdateManyMutationInput, Prisma.StudentUncheckedUpdateManyWithoutDocumentTypeInput>
+export type StudentUncheckedUpdateWithoutStudentDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
+  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentCreateManySchoolInput = {
@@ -677,9 +650,8 @@ export type StudentCreateManySchoolInput = {
   name: string
   registrationNumber: string
   dateOfBirth: Date | string
+  gender: $Enums.GENDER
   status?: $Enums.STUDENT_STATUS
-  documentNumber: string
-  documentTypeId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -690,12 +662,12 @@ export type StudentUpdateWithoutSchoolInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  documentType?: Prisma.documentTypeUpdateOneRequiredWithoutStudentsNestedInput
+  studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutSchoolInput = {
@@ -703,12 +675,12 @@ export type StudentUncheckedUpdateWithoutSchoolInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  documentTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateManyWithoutSchoolInput = {
@@ -716,66 +688,42 @@ export type StudentUncheckedUpdateManyWithoutSchoolInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
   dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
   status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  documentTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type StudentCreateManyDocumentTypeInput = {
-  id?: string
-  name: string
-  registrationNumber: string
-  dateOfBirth: Date | string
-  status?: $Enums.STUDENT_STATUS
-  documentNumber: string
-  schoolId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
+
+/**
+ * Count Type StudentCountOutputType
+ */
+
+export type StudentCountOutputType = {
+  studentDocuments: number
 }
 
-export type StudentUpdateWithoutDocumentTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
+export type StudentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  studentDocuments?: boolean | StudentCountOutputTypeCountStudentDocumentsArgs
 }
 
-export type StudentUncheckedUpdateWithoutDocumentTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StudentCountOutputType
+   */
+  select?: Prisma.StudentCountOutputTypeSelect<ExtArgs> | null
 }
 
-export type StudentUncheckedUpdateManyWithoutDocumentTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
-  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeCountStudentDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StudentDocumentWhereInput
 }
-
 
 
 export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -783,15 +731,15 @@ export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   registrationNumber?: boolean
   dateOfBirth?: boolean
+  gender?: boolean
   status?: boolean
-  documentNumber?: boolean
-  documentTypeId?: boolean
   schoolId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  studentDocuments?: boolean | Prisma.Student$studentDocumentsArgs<ExtArgs>
+  _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
 export type StudentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -799,14 +747,12 @@ export type StudentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   registrationNumber?: boolean
   dateOfBirth?: boolean
+  gender?: boolean
   status?: boolean
-  documentNumber?: boolean
-  documentTypeId?: boolean
   schoolId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
@@ -815,14 +761,12 @@ export type StudentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   registrationNumber?: boolean
   dateOfBirth?: boolean
+  gender?: boolean
   status?: boolean
-  documentNumber?: boolean
-  documentTypeId?: boolean
   schoolId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
@@ -831,43 +775,40 @@ export type StudentSelectScalar = {
   name?: boolean
   registrationNumber?: boolean
   dateOfBirth?: boolean
+  gender?: boolean
   status?: boolean
-  documentNumber?: boolean
-  documentTypeId?: boolean
   schoolId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type StudentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "registrationNumber" | "dateOfBirth" | "status" | "documentNumber" | "documentTypeId" | "schoolId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["student"]>
+export type StudentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "registrationNumber" | "dateOfBirth" | "gender" | "status" | "schoolId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["student"]>
 export type StudentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  studentDocuments?: boolean | Prisma.Student$studentDocumentsArgs<ExtArgs>
+  _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StudentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }
 export type StudentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  documentType?: boolean | Prisma.documentTypeDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }
 
 export type $StudentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Student"
   objects: {
-    documentType: Prisma.$documentTypePayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
+    studentDocuments: Prisma.$StudentDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     registrationNumber: string
     dateOfBirth: Date
+    gender: $Enums.GENDER
     status: $Enums.STUDENT_STATUS
-    documentNumber: string
-    documentTypeId: string
     schoolId: string
     createdAt: Date
     updatedAt: Date
@@ -1266,8 +1207,8 @@ readonly fields: StudentFieldRefs;
  */
 export interface Prisma__StudentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  documentType<T extends Prisma.documentTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.documentTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  studentDocuments<T extends Prisma.Student$studentDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$studentDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1301,9 +1242,8 @@ export interface StudentFieldRefs {
   readonly name: Prisma.FieldRef<"Student", 'String'>
   readonly registrationNumber: Prisma.FieldRef<"Student", 'String'>
   readonly dateOfBirth: Prisma.FieldRef<"Student", 'DateTime'>
+  readonly gender: Prisma.FieldRef<"Student", 'GENDER'>
   readonly status: Prisma.FieldRef<"Student", 'STUDENT_STATUS'>
-  readonly documentNumber: Prisma.FieldRef<"Student", 'String'>
-  readonly documentTypeId: Prisma.FieldRef<"Student", 'String'>
   readonly schoolId: Prisma.FieldRef<"Student", 'String'>
   readonly createdAt: Prisma.FieldRef<"Student", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Student", 'DateTime'>
@@ -1701,6 +1641,30 @@ export type StudentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Students to delete.
    */
   limit?: number
+}
+
+/**
+ * Student.studentDocuments
+ */
+export type Student$studentDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StudentDocument
+   */
+  select?: Prisma.StudentDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StudentDocument
+   */
+  omit?: Prisma.StudentDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StudentDocumentInclude<ExtArgs> | null
+  where?: Prisma.StudentDocumentWhereInput
+  orderBy?: Prisma.StudentDocumentOrderByWithRelationInput | Prisma.StudentDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.StudentDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StudentDocumentScalarFieldEnum | Prisma.StudentDocumentScalarFieldEnum[]
 }
 
 /**

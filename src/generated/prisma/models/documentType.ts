@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `documentType` model and its related types.
+ * This file exports the `DocumentType` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,10 +13,10 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model documentType
+ * Model DocumentType
  * 
  */
-export type documentTypeModel = runtime.Types.Result.DefaultSelection<Prisma.$documentTypePayload>
+export type DocumentTypeModel = runtime.Types.Result.DefaultSelection<Prisma.$DocumentTypePayload>
 
 export type AggregateDocumentType = {
   _count: DocumentTypeCountAggregateOutputType | null
@@ -89,37 +89,37 @@ export type DocumentTypeCountAggregateInputType = {
 
 export type DocumentTypeAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which documentType to aggregate.
+   * Filter which DocumentType to aggregate.
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of documentTypes to fetch.
+   * Determine the order of DocumentTypes to fetch.
    */
-  orderBy?: Prisma.documentTypeOrderByWithRelationInput | Prisma.documentTypeOrderByWithRelationInput[]
+  orderBy?: Prisma.DocumentTypeOrderByWithRelationInput | Prisma.DocumentTypeOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.documentTypeWhereUniqueInput
+  cursor?: Prisma.DocumentTypeWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` documentTypes from the position of the cursor.
+   * Take `±n` DocumentTypes from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` documentTypes.
+   * Skip the first `n` DocumentTypes.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned documentTypes
+   * Count returned DocumentTypes
   **/
   _count?: true | DocumentTypeCountAggregateInputType
   /**
@@ -147,11 +147,11 @@ export type GetDocumentTypeAggregateType<T extends DocumentTypeAggregateArgs> = 
 
 
 
-export type documentTypeGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.documentTypeWhereInput
-  orderBy?: Prisma.documentTypeOrderByWithAggregationInput | Prisma.documentTypeOrderByWithAggregationInput[]
+export type DocumentTypeGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentTypeWhereInput
+  orderBy?: Prisma.DocumentTypeOrderByWithAggregationInput | Prisma.DocumentTypeOrderByWithAggregationInput[]
   by: Prisma.DocumentTypeScalarFieldEnum[] | Prisma.DocumentTypeScalarFieldEnum
-  having?: Prisma.documentTypeScalarWhereWithAggregatesInput
+  having?: Prisma.DocumentTypeScalarWhereWithAggregatesInput
   take?: number
   skip?: number
   _count?: DocumentTypeCountAggregateInputType | true
@@ -172,7 +172,7 @@ export type DocumentTypeGroupByOutputType = {
   _max: DocumentTypeMaxAggregateOutputType | null
 }
 
-type GetDocumentTypeGroupByPayload<T extends documentTypeGroupByArgs> = Prisma.PrismaPromise<
+type GetDocumentTypeGroupByPayload<T extends DocumentTypeGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DocumentTypeGroupByOutputType, T['by']> &
       {
@@ -187,22 +187,22 @@ type GetDocumentTypeGroupByPayload<T extends documentTypeGroupByArgs> = Prisma.P
 
 
 
-export type documentTypeWhereInput = {
-  AND?: Prisma.documentTypeWhereInput | Prisma.documentTypeWhereInput[]
-  OR?: Prisma.documentTypeWhereInput[]
-  NOT?: Prisma.documentTypeWhereInput | Prisma.documentTypeWhereInput[]
-  id?: Prisma.StringFilter<"documentType"> | string
-  type?: Prisma.StringFilter<"documentType"> | string
-  label?: Prisma.StringFilter<"documentType"> | string
-  schoolId?: Prisma.StringFilter<"documentType"> | string
-  createdAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"documentType"> | Date | string | null
+export type DocumentTypeWhereInput = {
+  AND?: Prisma.DocumentTypeWhereInput | Prisma.DocumentTypeWhereInput[]
+  OR?: Prisma.DocumentTypeWhereInput[]
+  NOT?: Prisma.DocumentTypeWhereInput | Prisma.DocumentTypeWhereInput[]
+  id?: Prisma.StringFilter<"DocumentType"> | string
+  type?: Prisma.StringFilter<"DocumentType"> | string
+  label?: Prisma.StringFilter<"DocumentType"> | string
+  schoolId?: Prisma.StringFilter<"DocumentType"> | string
+  createdAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"DocumentType"> | Date | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  students?: Prisma.StudentListRelationFilter
+  studentDocuments?: Prisma.StudentDocumentListRelationFilter
 }
 
-export type documentTypeOrderByWithRelationInput = {
+export type DocumentTypeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
@@ -211,26 +211,26 @@ export type documentTypeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
-  students?: Prisma.StudentOrderByRelationAggregateInput
+  studentDocuments?: Prisma.StudentDocumentOrderByRelationAggregateInput
 }
 
-export type documentTypeWhereUniqueInput = Prisma.AtLeast<{
+export type DocumentTypeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  type_schoolId?: Prisma.documentTypeTypeSchoolIdCompoundUniqueInput
-  AND?: Prisma.documentTypeWhereInput | Prisma.documentTypeWhereInput[]
-  OR?: Prisma.documentTypeWhereInput[]
-  NOT?: Prisma.documentTypeWhereInput | Prisma.documentTypeWhereInput[]
-  type?: Prisma.StringFilter<"documentType"> | string
-  label?: Prisma.StringFilter<"documentType"> | string
-  schoolId?: Prisma.StringFilter<"documentType"> | string
-  createdAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"documentType"> | Date | string | null
+  type_schoolId?: Prisma.DocumentTypeTypeSchoolIdCompoundUniqueInput
+  AND?: Prisma.DocumentTypeWhereInput | Prisma.DocumentTypeWhereInput[]
+  OR?: Prisma.DocumentTypeWhereInput[]
+  NOT?: Prisma.DocumentTypeWhereInput | Prisma.DocumentTypeWhereInput[]
+  type?: Prisma.StringFilter<"DocumentType"> | string
+  label?: Prisma.StringFilter<"DocumentType"> | string
+  schoolId?: Prisma.StringFilter<"DocumentType"> | string
+  createdAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"DocumentType"> | Date | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-  students?: Prisma.StudentListRelationFilter
+  studentDocuments?: Prisma.StudentDocumentListRelationFilter
 }, "id" | "type_schoolId">
 
-export type documentTypeOrderByWithAggregationInput = {
+export type DocumentTypeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
@@ -238,25 +238,25 @@ export type documentTypeOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  _count?: Prisma.documentTypeCountOrderByAggregateInput
-  _max?: Prisma.documentTypeMaxOrderByAggregateInput
-  _min?: Prisma.documentTypeMinOrderByAggregateInput
+  _count?: Prisma.DocumentTypeCountOrderByAggregateInput
+  _max?: Prisma.DocumentTypeMaxOrderByAggregateInput
+  _min?: Prisma.DocumentTypeMinOrderByAggregateInput
 }
 
-export type documentTypeScalarWhereWithAggregatesInput = {
-  AND?: Prisma.documentTypeScalarWhereWithAggregatesInput | Prisma.documentTypeScalarWhereWithAggregatesInput[]
-  OR?: Prisma.documentTypeScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.documentTypeScalarWhereWithAggregatesInput | Prisma.documentTypeScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"documentType"> | string
-  type?: Prisma.StringWithAggregatesFilter<"documentType"> | string
-  label?: Prisma.StringWithAggregatesFilter<"documentType"> | string
-  schoolId?: Prisma.StringWithAggregatesFilter<"documentType"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"documentType"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"documentType"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"documentType"> | Date | string | null
+export type DocumentTypeScalarWhereWithAggregatesInput = {
+  AND?: Prisma.DocumentTypeScalarWhereWithAggregatesInput | Prisma.DocumentTypeScalarWhereWithAggregatesInput[]
+  OR?: Prisma.DocumentTypeScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.DocumentTypeScalarWhereWithAggregatesInput | Prisma.DocumentTypeScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"DocumentType"> | string
+  type?: Prisma.StringWithAggregatesFilter<"DocumentType"> | string
+  label?: Prisma.StringWithAggregatesFilter<"DocumentType"> | string
+  schoolId?: Prisma.StringWithAggregatesFilter<"DocumentType"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"DocumentType"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DocumentType"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DocumentType"> | Date | string | null
 }
 
-export type documentTypeCreateInput = {
+export type DocumentTypeCreateInput = {
   id?: string
   type: string
   label: string
@@ -264,10 +264,10 @@ export type documentTypeCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   school: Prisma.SchoolCreateNestedOneWithoutDocumentTypesInput
-  students?: Prisma.StudentCreateNestedManyWithoutDocumentTypeInput
+  studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutDocumentTypeInput
 }
 
-export type documentTypeUncheckedCreateInput = {
+export type DocumentTypeUncheckedCreateInput = {
   id?: string
   type: string
   label: string
@@ -275,10 +275,10 @@ export type documentTypeUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  students?: Prisma.StudentUncheckedCreateNestedManyWithoutDocumentTypeInput
+  studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
-export type documentTypeUpdateInput = {
+export type DocumentTypeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -286,10 +286,10 @@ export type documentTypeUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutDocumentTypesNestedInput
-  students?: Prisma.StudentUpdateManyWithoutDocumentTypeNestedInput
+  studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutDocumentTypeNestedInput
 }
 
-export type documentTypeUncheckedUpdateInput = {
+export type DocumentTypeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -297,10 +297,10 @@ export type documentTypeUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  students?: Prisma.StudentUncheckedUpdateManyWithoutDocumentTypeNestedInput
+  studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
-export type documentTypeCreateManyInput = {
+export type DocumentTypeCreateManyInput = {
   id?: string
   type: string
   label: string
@@ -310,7 +310,7 @@ export type documentTypeCreateManyInput = {
   deletedAt?: Date | string | null
 }
 
-export type documentTypeUpdateManyMutationInput = {
+export type DocumentTypeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -319,7 +319,7 @@ export type documentTypeUpdateManyMutationInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type documentTypeUncheckedUpdateManyInput = {
+export type DocumentTypeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -330,21 +330,21 @@ export type documentTypeUncheckedUpdateManyInput = {
 }
 
 export type DocumentTypeListRelationFilter = {
-  every?: Prisma.documentTypeWhereInput
-  some?: Prisma.documentTypeWhereInput
-  none?: Prisma.documentTypeWhereInput
+  every?: Prisma.DocumentTypeWhereInput
+  some?: Prisma.DocumentTypeWhereInput
+  none?: Prisma.DocumentTypeWhereInput
 }
 
-export type documentTypeOrderByRelationAggregateInput = {
+export type DocumentTypeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type documentTypeTypeSchoolIdCompoundUniqueInput = {
+export type DocumentTypeTypeSchoolIdCompoundUniqueInput = {
   type: string
   schoolId: string
 }
 
-export type documentTypeCountOrderByAggregateInput = {
+export type DocumentTypeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
@@ -354,7 +354,7 @@ export type documentTypeCountOrderByAggregateInput = {
   deletedAt?: Prisma.SortOrder
 }
 
-export type documentTypeMaxOrderByAggregateInput = {
+export type DocumentTypeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
@@ -364,7 +364,7 @@ export type documentTypeMaxOrderByAggregateInput = {
   deletedAt?: Prisma.SortOrder
 }
 
-export type documentTypeMinOrderByAggregateInput = {
+export type DocumentTypeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   label?: Prisma.SortOrder
@@ -375,126 +375,126 @@ export type documentTypeMinOrderByAggregateInput = {
 }
 
 export type DocumentTypeScalarRelationFilter = {
-  is?: Prisma.documentTypeWhereInput
-  isNot?: Prisma.documentTypeWhereInput
+  is?: Prisma.DocumentTypeWhereInput
+  isNot?: Prisma.DocumentTypeWhereInput
 }
 
-export type documentTypeCreateNestedManyWithoutSchoolInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput> | Prisma.documentTypeCreateWithoutSchoolInput[] | Prisma.documentTypeUncheckedCreateWithoutSchoolInput[]
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutSchoolInput | Prisma.documentTypeCreateOrConnectWithoutSchoolInput[]
-  createMany?: Prisma.documentTypeCreateManySchoolInputEnvelope
-  connect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
+export type DocumentTypeCreateNestedManyWithoutSchoolInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput> | Prisma.DocumentTypeCreateWithoutSchoolInput[] | Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput[]
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput | Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput[]
+  createMany?: Prisma.DocumentTypeCreateManySchoolInputEnvelope
+  connect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
 }
 
-export type documentTypeUncheckedCreateNestedManyWithoutSchoolInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput> | Prisma.documentTypeCreateWithoutSchoolInput[] | Prisma.documentTypeUncheckedCreateWithoutSchoolInput[]
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutSchoolInput | Prisma.documentTypeCreateOrConnectWithoutSchoolInput[]
-  createMany?: Prisma.documentTypeCreateManySchoolInputEnvelope
-  connect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
+export type DocumentTypeUncheckedCreateNestedManyWithoutSchoolInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput> | Prisma.DocumentTypeCreateWithoutSchoolInput[] | Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput[]
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput | Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput[]
+  createMany?: Prisma.DocumentTypeCreateManySchoolInputEnvelope
+  connect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
 }
 
-export type documentTypeUpdateManyWithoutSchoolNestedInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput> | Prisma.documentTypeCreateWithoutSchoolInput[] | Prisma.documentTypeUncheckedCreateWithoutSchoolInput[]
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutSchoolInput | Prisma.documentTypeCreateOrConnectWithoutSchoolInput[]
-  upsert?: Prisma.documentTypeUpsertWithWhereUniqueWithoutSchoolInput | Prisma.documentTypeUpsertWithWhereUniqueWithoutSchoolInput[]
-  createMany?: Prisma.documentTypeCreateManySchoolInputEnvelope
-  set?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  disconnect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  delete?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  connect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  update?: Prisma.documentTypeUpdateWithWhereUniqueWithoutSchoolInput | Prisma.documentTypeUpdateWithWhereUniqueWithoutSchoolInput[]
-  updateMany?: Prisma.documentTypeUpdateManyWithWhereWithoutSchoolInput | Prisma.documentTypeUpdateManyWithWhereWithoutSchoolInput[]
-  deleteMany?: Prisma.documentTypeScalarWhereInput | Prisma.documentTypeScalarWhereInput[]
+export type DocumentTypeUpdateManyWithoutSchoolNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput> | Prisma.DocumentTypeCreateWithoutSchoolInput[] | Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput[]
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput | Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput[]
+  upsert?: Prisma.DocumentTypeUpsertWithWhereUniqueWithoutSchoolInput | Prisma.DocumentTypeUpsertWithWhereUniqueWithoutSchoolInput[]
+  createMany?: Prisma.DocumentTypeCreateManySchoolInputEnvelope
+  set?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  disconnect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  delete?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  connect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  update?: Prisma.DocumentTypeUpdateWithWhereUniqueWithoutSchoolInput | Prisma.DocumentTypeUpdateWithWhereUniqueWithoutSchoolInput[]
+  updateMany?: Prisma.DocumentTypeUpdateManyWithWhereWithoutSchoolInput | Prisma.DocumentTypeUpdateManyWithWhereWithoutSchoolInput[]
+  deleteMany?: Prisma.DocumentTypeScalarWhereInput | Prisma.DocumentTypeScalarWhereInput[]
 }
 
-export type documentTypeUncheckedUpdateManyWithoutSchoolNestedInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput> | Prisma.documentTypeCreateWithoutSchoolInput[] | Prisma.documentTypeUncheckedCreateWithoutSchoolInput[]
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutSchoolInput | Prisma.documentTypeCreateOrConnectWithoutSchoolInput[]
-  upsert?: Prisma.documentTypeUpsertWithWhereUniqueWithoutSchoolInput | Prisma.documentTypeUpsertWithWhereUniqueWithoutSchoolInput[]
-  createMany?: Prisma.documentTypeCreateManySchoolInputEnvelope
-  set?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  disconnect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  delete?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  connect?: Prisma.documentTypeWhereUniqueInput | Prisma.documentTypeWhereUniqueInput[]
-  update?: Prisma.documentTypeUpdateWithWhereUniqueWithoutSchoolInput | Prisma.documentTypeUpdateWithWhereUniqueWithoutSchoolInput[]
-  updateMany?: Prisma.documentTypeUpdateManyWithWhereWithoutSchoolInput | Prisma.documentTypeUpdateManyWithWhereWithoutSchoolInput[]
-  deleteMany?: Prisma.documentTypeScalarWhereInput | Prisma.documentTypeScalarWhereInput[]
+export type DocumentTypeUncheckedUpdateManyWithoutSchoolNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput> | Prisma.DocumentTypeCreateWithoutSchoolInput[] | Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput[]
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput | Prisma.DocumentTypeCreateOrConnectWithoutSchoolInput[]
+  upsert?: Prisma.DocumentTypeUpsertWithWhereUniqueWithoutSchoolInput | Prisma.DocumentTypeUpsertWithWhereUniqueWithoutSchoolInput[]
+  createMany?: Prisma.DocumentTypeCreateManySchoolInputEnvelope
+  set?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  disconnect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  delete?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  connect?: Prisma.DocumentTypeWhereUniqueInput | Prisma.DocumentTypeWhereUniqueInput[]
+  update?: Prisma.DocumentTypeUpdateWithWhereUniqueWithoutSchoolInput | Prisma.DocumentTypeUpdateWithWhereUniqueWithoutSchoolInput[]
+  updateMany?: Prisma.DocumentTypeUpdateManyWithWhereWithoutSchoolInput | Prisma.DocumentTypeUpdateManyWithWhereWithoutSchoolInput[]
+  deleteMany?: Prisma.DocumentTypeScalarWhereInput | Prisma.DocumentTypeScalarWhereInput[]
 }
 
-export type documentTypeCreateNestedOneWithoutStudentsInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutStudentsInput, Prisma.documentTypeUncheckedCreateWithoutStudentsInput>
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutStudentsInput
-  connect?: Prisma.documentTypeWhereUniqueInput
+export type DocumentTypeCreateNestedOneWithoutStudentDocumentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedCreateWithoutStudentDocumentsInput>
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutStudentDocumentsInput
+  connect?: Prisma.DocumentTypeWhereUniqueInput
 }
 
-export type documentTypeUpdateOneRequiredWithoutStudentsNestedInput = {
-  create?: Prisma.XOR<Prisma.documentTypeCreateWithoutStudentsInput, Prisma.documentTypeUncheckedCreateWithoutStudentsInput>
-  connectOrCreate?: Prisma.documentTypeCreateOrConnectWithoutStudentsInput
-  upsert?: Prisma.documentTypeUpsertWithoutStudentsInput
-  connect?: Prisma.documentTypeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.documentTypeUpdateToOneWithWhereWithoutStudentsInput, Prisma.documentTypeUpdateWithoutStudentsInput>, Prisma.documentTypeUncheckedUpdateWithoutStudentsInput>
+export type DocumentTypeUpdateOneRequiredWithoutStudentDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeCreateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedCreateWithoutStudentDocumentsInput>
+  connectOrCreate?: Prisma.DocumentTypeCreateOrConnectWithoutStudentDocumentsInput
+  upsert?: Prisma.DocumentTypeUpsertWithoutStudentDocumentsInput
+  connect?: Prisma.DocumentTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentTypeUpdateToOneWithWhereWithoutStudentDocumentsInput, Prisma.DocumentTypeUpdateWithoutStudentDocumentsInput>, Prisma.DocumentTypeUncheckedUpdateWithoutStudentDocumentsInput>
 }
 
-export type documentTypeCreateWithoutSchoolInput = {
+export type DocumentTypeCreateWithoutSchoolInput = {
   id?: string
   type: string
   label: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  students?: Prisma.StudentCreateNestedManyWithoutDocumentTypeInput
+  studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutDocumentTypeInput
 }
 
-export type documentTypeUncheckedCreateWithoutSchoolInput = {
+export type DocumentTypeUncheckedCreateWithoutSchoolInput = {
   id?: string
   type: string
   label: string
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  students?: Prisma.StudentUncheckedCreateNestedManyWithoutDocumentTypeInput
+  studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
-export type documentTypeCreateOrConnectWithoutSchoolInput = {
-  where: Prisma.documentTypeWhereUniqueInput
-  create: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput>
+export type DocumentTypeCreateOrConnectWithoutSchoolInput = {
+  where: Prisma.DocumentTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput>
 }
 
-export type documentTypeCreateManySchoolInputEnvelope = {
-  data: Prisma.documentTypeCreateManySchoolInput | Prisma.documentTypeCreateManySchoolInput[]
+export type DocumentTypeCreateManySchoolInputEnvelope = {
+  data: Prisma.DocumentTypeCreateManySchoolInput | Prisma.DocumentTypeCreateManySchoolInput[]
   skipDuplicates?: boolean
 }
 
-export type documentTypeUpsertWithWhereUniqueWithoutSchoolInput = {
-  where: Prisma.documentTypeWhereUniqueInput
-  update: Prisma.XOR<Prisma.documentTypeUpdateWithoutSchoolInput, Prisma.documentTypeUncheckedUpdateWithoutSchoolInput>
-  create: Prisma.XOR<Prisma.documentTypeCreateWithoutSchoolInput, Prisma.documentTypeUncheckedCreateWithoutSchoolInput>
+export type DocumentTypeUpsertWithWhereUniqueWithoutSchoolInput = {
+  where: Prisma.DocumentTypeWhereUniqueInput
+  update: Prisma.XOR<Prisma.DocumentTypeUpdateWithoutSchoolInput, Prisma.DocumentTypeUncheckedUpdateWithoutSchoolInput>
+  create: Prisma.XOR<Prisma.DocumentTypeCreateWithoutSchoolInput, Prisma.DocumentTypeUncheckedCreateWithoutSchoolInput>
 }
 
-export type documentTypeUpdateWithWhereUniqueWithoutSchoolInput = {
-  where: Prisma.documentTypeWhereUniqueInput
-  data: Prisma.XOR<Prisma.documentTypeUpdateWithoutSchoolInput, Prisma.documentTypeUncheckedUpdateWithoutSchoolInput>
+export type DocumentTypeUpdateWithWhereUniqueWithoutSchoolInput = {
+  where: Prisma.DocumentTypeWhereUniqueInput
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateWithoutSchoolInput, Prisma.DocumentTypeUncheckedUpdateWithoutSchoolInput>
 }
 
-export type documentTypeUpdateManyWithWhereWithoutSchoolInput = {
-  where: Prisma.documentTypeScalarWhereInput
-  data: Prisma.XOR<Prisma.documentTypeUpdateManyMutationInput, Prisma.documentTypeUncheckedUpdateManyWithoutSchoolInput>
+export type DocumentTypeUpdateManyWithWhereWithoutSchoolInput = {
+  where: Prisma.DocumentTypeScalarWhereInput
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateManyMutationInput, Prisma.DocumentTypeUncheckedUpdateManyWithoutSchoolInput>
 }
 
-export type documentTypeScalarWhereInput = {
-  AND?: Prisma.documentTypeScalarWhereInput | Prisma.documentTypeScalarWhereInput[]
-  OR?: Prisma.documentTypeScalarWhereInput[]
-  NOT?: Prisma.documentTypeScalarWhereInput | Prisma.documentTypeScalarWhereInput[]
-  id?: Prisma.StringFilter<"documentType"> | string
-  type?: Prisma.StringFilter<"documentType"> | string
-  label?: Prisma.StringFilter<"documentType"> | string
-  schoolId?: Prisma.StringFilter<"documentType"> | string
-  createdAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"documentType"> | Date | string
-  deletedAt?: Prisma.DateTimeNullableFilter<"documentType"> | Date | string | null
+export type DocumentTypeScalarWhereInput = {
+  AND?: Prisma.DocumentTypeScalarWhereInput | Prisma.DocumentTypeScalarWhereInput[]
+  OR?: Prisma.DocumentTypeScalarWhereInput[]
+  NOT?: Prisma.DocumentTypeScalarWhereInput | Prisma.DocumentTypeScalarWhereInput[]
+  id?: Prisma.StringFilter<"DocumentType"> | string
+  type?: Prisma.StringFilter<"DocumentType"> | string
+  label?: Prisma.StringFilter<"DocumentType"> | string
+  schoolId?: Prisma.StringFilter<"DocumentType"> | string
+  createdAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DocumentType"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"DocumentType"> | Date | string | null
 }
 
-export type documentTypeCreateWithoutStudentsInput = {
+export type DocumentTypeCreateWithoutStudentDocumentsInput = {
   id?: string
   type: string
   label: string
@@ -504,7 +504,7 @@ export type documentTypeCreateWithoutStudentsInput = {
   school: Prisma.SchoolCreateNestedOneWithoutDocumentTypesInput
 }
 
-export type documentTypeUncheckedCreateWithoutStudentsInput = {
+export type DocumentTypeUncheckedCreateWithoutStudentDocumentsInput = {
   id?: string
   type: string
   label: string
@@ -514,23 +514,23 @@ export type documentTypeUncheckedCreateWithoutStudentsInput = {
   deletedAt?: Date | string | null
 }
 
-export type documentTypeCreateOrConnectWithoutStudentsInput = {
-  where: Prisma.documentTypeWhereUniqueInput
-  create: Prisma.XOR<Prisma.documentTypeCreateWithoutStudentsInput, Prisma.documentTypeUncheckedCreateWithoutStudentsInput>
+export type DocumentTypeCreateOrConnectWithoutStudentDocumentsInput = {
+  where: Prisma.DocumentTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentTypeCreateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedCreateWithoutStudentDocumentsInput>
 }
 
-export type documentTypeUpsertWithoutStudentsInput = {
-  update: Prisma.XOR<Prisma.documentTypeUpdateWithoutStudentsInput, Prisma.documentTypeUncheckedUpdateWithoutStudentsInput>
-  create: Prisma.XOR<Prisma.documentTypeCreateWithoutStudentsInput, Prisma.documentTypeUncheckedCreateWithoutStudentsInput>
-  where?: Prisma.documentTypeWhereInput
+export type DocumentTypeUpsertWithoutStudentDocumentsInput = {
+  update: Prisma.XOR<Prisma.DocumentTypeUpdateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedUpdateWithoutStudentDocumentsInput>
+  create: Prisma.XOR<Prisma.DocumentTypeCreateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedCreateWithoutStudentDocumentsInput>
+  where?: Prisma.DocumentTypeWhereInput
 }
 
-export type documentTypeUpdateToOneWithWhereWithoutStudentsInput = {
-  where?: Prisma.documentTypeWhereInput
-  data: Prisma.XOR<Prisma.documentTypeUpdateWithoutStudentsInput, Prisma.documentTypeUncheckedUpdateWithoutStudentsInput>
+export type DocumentTypeUpdateToOneWithWhereWithoutStudentDocumentsInput = {
+  where?: Prisma.DocumentTypeWhereInput
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateWithoutStudentDocumentsInput, Prisma.DocumentTypeUncheckedUpdateWithoutStudentDocumentsInput>
 }
 
-export type documentTypeUpdateWithoutStudentsInput = {
+export type DocumentTypeUpdateWithoutStudentDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -540,7 +540,7 @@ export type documentTypeUpdateWithoutStudentsInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutDocumentTypesNestedInput
 }
 
-export type documentTypeUncheckedUpdateWithoutStudentsInput = {
+export type DocumentTypeUncheckedUpdateWithoutStudentDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -550,7 +550,7 @@ export type documentTypeUncheckedUpdateWithoutStudentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type documentTypeCreateManySchoolInput = {
+export type DocumentTypeCreateManySchoolInput = {
   id?: string
   type: string
   label: string
@@ -559,27 +559,27 @@ export type documentTypeCreateManySchoolInput = {
   deletedAt?: Date | string | null
 }
 
-export type documentTypeUpdateWithoutSchoolInput = {
+export type DocumentTypeUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  students?: Prisma.StudentUpdateManyWithoutDocumentTypeNestedInput
+  studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutDocumentTypeNestedInput
 }
 
-export type documentTypeUncheckedUpdateWithoutSchoolInput = {
+export type DocumentTypeUncheckedUpdateWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  students?: Prisma.StudentUncheckedUpdateManyWithoutDocumentTypeNestedInput
+  studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
-export type documentTypeUncheckedUpdateManyWithoutSchoolInput = {
+export type DocumentTypeUncheckedUpdateManyWithoutSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
@@ -594,11 +594,11 @@ export type documentTypeUncheckedUpdateManyWithoutSchoolInput = {
  */
 
 export type DocumentTypeCountOutputType = {
-  students: number
+  studentDocuments: number
 }
 
 export type DocumentTypeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  students?: boolean | DocumentTypeCountOutputTypeCountStudentsArgs
+  studentDocuments?: boolean | DocumentTypeCountOutputTypeCountStudentDocumentsArgs
 }
 
 /**
@@ -614,12 +614,12 @@ export type DocumentTypeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
 /**
  * DocumentTypeCountOutputType without action
  */
-export type DocumentTypeCountOutputTypeCountStudentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StudentWhereInput
+export type DocumentTypeCountOutputTypeCountStudentDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StudentDocumentWhereInput
 }
 
 
-export type documentTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type DocumentTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   label?: boolean
@@ -628,11 +628,11 @@ export type documentTypeSelect<ExtArgs extends runtime.Types.Extensions.Internal
   updatedAt?: boolean
   deletedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  students?: boolean | Prisma.documentType$studentsArgs<ExtArgs>
+  studentDocuments?: boolean | Prisma.DocumentType$studentDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentType"]>
 
-export type documentTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type DocumentTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   label?: boolean
@@ -643,7 +643,7 @@ export type documentTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentType"]>
 
-export type documentTypeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type DocumentTypeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   label?: boolean
@@ -654,7 +654,7 @@ export type documentTypeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentType"]>
 
-export type documentTypeSelectScalar = {
+export type DocumentTypeSelectScalar = {
   id?: boolean
   type?: boolean
   label?: boolean
@@ -664,24 +664,24 @@ export type documentTypeSelectScalar = {
   deletedAt?: boolean
 }
 
-export type documentTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "label" | "schoolId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["documentType"]>
-export type documentTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "label" | "schoolId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["documentType"]>
+export type DocumentTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
-  students?: boolean | Prisma.documentType$studentsArgs<ExtArgs>
+  studentDocuments?: boolean | Prisma.DocumentType$studentDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentTypeCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type documentTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }
-export type documentTypeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
 }
 
-export type $documentTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "documentType"
+export type $DocumentTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "DocumentType"
   objects: {
     school: Prisma.$SchoolPayload<ExtArgs>
-    students: Prisma.$StudentPayload<ExtArgs>[]
+    studentDocuments: Prisma.$StudentDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -695,18 +695,18 @@ export type $documentTypePayload<ExtArgs extends runtime.Types.Extensions.Intern
   composites: {}
 }
 
-export type documentTypeGetPayload<S extends boolean | null | undefined | documentTypeDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$documentTypePayload, S>
+export type DocumentTypeGetPayload<S extends boolean | null | undefined | DocumentTypeDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload, S>
 
-export type documentTypeCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<documentTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+export type DocumentTypeCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<DocumentTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
     select?: DocumentTypeCountAggregateInputType | true
   }
 
-export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['documentType'], meta: { name: 'documentType' } }
+export interface DocumentTypeDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DocumentType'], meta: { name: 'DocumentType' } }
   /**
    * Find zero or one DocumentType that matches the filter.
-   * @param {documentTypeFindUniqueArgs} args - Arguments to find a DocumentType
+   * @param {DocumentTypeFindUniqueArgs} args - Arguments to find a DocumentType
    * @example
    * // Get one DocumentType
    * const documentType = await prisma.documentType.findUnique({
@@ -715,12 +715,12 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
    */
-  findUnique<T extends documentTypeFindUniqueArgs>(args: Prisma.SelectSubset<T, documentTypeFindUniqueArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends DocumentTypeFindUniqueArgs>(args: Prisma.SelectSubset<T, DocumentTypeFindUniqueArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find one DocumentType that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {documentTypeFindUniqueOrThrowArgs} args - Arguments to find a DocumentType
+   * @param {DocumentTypeFindUniqueOrThrowArgs} args - Arguments to find a DocumentType
    * @example
    * // Get one DocumentType
    * const documentType = await prisma.documentType.findUniqueOrThrow({
@@ -729,13 +729,13 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
    */
-  findUniqueOrThrow<T extends documentTypeFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, documentTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends DocumentTypeFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, DocumentTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first DocumentType that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeFindFirstArgs} args - Arguments to find a DocumentType
+   * @param {DocumentTypeFindFirstArgs} args - Arguments to find a DocumentType
    * @example
    * // Get one DocumentType
    * const documentType = await prisma.documentType.findFirst({
@@ -744,14 +744,14 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
    */
-  findFirst<T extends documentTypeFindFirstArgs>(args?: Prisma.SelectSubset<T, documentTypeFindFirstArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends DocumentTypeFindFirstArgs>(args?: Prisma.SelectSubset<T, DocumentTypeFindFirstArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first DocumentType that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeFindFirstOrThrowArgs} args - Arguments to find a DocumentType
+   * @param {DocumentTypeFindFirstOrThrowArgs} args - Arguments to find a DocumentType
    * @example
    * // Get one DocumentType
    * const documentType = await prisma.documentType.findFirstOrThrow({
@@ -760,13 +760,13 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
    */
-  findFirstOrThrow<T extends documentTypeFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, documentTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends DocumentTypeFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, DocumentTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find zero or more DocumentTypes that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {DocumentTypeFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all DocumentTypes
    * const documentTypes = await prisma.documentType.findMany()
@@ -778,11 +778,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * const documentTypeWithIdOnly = await prisma.documentType.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends documentTypeFindManyArgs>(args?: Prisma.SelectSubset<T, documentTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends DocumentTypeFindManyArgs>(args?: Prisma.SelectSubset<T, DocumentTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
    * Create a DocumentType.
-   * @param {documentTypeCreateArgs} args - Arguments to create a DocumentType.
+   * @param {DocumentTypeCreateArgs} args - Arguments to create a DocumentType.
    * @example
    * // Create one DocumentType
    * const DocumentType = await prisma.documentType.create({
@@ -792,11 +792,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    * 
    */
-  create<T extends documentTypeCreateArgs>(args: Prisma.SelectSubset<T, documentTypeCreateArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends DocumentTypeCreateArgs>(args: Prisma.SelectSubset<T, DocumentTypeCreateArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Create many DocumentTypes.
-   * @param {documentTypeCreateManyArgs} args - Arguments to create many DocumentTypes.
+   * @param {DocumentTypeCreateManyArgs} args - Arguments to create many DocumentTypes.
    * @example
    * // Create many DocumentTypes
    * const documentType = await prisma.documentType.createMany({
@@ -806,11 +806,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    *     
    */
-  createMany<T extends documentTypeCreateManyArgs>(args?: Prisma.SelectSubset<T, documentTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends DocumentTypeCreateManyArgs>(args?: Prisma.SelectSubset<T, DocumentTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Create many DocumentTypes and returns the data saved in the database.
-   * @param {documentTypeCreateManyAndReturnArgs} args - Arguments to create many DocumentTypes.
+   * @param {DocumentTypeCreateManyAndReturnArgs} args - Arguments to create many DocumentTypes.
    * @example
    * // Create many DocumentTypes
    * const documentType = await prisma.documentType.createManyAndReturn({
@@ -830,11 +830,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  createManyAndReturn<T extends documentTypeCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, documentTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+  createManyAndReturn<T extends DocumentTypeCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, DocumentTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Delete a DocumentType.
-   * @param {documentTypeDeleteArgs} args - Arguments to delete one DocumentType.
+   * @param {DocumentTypeDeleteArgs} args - Arguments to delete one DocumentType.
    * @example
    * // Delete one DocumentType
    * const DocumentType = await prisma.documentType.delete({
@@ -844,11 +844,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    * 
    */
-  delete<T extends documentTypeDeleteArgs>(args: Prisma.SelectSubset<T, documentTypeDeleteArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends DocumentTypeDeleteArgs>(args: Prisma.SelectSubset<T, DocumentTypeDeleteArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Update one DocumentType.
-   * @param {documentTypeUpdateArgs} args - Arguments to update one DocumentType.
+   * @param {DocumentTypeUpdateArgs} args - Arguments to update one DocumentType.
    * @example
    * // Update one DocumentType
    * const documentType = await prisma.documentType.update({
@@ -861,11 +861,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    * 
    */
-  update<T extends documentTypeUpdateArgs>(args: Prisma.SelectSubset<T, documentTypeUpdateArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends DocumentTypeUpdateArgs>(args: Prisma.SelectSubset<T, DocumentTypeUpdateArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Delete zero or more DocumentTypes.
-   * @param {documentTypeDeleteManyArgs} args - Arguments to filter DocumentTypes to delete.
+   * @param {DocumentTypeDeleteManyArgs} args - Arguments to filter DocumentTypes to delete.
    * @example
    * // Delete a few DocumentTypes
    * const { count } = await prisma.documentType.deleteMany({
@@ -875,13 +875,13 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    * 
    */
-  deleteMany<T extends documentTypeDeleteManyArgs>(args?: Prisma.SelectSubset<T, documentTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends DocumentTypeDeleteManyArgs>(args?: Prisma.SelectSubset<T, DocumentTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more DocumentTypes.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {DocumentTypeUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many DocumentTypes
    * const documentType = await prisma.documentType.updateMany({
@@ -894,11 +894,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * })
    * 
    */
-  updateMany<T extends documentTypeUpdateManyArgs>(args: Prisma.SelectSubset<T, documentTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends DocumentTypeUpdateManyArgs>(args: Prisma.SelectSubset<T, DocumentTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more DocumentTypes and returns the data updated in the database.
-   * @param {documentTypeUpdateManyAndReturnArgs} args - Arguments to update many DocumentTypes.
+   * @param {DocumentTypeUpdateManyAndReturnArgs} args - Arguments to update many DocumentTypes.
    * @example
    * // Update many DocumentTypes
    * const documentType = await prisma.documentType.updateManyAndReturn({
@@ -924,11 +924,11 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  updateManyAndReturn<T extends documentTypeUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, documentTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+  updateManyAndReturn<T extends DocumentTypeUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, DocumentTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one DocumentType.
-   * @param {documentTypeUpsertArgs} args - Arguments to update or create a DocumentType.
+   * @param {DocumentTypeUpsertArgs} args - Arguments to update or create a DocumentType.
    * @example
    * // Update or create a DocumentType
    * const documentType = await prisma.documentType.upsert({
@@ -943,14 +943,14 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
    */
-  upsert<T extends documentTypeUpsertArgs>(args: Prisma.SelectSubset<T, documentTypeUpsertArgs<ExtArgs>>): Prisma.Prisma__documentTypeClient<runtime.Types.Result.GetResult<Prisma.$documentTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends DocumentTypeUpsertArgs>(args: Prisma.SelectSubset<T, DocumentTypeUpsertArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
    * Count the number of DocumentTypes.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeCountArgs} args - Arguments to filter DocumentTypes to count.
+   * @param {DocumentTypeCountArgs} args - Arguments to filter DocumentTypes to count.
    * @example
    * // Count the number of DocumentTypes
    * const count = await prisma.documentType.count({
@@ -959,8 +959,8 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    *   }
    * })
   **/
-  count<T extends documentTypeCountArgs>(
-    args?: Prisma.Subset<T, documentTypeCountArgs>,
+  count<T extends DocumentTypeCountArgs>(
+    args?: Prisma.Subset<T, DocumentTypeCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
@@ -999,7 +999,7 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * Group by DocumentType.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {documentTypeGroupByArgs} args - Group by arguments.
+   * @param {DocumentTypeGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -1014,14 +1014,14 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
    * 
   **/
   groupBy<
-    T extends documentTypeGroupByArgs,
+    T extends DocumentTypeGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: documentTypeGroupByArgs['orderBy'] }
-      : { orderBy?: documentTypeGroupByArgs['orderBy'] },
+      ? { orderBy: DocumentTypeGroupByArgs['orderBy'] }
+      : { orderBy?: DocumentTypeGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -1070,23 +1070,23 @@ export interface documentTypeDelegate<ExtArgs extends runtime.Types.Extensions.I
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, documentTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, DocumentTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the documentType model
+ * Fields of the DocumentType model
  */
-readonly fields: documentTypeFieldRefs;
+readonly fields: DocumentTypeFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for documentType.
+ * The delegate class that acts as a "Promise-like" for DocumentType.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__documentTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__DocumentTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  students<T extends Prisma.documentType$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.documentType$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  studentDocuments<T extends Prisma.DocumentType$studentDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentType$studentDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1113,449 +1113,449 @@ export interface Prisma__documentTypeClient<T, Null = never, ExtArgs extends run
 
 
 /**
- * Fields of the documentType model
+ * Fields of the DocumentType model
  */
-export interface documentTypeFieldRefs {
-  readonly id: Prisma.FieldRef<"documentType", 'String'>
-  readonly type: Prisma.FieldRef<"documentType", 'String'>
-  readonly label: Prisma.FieldRef<"documentType", 'String'>
-  readonly schoolId: Prisma.FieldRef<"documentType", 'String'>
-  readonly createdAt: Prisma.FieldRef<"documentType", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"documentType", 'DateTime'>
-  readonly deletedAt: Prisma.FieldRef<"documentType", 'DateTime'>
+export interface DocumentTypeFieldRefs {
+  readonly id: Prisma.FieldRef<"DocumentType", 'String'>
+  readonly type: Prisma.FieldRef<"DocumentType", 'String'>
+  readonly label: Prisma.FieldRef<"DocumentType", 'String'>
+  readonly schoolId: Prisma.FieldRef<"DocumentType", 'String'>
+  readonly createdAt: Prisma.FieldRef<"DocumentType", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"DocumentType", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"DocumentType", 'DateTime'>
 }
     
 
 // Custom InputTypes
 /**
- * documentType findUnique
+ * DocumentType findUnique
  */
-export type documentTypeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter, which documentType to fetch.
+   * Filter, which DocumentType to fetch.
    */
-  where: Prisma.documentTypeWhereUniqueInput
+  where: Prisma.DocumentTypeWhereUniqueInput
 }
 
 /**
- * documentType findUniqueOrThrow
+ * DocumentType findUniqueOrThrow
  */
-export type documentTypeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter, which documentType to fetch.
+   * Filter, which DocumentType to fetch.
    */
-  where: Prisma.documentTypeWhereUniqueInput
+  where: Prisma.DocumentTypeWhereUniqueInput
 }
 
 /**
- * documentType findFirst
+ * DocumentType findFirst
  */
-export type documentTypeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter, which documentType to fetch.
+   * Filter, which DocumentType to fetch.
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of documentTypes to fetch.
+   * Determine the order of DocumentTypes to fetch.
    */
-  orderBy?: Prisma.documentTypeOrderByWithRelationInput | Prisma.documentTypeOrderByWithRelationInput[]
+  orderBy?: Prisma.DocumentTypeOrderByWithRelationInput | Prisma.DocumentTypeOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for documentTypes.
+   * Sets the position for searching for DocumentTypes.
    */
-  cursor?: Prisma.documentTypeWhereUniqueInput
+  cursor?: Prisma.DocumentTypeWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` documentTypes from the position of the cursor.
+   * Take `±n` DocumentTypes from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` documentTypes.
+   * Skip the first `n` DocumentTypes.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of documentTypes.
+   * Filter by unique combinations of DocumentTypes.
    */
   distinct?: Prisma.DocumentTypeScalarFieldEnum | Prisma.DocumentTypeScalarFieldEnum[]
 }
 
 /**
- * documentType findFirstOrThrow
+ * DocumentType findFirstOrThrow
  */
-export type documentTypeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter, which documentType to fetch.
+   * Filter, which DocumentType to fetch.
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of documentTypes to fetch.
+   * Determine the order of DocumentTypes to fetch.
    */
-  orderBy?: Prisma.documentTypeOrderByWithRelationInput | Prisma.documentTypeOrderByWithRelationInput[]
+  orderBy?: Prisma.DocumentTypeOrderByWithRelationInput | Prisma.DocumentTypeOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for documentTypes.
+   * Sets the position for searching for DocumentTypes.
    */
-  cursor?: Prisma.documentTypeWhereUniqueInput
+  cursor?: Prisma.DocumentTypeWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` documentTypes from the position of the cursor.
+   * Take `±n` DocumentTypes from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` documentTypes.
+   * Skip the first `n` DocumentTypes.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of documentTypes.
+   * Filter by unique combinations of DocumentTypes.
    */
   distinct?: Prisma.DocumentTypeScalarFieldEnum | Prisma.DocumentTypeScalarFieldEnum[]
 }
 
 /**
- * documentType findMany
+ * DocumentType findMany
  */
-export type documentTypeFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter, which documentTypes to fetch.
+   * Filter, which DocumentTypes to fetch.
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of documentTypes to fetch.
+   * Determine the order of DocumentTypes to fetch.
    */
-  orderBy?: Prisma.documentTypeOrderByWithRelationInput | Prisma.documentTypeOrderByWithRelationInput[]
+  orderBy?: Prisma.DocumentTypeOrderByWithRelationInput | Prisma.DocumentTypeOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing documentTypes.
+   * Sets the position for listing DocumentTypes.
    */
-  cursor?: Prisma.documentTypeWhereUniqueInput
+  cursor?: Prisma.DocumentTypeWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` documentTypes from the position of the cursor.
+   * Take `±n` DocumentTypes from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` documentTypes.
+   * Skip the first `n` DocumentTypes.
    */
   skip?: number
   distinct?: Prisma.DocumentTypeScalarFieldEnum | Prisma.DocumentTypeScalarFieldEnum[]
 }
 
 /**
- * documentType create
+ * DocumentType create
  */
-export type documentTypeCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * The data needed to create a documentType.
+   * The data needed to create a DocumentType.
    */
-  data: Prisma.XOR<Prisma.documentTypeCreateInput, Prisma.documentTypeUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.DocumentTypeCreateInput, Prisma.DocumentTypeUncheckedCreateInput>
 }
 
 /**
- * documentType createMany
+ * DocumentType createMany
  */
-export type documentTypeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many documentTypes.
+   * The data used to create many DocumentTypes.
    */
-  data: Prisma.documentTypeCreateManyInput | Prisma.documentTypeCreateManyInput[]
+  data: Prisma.DocumentTypeCreateManyInput | Prisma.DocumentTypeCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * documentType createManyAndReturn
+ * DocumentType createManyAndReturn
  */
-export type documentTypeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelectCreateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
-   * The data used to create many documentTypes.
+   * The data used to create many DocumentTypes.
    */
-  data: Prisma.documentTypeCreateManyInput | Prisma.documentTypeCreateManyInput[]
+  data: Prisma.DocumentTypeCreateManyInput | Prisma.DocumentTypeCreateManyInput[]
   skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeIncludeCreateManyAndReturn<ExtArgs> | null
+  include?: Prisma.DocumentTypeIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * documentType update
+ * DocumentType update
  */
-export type documentTypeUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * The data needed to update a documentType.
+   * The data needed to update a DocumentType.
    */
-  data: Prisma.XOR<Prisma.documentTypeUpdateInput, Prisma.documentTypeUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateInput, Prisma.DocumentTypeUncheckedUpdateInput>
   /**
-   * Choose, which documentType to update.
+   * Choose, which DocumentType to update.
    */
-  where: Prisma.documentTypeWhereUniqueInput
+  where: Prisma.DocumentTypeWhereUniqueInput
 }
 
 /**
- * documentType updateMany
+ * DocumentType updateMany
  */
-export type documentTypeUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update documentTypes.
+   * The data used to update DocumentTypes.
    */
-  data: Prisma.XOR<Prisma.documentTypeUpdateManyMutationInput, Prisma.documentTypeUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateManyMutationInput, Prisma.DocumentTypeUncheckedUpdateManyInput>
   /**
-   * Filter which documentTypes to update
+   * Filter which DocumentTypes to update
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
-   * Limit how many documentTypes to update.
+   * Limit how many DocumentTypes to update.
    */
   limit?: number
 }
 
 /**
- * documentType updateManyAndReturn
+ * DocumentType updateManyAndReturn
  */
-export type documentTypeUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelectUpdateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
-   * The data used to update documentTypes.
+   * The data used to update DocumentTypes.
    */
-  data: Prisma.XOR<Prisma.documentTypeUpdateManyMutationInput, Prisma.documentTypeUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.DocumentTypeUpdateManyMutationInput, Prisma.DocumentTypeUncheckedUpdateManyInput>
   /**
-   * Filter which documentTypes to update
+   * Filter which DocumentTypes to update
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
-   * Limit how many documentTypes to update.
+   * Limit how many DocumentTypes to update.
    */
   limit?: number
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeIncludeUpdateManyAndReturn<ExtArgs> | null
+  include?: Prisma.DocumentTypeIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * documentType upsert
+ * DocumentType upsert
  */
-export type documentTypeUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * The filter to search for the documentType to update in case it exists.
+   * The filter to search for the DocumentType to update in case it exists.
    */
-  where: Prisma.documentTypeWhereUniqueInput
+  where: Prisma.DocumentTypeWhereUniqueInput
   /**
-   * In case the documentType found by the `where` argument doesn't exist, create a new documentType with this data.
+   * In case the DocumentType found by the `where` argument doesn't exist, create a new DocumentType with this data.
    */
-  create: Prisma.XOR<Prisma.documentTypeCreateInput, Prisma.documentTypeUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.DocumentTypeCreateInput, Prisma.DocumentTypeUncheckedCreateInput>
   /**
-   * In case the documentType was found with the provided `where` argument, update it with this data.
+   * In case the DocumentType was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.documentTypeUpdateInput, Prisma.documentTypeUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.DocumentTypeUpdateInput, Prisma.DocumentTypeUncheckedUpdateInput>
 }
 
 /**
- * documentType delete
+ * DocumentType delete
  */
-export type documentTypeDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
   /**
-   * Filter which documentType to delete.
+   * Filter which DocumentType to delete.
    */
-  where: Prisma.documentTypeWhereUniqueInput
+  where: Prisma.DocumentTypeWhereUniqueInput
 }
 
 /**
- * documentType deleteMany
+ * DocumentType deleteMany
  */
-export type documentTypeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which documentTypes to delete
+   * Filter which DocumentTypes to delete
    */
-  where?: Prisma.documentTypeWhereInput
+  where?: Prisma.DocumentTypeWhereInput
   /**
-   * Limit how many documentTypes to delete.
+   * Limit how many DocumentTypes to delete.
    */
   limit?: number
 }
 
 /**
- * documentType.students
+ * DocumentType.studentDocuments
  */
-export type documentType$studentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentType$studentDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Student
+   * Select specific fields to fetch from the StudentDocument
    */
-  select?: Prisma.StudentSelect<ExtArgs> | null
+  select?: Prisma.StudentDocumentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Student
+   * Omit specific fields from the StudentDocument
    */
-  omit?: Prisma.StudentOmit<ExtArgs> | null
+  omit?: Prisma.StudentDocumentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.StudentInclude<ExtArgs> | null
-  where?: Prisma.StudentWhereInput
-  orderBy?: Prisma.StudentOrderByWithRelationInput | Prisma.StudentOrderByWithRelationInput[]
-  cursor?: Prisma.StudentWhereUniqueInput
+  include?: Prisma.StudentDocumentInclude<ExtArgs> | null
+  where?: Prisma.StudentDocumentWhereInput
+  orderBy?: Prisma.StudentDocumentOrderByWithRelationInput | Prisma.StudentDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.StudentDocumentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.StudentScalarFieldEnum | Prisma.StudentScalarFieldEnum[]
+  distinct?: Prisma.StudentDocumentScalarFieldEnum | Prisma.StudentDocumentScalarFieldEnum[]
 }
 
 /**
- * documentType without action
+ * DocumentType without action
  */
-export type documentTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DocumentTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the documentType
+   * Select specific fields to fetch from the DocumentType
    */
-  select?: Prisma.documentTypeSelect<ExtArgs> | null
+  select?: Prisma.DocumentTypeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the documentType
+   * Omit specific fields from the DocumentType
    */
-  omit?: Prisma.documentTypeOmit<ExtArgs> | null
+  omit?: Prisma.DocumentTypeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.documentTypeInclude<ExtArgs> | null
+  include?: Prisma.DocumentTypeInclude<ExtArgs> | null
 }
