@@ -3,7 +3,7 @@ import { StudentDocumentsRepository } from '../../student-documents/repositories
 import type { GENDER } from '@/generated/prisma/enums';
 import type { Student } from '@/generated/prisma/client';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
-import { DocumentAlreadyExistsError } from '../errors/studen-document-already-exists.error';
+import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
 
 export interface CreateStudentRequest {
   name: string;
@@ -46,7 +46,7 @@ export class CreateStudentUseCase {
       );
 
     if (documentExists) {
-      throw new DocumentAlreadyExistsError();
+      throw new StudentWithSameDocumentAlreadyExistsError();
     }
 
     const student = await this.studentsRepository.save({
