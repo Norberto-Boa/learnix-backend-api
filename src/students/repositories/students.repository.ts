@@ -11,7 +11,7 @@ export interface CreateStudentsData {
   schoolId: string;
 }
 
-export abstract class studentsRepository {
+export abstract class StudentsRepository {
   abstract save(
     data: CreateStudentsData,
     tx?: TransactionClient,

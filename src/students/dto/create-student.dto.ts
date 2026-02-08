@@ -1,11 +1,17 @@
 import { GENDER, STUDENT_STATUS } from '@/generated/prisma/enums';
+import { createZodDto } from 'nestjs-zod';
 import { z } from 'zod';
 
-const createStudent = z.object({
+export const createStudentSchema = z.object({
   name: z.string('Nome é obrigatório'),
   registrationNumbe: z.string(),
   dateOfBirth: z.date(),
   gender: z.enum(GENDER),
   status: z.enum(STUDENT_STATUS),
   schoolId: z.uuid(),
+  documentTypeId: z.string(),
+  documentNumber: z.string(),
+  documentUrl: z.url().optional(),
 });
+
+export class CreateStudentDTO extends createZodDto(createStudentSchema) {}

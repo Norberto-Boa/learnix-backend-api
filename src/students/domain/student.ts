@@ -4,7 +4,7 @@ export interface StudentDomain {
   id: string;
   name: string;
   registrationNumber: string;
-  dateOfBitrth: string;
+  dateOfBirth: Date;
   gender: GENDER;
   status: STUDENT_STATUS;
   schoolId: string;

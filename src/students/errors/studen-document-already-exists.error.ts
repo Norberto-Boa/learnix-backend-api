@@ -1,6 +1,6 @@
 import type { DomainException } from '@/shared/@types/DomainException';
 
-export class StudentAlreadyExistsError
+export class DocumentAlreadyExistsError
   extends Error
   implements DomainException
 {
