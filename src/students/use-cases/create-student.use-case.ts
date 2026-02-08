@@ -5,7 +5,7 @@ import type { Student } from '@/generated/prisma/client';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
 import { DocumentAlreadyExistsError } from '../errors/studen-document-already-exists.error';
 
-interface CreateStudentReques {
+export interface CreateStudentRequest {
   name: string;
   registrationNumber: string;
   dateOfBirth: Date;
@@ -24,7 +24,10 @@ export class CreateStudentUseCase {
     private StudentDocumentsRepository: StudentDocumentsRepository,
   ) {}
 
-  async execute(data: CreateStudentReques, schoolId: string): Promise<Student> {
+  async execute(
+    data: CreateStudentRequest,
+    schoolId: string,
+  ): Promise<Student> {
     const studentExists =
       await this.studentsRepository.findByRegistrationNumber(
         data.registrationNumber,
