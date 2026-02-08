@@ -1,5 +1,5 @@
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
-import type { StudentDocumentDomain } from './domain/student-document';
+import type { StudentDocumentDomain } from '../domain/student-document';
 
 export interface CreateStudentsDocumentData {
   studentId: string;
@@ -20,9 +20,14 @@ export abstract class StudentDocumentsRepository {
     schoolId: string,
     tx?: TransactionClient,
   ): Promise<StudentDocumentDomain | null>;
-  abstract findByStudent(
+  abstract findByStudentId(
     studentId: string,
+    schoolId: string,
     tx?: TransactionClient,
-  ): Promise<StudentDocumentDomain | null>;
-  abstract delete(id: string, tx?: TransactionClient): Promise<void>;
+  ): Promise<StudentDocumentDomain[] | null>;
+  abstract delete(
+    id: string,
+    schoolId: string,
+    tx?: TransactionClient,
+  ): Promise<void>;
 }

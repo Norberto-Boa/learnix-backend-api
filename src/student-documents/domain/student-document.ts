@@ -3,9 +3,9 @@ export interface StudentDocumentDomain {
   studentId: string;
   documentTypeId: string;
   documentNumber: string;
-  filUrl?: string | null;
+  fileUrl?: string | null;
   schoolId: string;
   createdAt: Date;
-  updated: Date;
+  updatedAt: Date;
   deletedAt: Date | null;
 }
