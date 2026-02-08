@@ -1,6 +1,6 @@
 import type { GENDER, STUDENT_STATUS } from '@/generated/prisma/enums';
 
-export interface Student {
+export interface StudentDomain {
   id: string;
   name: string;
   registrationNumber: string;

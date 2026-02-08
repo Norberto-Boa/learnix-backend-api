@@ -22,6 +22,7 @@ export abstract class StudentDocumentsRepository {
   ): Promise<StudentDocumentDomain | null>;
   abstract findByStudent(
     studentId: string,
+    tx?: TransactionClient,
   ): Promise<StudentDocumentDomain | null>;
   abstract delete(id: string, tx?: TransactionClient): Promise<void>;
 }

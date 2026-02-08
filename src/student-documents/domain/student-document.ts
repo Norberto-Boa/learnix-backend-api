@@ -1,4 +1,4 @@
-export interface StudentDocument {
+export interface StudentDocumentDomain {
   id: string;
   studentId: string;
   documentTypeId: string;
