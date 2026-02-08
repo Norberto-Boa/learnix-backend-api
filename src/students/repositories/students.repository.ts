@@ -25,7 +25,7 @@ export abstract class StudentsRepository {
     registrationNumber: string,
     schoolId: string,
     tx?: TransactionClient,
-  ): Promise<Student | null>;
+  ): Promise<StudentDomain | null>;
   abstract findByName(
     name: string,
     schoolId: string,
