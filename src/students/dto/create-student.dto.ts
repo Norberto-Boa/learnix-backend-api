@@ -4,11 +4,10 @@ import { z } from 'zod';
 
 export const createStudentSchema = z.object({
   name: z.string('Nome é obrigatório'),
-  registrationNumbe: z.string(),
+  registrationNumber: z.string(),
   dateOfBirth: z.date(),
   gender: z.enum(GENDER),
   status: z.enum(STUDENT_STATUS),
-  schoolId: z.uuid(),
   documentTypeId: z.string(),
   documentNumber: z.string(),
   documentUrl: z.url().optional(),
