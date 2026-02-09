@@ -11,7 +11,7 @@ import type { PrismaService } from '@/prisma/prisma.service';
 export class PrismaStudentDocumentsRepository implements StudentDocumentsRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(
+  async save(
     data: CreateStudentsDocumentData,
     tx?: TransactionClient,
   ): Promise<StudentDocumentDomain> {

@@ -10,7 +10,7 @@ export interface CreateStudentsDocumentData {
 }
 
 export abstract class StudentDocumentsRepository {
-  abstract create(
+  abstract save(
     data: CreateStudentsDocumentData,
     tx?: TransactionClient,
   ): Promise<StudentDocumentDomain>;

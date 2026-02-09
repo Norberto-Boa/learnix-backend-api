@@ -64,7 +64,7 @@ export class CreateStudentUseCase {
       schoolId,
     });
 
-    await this.StudentDocumentsRepository.create({
+    await this.StudentDocumentsRepository.save({
       studentId: student.id,
       documentTypeId: data.document.documentTypeId,
       documentNumber: data.document.documentNumber,

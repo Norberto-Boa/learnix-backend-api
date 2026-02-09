@@ -9,9 +9,7 @@ import type { TransactionClient } from '@/generated/prisma/internal/prismaNamesp
 export class InMemoryStudentDocumentsRepository implements StudentDocumentsRepository {
   public items: StudentDocumentDomain[] = [];
 
-  async create(
-    data: CreateStudentsDocumentData,
-  ): Promise<StudentDocumentDomain> {
+  async save(data: CreateStudentsDocumentData): Promise<StudentDocumentDomain> {
     const document: StudentDocumentDomain = {
       id: randomUUID(),
       studentId: data.studentId,
