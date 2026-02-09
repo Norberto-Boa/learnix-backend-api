@@ -3,7 +3,7 @@ import type {
   CreateStudentsData,
   StudentsRepository,
 } from '../students.repository';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDomain } from '@/students/domain/student';
 
@@ -61,6 +61,14 @@ export class PrismaStudentsRepository implements StudentsRepository {
         schoolId,
       },
     });
+  }
+
+  async findByAge(
+    age: number,
+    schoolId: string,
+    tx?: TransactionClient,
+  ): Promise<StudentDomain[]> {
+    return [];
   }
 
   async softDelete(

@@ -1,4 +1,4 @@
-import type { StudentsRepository } from '../repositories/students.repository';
+import { StudentsRepository } from '../repositories/students.repository';
 import { StudentDocumentsRepository } from '../../student-documents/repositories/students-documents.repository';
 import type { GENDER } from '@/generated/prisma/enums';
 import type { Student } from '@/generated/prisma/client';

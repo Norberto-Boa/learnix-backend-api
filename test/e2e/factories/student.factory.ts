@@ -1,6 +1,5 @@
 import { GENDER, STUDENT_STATUS } from '@/generated/prisma/enums';
 import { faker } from '@faker-js/faker';
-import { documentType } from '../../../dist/src/generated/prisma/browser';
 
 export type StudentFactoryOverrides = Partial<{
   name: string;

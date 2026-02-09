@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import type { CreateStudentUseCase } from './use-cases/create-student.use-case';
-import type { AuditService } from '@/audit/audit.service';
+import { CreateStudentUseCase } from './use-cases/create-student.use-case';
+import { AuditService } from '@/audit/audit.service';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import {
   CreateStudentDTO,
@@ -8,7 +8,7 @@ import {
 } from './dto/create-student.dto';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 
 @Controller('students')
 export class StudentsController {

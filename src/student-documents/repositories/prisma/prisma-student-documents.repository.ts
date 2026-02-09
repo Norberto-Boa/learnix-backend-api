@@ -5,7 +5,7 @@ import type {
 } from '../students-documents.repository';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDocumentDomain } from '@/student-documents/domain/student-document';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 
 @Injectable()
 export class PrismaStudentDocumentsRepository implements StudentDocumentsRepository {

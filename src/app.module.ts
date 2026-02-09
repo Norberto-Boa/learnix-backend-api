@@ -14,6 +14,7 @@ import { TransformInterceptor } from './shared/interceptors/transform.intercepto
 import { AllExceptionsFilter } from './shared/filters/http-exception.filter';
 import { AcademicYearsModule } from './academic-years/academic-years.module';
 import { DocumentTypesModule } from './document-types/document-types.module';
+import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { DocumentTypesModule } from './document-types/document-types.module';
     PlatformModule,
     AcademicYearsModule,
     DocumentTypesModule,
+    StudentsModule,
   ],
   providers: [
     {
