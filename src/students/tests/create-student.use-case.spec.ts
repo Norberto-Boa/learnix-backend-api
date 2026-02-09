@@ -11,6 +11,7 @@ import {
 import { studentFactory } from '@test/e2e/factories/student.factory';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
 import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
+import { StudentMustHaveDocumentError } from '../errors/student-must-have-document.error';
 
 describe('CreateStudentUseCase', () => {
   let studentsRepository: InMemoryStudentsRepository;
@@ -50,6 +51,20 @@ describe('CreateStudentUseCase', () => {
     expect(student.id).toBeDefined();
     expect(studentsRepository.items).toHaveLength(1);
     expect(documentsRepository.items).toHaveLength(1);
+  });
+
+  it('creates a student with a document', async () => {
+    await expect(
+      useCase.execute(
+        {
+          name: fakeStudent.name,
+          registrationNumber: 'REG-001',
+          dateOfBirth: fakeStudent.dateOfBirth,
+          gender: fakeStudent.gender,
+        } as any,
+        'school-123',
+      ),
+    ).rejects.toBeInstanceOf(StudentMustHaveDocumentError);
   });
 
   it('Does not allow duplicate student registration number', async () => {

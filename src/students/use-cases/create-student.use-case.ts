@@ -4,6 +4,7 @@ import type { GENDER } from '@/generated/prisma/enums';
 import type { Student } from '@/generated/prisma/client';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
 import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
+import { StudentMustHaveDocumentError } from '../errors/student-must-have-document.error';
 
 export interface CreateStudentRequest {
   name: string;
@@ -36,6 +37,10 @@ export class CreateStudentUseCase {
 
     if (studentExists) {
       throw new StudentAlreadyExistsError();
+    }
+
+    if (!data.document) {
+      throw new StudentMustHaveDocumentError();
     }
 
     const documentExists =
