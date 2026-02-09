@@ -180,7 +180,7 @@ export type StudentDocumentGroupByOutputType = {
   schoolId: string
   createdAt: Date
   updatedAt: Date
-  deletedAt: Date
+  deletedAt: Date | null
   _count: StudentDocumentCountAggregateOutputType | null
   _min: StudentDocumentMinAggregateOutputType | null
   _max: StudentDocumentMaxAggregateOutputType | null
@@ -213,7 +213,7 @@ export type StudentDocumentWhereInput = {
   schoolId?: Prisma.StringFilter<"StudentDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"StudentDocument"> | Date | string | null
   documentType?: Prisma.XOR<Prisma.DocumentTypeScalarRelationFilter, Prisma.DocumentTypeWhereInput>
   student?: Prisma.XOR<Prisma.StudentScalarRelationFilter, Prisma.StudentWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -228,7 +228,7 @@ export type StudentDocumentOrderByWithRelationInput = {
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   documentType?: Prisma.DocumentTypeOrderByWithRelationInput
   student?: Prisma.StudentOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
@@ -247,7 +247,7 @@ export type StudentDocumentWhereUniqueInput = Prisma.AtLeast<{
   schoolId?: Prisma.StringFilter<"StudentDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"StudentDocument"> | Date | string | null
   documentType?: Prisma.XOR<Prisma.DocumentTypeScalarRelationFilter, Prisma.DocumentTypeWhereInput>
   student?: Prisma.XOR<Prisma.StudentScalarRelationFilter, Prisma.StudentWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -262,7 +262,7 @@ export type StudentDocumentOrderByWithAggregationInput = {
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.StudentDocumentCountOrderByAggregateInput
   _max?: Prisma.StudentDocumentMaxOrderByAggregateInput
   _min?: Prisma.StudentDocumentMinOrderByAggregateInput
@@ -280,7 +280,7 @@ export type StudentDocumentScalarWhereWithAggregatesInput = {
   schoolId?: Prisma.StringWithAggregatesFilter<"StudentDocument"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"StudentDocument"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"StudentDocument"> | Date | string
-  deletedAt?: Prisma.DateTimeWithAggregatesFilter<"StudentDocument"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"StudentDocument"> | Date | string | null
 }
 
 export type StudentDocumentCreateInput = {
@@ -289,7 +289,7 @@ export type StudentDocumentCreateInput = {
   fileUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   documentType: Prisma.DocumentTypeCreateNestedOneWithoutStudentDocumentsInput
   student: Prisma.StudentCreateNestedOneWithoutStudentDocumentsInput
   school: Prisma.SchoolCreateNestedOneWithoutStudentDocumentsInput
@@ -304,7 +304,7 @@ export type StudentDocumentUncheckedCreateInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentUpdateInput = {
@@ -313,7 +313,7 @@ export type StudentDocumentUpdateInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   documentType?: Prisma.DocumentTypeUpdateOneRequiredWithoutStudentDocumentsNestedInput
   student?: Prisma.StudentUpdateOneRequiredWithoutStudentDocumentsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentDocumentsNestedInput
@@ -328,7 +328,7 @@ export type StudentDocumentUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentCreateManyInput = {
@@ -340,7 +340,7 @@ export type StudentDocumentCreateManyInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentUpdateManyMutationInput = {
@@ -349,7 +349,7 @@ export type StudentDocumentUpdateManyMutationInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentUncheckedUpdateManyInput = {
@@ -361,7 +361,7 @@ export type StudentDocumentUncheckedUpdateManyInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentListRelationFilter = {
@@ -548,7 +548,7 @@ export type StudentDocumentCreateWithoutSchoolInput = {
   fileUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   documentType: Prisma.DocumentTypeCreateNestedOneWithoutStudentDocumentsInput
   student: Prisma.StudentCreateNestedOneWithoutStudentDocumentsInput
 }
@@ -561,7 +561,7 @@ export type StudentDocumentUncheckedCreateWithoutSchoolInput = {
   studentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentCreateOrConnectWithoutSchoolInput = {
@@ -602,7 +602,7 @@ export type StudentDocumentScalarWhereInput = {
   schoolId?: Prisma.StringFilter<"StudentDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"StudentDocument"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"StudentDocument"> | Date | string | null
 }
 
 export type StudentDocumentCreateWithoutDocumentTypeInput = {
@@ -611,7 +611,7 @@ export type StudentDocumentCreateWithoutDocumentTypeInput = {
   fileUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   student: Prisma.StudentCreateNestedOneWithoutStudentDocumentsInput
   school: Prisma.SchoolCreateNestedOneWithoutStudentDocumentsInput
 }
@@ -624,7 +624,7 @@ export type StudentDocumentUncheckedCreateWithoutDocumentTypeInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentCreateOrConnectWithoutDocumentTypeInput = {
@@ -659,7 +659,7 @@ export type StudentDocumentCreateWithoutStudentInput = {
   fileUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   documentType: Prisma.DocumentTypeCreateNestedOneWithoutStudentDocumentsInput
   school: Prisma.SchoolCreateNestedOneWithoutStudentDocumentsInput
 }
@@ -672,7 +672,7 @@ export type StudentDocumentUncheckedCreateWithoutStudentInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentCreateOrConnectWithoutStudentInput = {
@@ -709,7 +709,7 @@ export type StudentDocumentCreateManySchoolInput = {
   studentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentUpdateWithoutSchoolInput = {
@@ -718,7 +718,7 @@ export type StudentDocumentUpdateWithoutSchoolInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   documentType?: Prisma.DocumentTypeUpdateOneRequiredWithoutStudentDocumentsNestedInput
   student?: Prisma.StudentUpdateOneRequiredWithoutStudentDocumentsNestedInput
 }
@@ -731,7 +731,7 @@ export type StudentDocumentUncheckedUpdateWithoutSchoolInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentUncheckedUpdateManyWithoutSchoolInput = {
@@ -742,7 +742,7 @@ export type StudentDocumentUncheckedUpdateManyWithoutSchoolInput = {
   studentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentCreateManyDocumentTypeInput = {
@@ -753,7 +753,7 @@ export type StudentDocumentCreateManyDocumentTypeInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentUpdateWithoutDocumentTypeInput = {
@@ -762,7 +762,7 @@ export type StudentDocumentUpdateWithoutDocumentTypeInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   student?: Prisma.StudentUpdateOneRequiredWithoutStudentDocumentsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentDocumentsNestedInput
 }
@@ -775,7 +775,7 @@ export type StudentDocumentUncheckedUpdateWithoutDocumentTypeInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentUncheckedUpdateManyWithoutDocumentTypeInput = {
@@ -786,7 +786,7 @@ export type StudentDocumentUncheckedUpdateManyWithoutDocumentTypeInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentCreateManyStudentInput = {
@@ -797,7 +797,7 @@ export type StudentDocumentCreateManyStudentInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type StudentDocumentUpdateWithoutStudentInput = {
@@ -806,7 +806,7 @@ export type StudentDocumentUpdateWithoutStudentInput = {
   fileUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   documentType?: Prisma.DocumentTypeUpdateOneRequiredWithoutStudentDocumentsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentDocumentsNestedInput
 }
@@ -819,7 +819,7 @@ export type StudentDocumentUncheckedUpdateWithoutStudentInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentDocumentUncheckedUpdateManyWithoutStudentInput = {
@@ -830,7 +830,7 @@ export type StudentDocumentUncheckedUpdateManyWithoutStudentInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -925,7 +925,7 @@ export type $StudentDocumentPayload<ExtArgs extends runtime.Types.Extensions.Int
     schoolId: string
     createdAt: Date
     updatedAt: Date
-    deletedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["studentDocument"]>
   composites: {}
 }
