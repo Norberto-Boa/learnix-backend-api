@@ -5,6 +5,7 @@ import type { Student } from '@/generated/prisma/client';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
 import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
 import { StudentMustHaveDocumentError } from '../errors/student-must-have-document.error';
+import { Injectable } from '@nestjs/common';
 
 export interface CreateStudentRequest {
   name: string;
@@ -19,6 +20,7 @@ export interface CreateStudentRequest {
   };
 }
 
+@Injectable()
 export class CreateStudentUseCase {
   constructor(
     private studentsRepository: StudentsRepository,
