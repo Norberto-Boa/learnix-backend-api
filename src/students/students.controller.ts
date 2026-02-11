@@ -49,7 +49,7 @@ export class StudentsController {
         schoolId,
       );
 
-      this.auditService.log(
+      await this.auditService.log(
         {
           action: 'CREATE_STUDENT',
           entity: 'STUDENT',
