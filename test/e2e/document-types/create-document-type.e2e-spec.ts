@@ -13,6 +13,7 @@ import {
   testAuditLog,
 } from '../helpers/audit.e2e';
 import { DOCUMENT_TYPE_AUDIT_ACTIONS } from '@/document-types/constants/document-type-audit-actions';
+import { resetdb } from '../helpers/resetDatabase.e2e';
 
 describe('POST /document-types (e2e)', () => {
   let app: INestApplication;
@@ -44,20 +45,7 @@ describe('POST /document-types (e2e)', () => {
   });
 
   afterEach(async () => {
-    await prisma.$executeRawUnsafe(`
-    DO $$ DECLARE
-    r RECORD;
-  BEGIN
-    FOR r IN (
-      SELECT tablename
-      FROM pg_tables
-      WHERE schemaname = 'public'
-        AND tablename <> '_prisma_migrations'
-    ) LOOP
-      EXECUTE 'TRUNCATE TABLE "' || r.tablename || '" CASCADE';
-    END LOOP;
-  END $$;
-  `);
+    await resetdb(prisma);
   });
 
   afterAll(async () => {

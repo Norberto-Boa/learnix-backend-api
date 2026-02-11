@@ -47,6 +47,10 @@ describe('POST /students (e2e)', () => {
     });
   });
 
+  afterEach(async () => {
+    await resetdb(prisma);
+  });
+
   afterAll(async () => {
     await app.close();
   });
@@ -64,7 +68,7 @@ describe('POST /students (e2e)', () => {
         documentNumber: '123456',
       });
 
-    console.log(response);
+    console.log(response.body);
 
     expect(response.status).toBe(201);
 
