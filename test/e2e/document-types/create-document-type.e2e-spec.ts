@@ -6,7 +6,6 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { schoolFactory } from '../factories/school.factory';
 import { userFactory } from '../factories/user.factory';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
-import type { UserDelegate } from '@/generated/prisma/models';
 import type { School, User } from '@/generated/prisma/client';
 import {
   countAuditLogs,
