@@ -34,6 +34,17 @@ export class PrismaStudentsRepository implements StudentsRepository {
     });
   }
 
+  async findMany(
+    schoolId: string,
+    tx?: TransactionClient,
+  ): Promise<StudentDomain[]> {
+    const client = tx ?? this.prisma;
+
+    return client.student.findMany({
+      where: { schoolId },
+    });
+  }
+
   async findByRegistrationNumber(
     registrationNumber: string,
     schoolId: string,
