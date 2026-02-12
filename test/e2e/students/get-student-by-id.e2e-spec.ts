@@ -9,6 +9,7 @@ import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import { schoolFactory } from '../factories/school.factory';
 import { userFactory } from '../factories/user.factory';
 import type { DocumentType } from '@/generated/prisma/client';
+import { randomUUID } from 'crypto';
 
 describe('GET /students/:id (e2e)', () => {
   let app: INestApplication;
@@ -72,9 +73,17 @@ describe('GET /students/:id (e2e)', () => {
       .get(`/students/${student.id}`)
       .set('Authorization', `Bearer ${token}`);
 
-    console.log(response);
-
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
+  });
+
+  it('Should return 404 when student does not exist', async () => {
+    const fakeUUID = randomUUID();
+
+    const response = await request(app.getHttpServer())
+      .get(`/students/${fakeUUID}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(404);
   });
 });
