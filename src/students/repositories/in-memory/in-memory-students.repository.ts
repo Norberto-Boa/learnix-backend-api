@@ -28,6 +28,15 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     return student;
   }
 
+  async findMany(
+    schoolId: string,
+    tx?: TransactionClient,
+  ): Promise<StudentDomain[]> {
+    const students = this.items.filter((item) => item.schoolId === schoolId);
+
+    return students;
+  }
+
   async findById(
     id: string,
     schoolId: string,
