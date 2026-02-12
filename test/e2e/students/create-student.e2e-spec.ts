@@ -8,6 +8,7 @@ import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import { schoolFactory } from '../factories/school.factory';
 import { userFactory } from '../factories/user.factory';
 import type { DocumentType } from '@/generated/prisma/client';
+import { resetdb } from '../helpers/resetDatabase.e2e';
 
 describe('POST /students (e2e)', () => {
   let app: INestApplication;
@@ -20,6 +21,10 @@ describe('POST /students (e2e)', () => {
   beforeAll(async () => {
     app = await createTestApp();
     prisma = app.get(PrismaService);
+  });
+
+  beforeEach(async () => {
+    await resetdb(prisma);
 
     school = await prisma.school.create({
       data: schoolFactory(),
@@ -47,10 +52,6 @@ describe('POST /students (e2e)', () => {
     });
   });
 
-  afterEach(async () => {
-    await resetdb(prisma);
-  });
-
   afterAll(async () => {
     await app.close();
   });
@@ -68,8 +69,6 @@ describe('POST /students (e2e)', () => {
         documentNumber: '123456',
       });
 
-    console.log(response.body);
-
     expect(response.status).toBe(201);
 
     const student = await prisma.student.findFirst({
@@ -86,5 +85,20 @@ describe('POST /students (e2e)', () => {
 
     expect(student).toBeDefined();
     expect(document).toBeDefined();
+  });
+
+  it('Does not allow creating student without document', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/students')
+      .set(`Authorization`, `Bearer ${token}`)
+      .send({
+        name: 'John Doe',
+        registrationNumber: 'REG-001',
+        dateOfBirth: '2010-01-01',
+        gender: 'MALE',
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.success).toBe(false);
   });
 });

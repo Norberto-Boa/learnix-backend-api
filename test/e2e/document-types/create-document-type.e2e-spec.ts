@@ -22,9 +22,13 @@ describe('POST /document-types (e2e)', () => {
   let school: School;
   let token: AuthResult;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await createTestApp();
     prisma = app.get(PrismaService);
+  });
+
+  beforeEach(async () => {
+    await resetdb(prisma);
 
     school = await prisma.school.create({
       data: schoolFactory(),
@@ -42,10 +46,6 @@ describe('POST /document-types (e2e)', () => {
       email: admin.email,
       password: 'admin123',
     });
-  });
-
-  afterEach(async () => {
-    await resetdb(prisma);
   });
 
   afterAll(async () => {

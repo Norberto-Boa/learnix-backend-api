@@ -15,7 +15,7 @@ const config: Config = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@test/(.*)$': '<rootDir>/test/$1',
   },
-
+  workerThreads: false,
   globalSetup: '<rootDir>/test/e2e/global-setup.ts',
   globalTeardown: '<rootDir>/test/e2e/global-teardown.ts',
 };
