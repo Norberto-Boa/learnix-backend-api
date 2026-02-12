@@ -16,6 +16,10 @@ export abstract class StudentsRepository {
     data: CreateStudentsData,
     tx?: TransactionClient,
   ): Promise<StudentDomain>;
+  abstract findMany(
+    schoolId: string,
+    tx?: TransactionClient,
+  ): Promise<StudentDomain[]>;
   abstract findById(
     id: string,
     schoolId: string,
