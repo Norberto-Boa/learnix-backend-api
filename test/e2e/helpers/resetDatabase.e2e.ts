@@ -2,7 +2,7 @@ import type { PrismaClient } from '@/generated/prisma/client';
 
 export async function resetdb(prisma: PrismaClient) {
   await prisma.$transaction(async (tx) => {
-    await prisma.$executeRawUnsafe(`
+    await tx.$executeRawUnsafe(`
       DO $$ DECLARE
       r RECORD;
     BEGIN
