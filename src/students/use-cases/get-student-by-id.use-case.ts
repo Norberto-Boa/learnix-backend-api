@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { StudentsRepository } from '../repositories/students.repository';
+import { StudentsRepository } from '../repositories/students.repository';
 import { StudentNotFoundError } from '../errors/student-not-found.error';
 
 interface GetStudentByIdRequest {
