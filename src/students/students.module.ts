@@ -6,12 +6,14 @@ import { PrismaStudentsRepository } from './repositories/prisma/prisma-students-
 import { StudentDocumentsRepository } from '@/student-documents/repositories/students-documents.repository';
 import { PrismaStudentDocumentsRepository } from '../student-documents/repositories/prisma/prisma-student-documents.repository';
 import { GetStudentByIdUseCase } from './use-cases/get-student-by-id.use-case';
+import { GetStudentsUseCase } from './use-cases/get-students.use-case';
 
 @Module({
   controllers: [StudentsController],
   providers: [
     CreateStudentUseCase,
     GetStudentByIdUseCase,
+    GetStudentsUseCase,
     {
       provide: StudentsRepository,
       useClass: PrismaStudentsRepository,
