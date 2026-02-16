@@ -120,4 +120,32 @@ describe('GET /students/:id (e2e)', () => {
     expect(response.status).toBe(200);
     expect(response.body.data.length as StudentDomain[]).toBe(3);
   });
+
+  it('Should return student by users school only', async () => {
+    const studentToBeDeleted = await prisma.student.create({
+      data: {
+        name: 'John Doe',
+        registrationNumber: 'REG-006',
+        dateOfBirth: new Date('2007-01-06'),
+        gender: 'MALE',
+        schoolId: school.id,
+      },
+    });
+
+    await prisma.student.update({
+      where: {
+        id: studentToBeDeleted.id,
+      },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+
+    const response = await request(app.getHttpServer())
+      .get(`/students`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.data.length as StudentDomain[]).toBe(3);
+  });
 });
