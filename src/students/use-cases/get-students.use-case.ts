@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { StudentsRepository } from '../repositories/students.repository';
+import { StudentsRepository } from '../repositories/students.repository';
 
 @Injectable()
 export class GetStudentsUseCase {

@@ -30,7 +30,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
     const client = tx ?? this.prisma;
 
     return client.student.findFirst({
-      where: { id, schoolId },
+      where: { id, schoolId, deletedAt: null },
     });
   }
 
@@ -41,7 +41,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
     const client = tx ?? this.prisma;
 
     return client.student.findMany({
-      where: { schoolId },
+      where: { schoolId, deletedAt: null },
     });
   }
 
@@ -53,7 +53,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
     const client = tx ?? this.prisma;
 
     return client.student.findFirst({
-      where: { registrationNumber, schoolId },
+      where: { registrationNumber, schoolId, deletedAt: null },
     });
   }
 
@@ -70,6 +70,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
           contains: name,
         },
         schoolId,
+        deletedAt: null,
       },
     });
   }

@@ -25,12 +25,14 @@ import {
   getStudentByIdParamsSchema,
   GetStudentByIdParamsDTO,
 } from './dto/get-student-by-id-params.dto';
+import { GetStudentsUseCase } from './use-cases/get-students.use-case';
 
 @Controller('students')
 export class StudentsController {
   constructor(
     private createStudentUseCase: CreateStudentUseCase,
     private getStudentByIdUseCase: GetStudentByIdUseCase,
+    private getStudentsUseCase: GetStudentsUseCase,
     private auditService: AuditService,
     private prismaService: PrismaService,
   ) {}
@@ -103,5 +105,13 @@ export class StudentsController {
     @GetSchoolId('schoolId') schoolId: string,
   ) {
     return this.getStudentByIdUseCase.execute({ studentId: id }, schoolId);
+  }
+
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @UsePipes()
+  @UseGuards(RolesGuard)
+  @Get()
+  async getStudents(@GetSchoolId('schoolId') schoolId: string) {
+    return this.getStudentsUseCase.execute(schoolId);
   }
 }
