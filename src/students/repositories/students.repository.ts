@@ -27,7 +27,7 @@ export abstract class StudentsRepository {
   abstract findMany(
     params: GetStudentsParams,
     db?: DbContext,
-  ): Promise<{ data: StudentDomain[]; total: number }>;
+  ): Promise<{ students: StudentDomain[]; total: number }>;
   abstract findById(
     id: string,
     schoolId: string,

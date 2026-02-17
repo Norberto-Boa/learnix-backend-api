@@ -95,7 +95,7 @@ describe('GET /students/:id (e2e)', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.data.length as StudentDomain[]).toBe(3);
+    expect(response.body.data.students.length as StudentDomain[]).toBe(3);
   });
 
   it('Should return student by users school only', async () => {
@@ -118,7 +118,7 @@ describe('GET /students/:id (e2e)', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.data.length as StudentDomain[]).toBe(3);
+    expect(response.body.data.students.length as StudentDomain[]).toBe(3);
   });
 
   it('Should return student by users school only', async () => {
@@ -146,6 +146,6 @@ describe('GET /students/:id (e2e)', () => {
       .set('Authorization', `Bearer ${token}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.data.length as StudentDomain[]).toBe(3);
+    expect(response.body.data.students.length as StudentDomain[]).toBe(3);
   });
 });

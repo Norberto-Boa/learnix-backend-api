@@ -34,7 +34,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
   async findMany(
     { schoolId, page, limit, search, status }: GetStudentsParams,
     db?: DbContext,
-  ): Promise<{ data: StudentDomain[]; total: number }> {
+  ): Promise<{ students: StudentDomain[]; total: number }> {
     const skip = (page - 1) * limit;
 
     const where: any = {
@@ -72,7 +72,7 @@ export class PrismaStudentsRepository implements StudentsRepository {
     ]);
 
     return {
-      data: students,
+      students,
       total,
     };
   }
