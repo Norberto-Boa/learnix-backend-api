@@ -3,6 +3,7 @@ import type {
   CreateStudentsData,
   GetStudentsParams,
   StudentsRepository,
+  UpdateStudentsData,
 } from '../students.repository';
 import { PrismaService } from '@/prisma/prisma.service';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
@@ -113,6 +114,20 @@ export class PrismaStudentsRepository implements StudentsRepository {
     tx?: TransactionClient,
   ): Promise<StudentDomain[]> {
     return [];
+  }
+
+  async update(
+    id: string,
+    schoolId: string,
+    data: UpdateStudentsData,
+    db: DbContext,
+  ): Promise<StudentDomain> {
+    const client = db ?? this.prisma;
+
+    return client.student.update({
+      where: { id, schoolId },
+      data,
+    });
   }
 
   async softDelete(id: string, schoolId: string, db: DbContext): Promise<void> {
