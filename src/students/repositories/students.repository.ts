@@ -59,7 +59,7 @@ export abstract class StudentsRepository {
     id: string,
     schoolId: string,
     data: UpdateStudentsData,
-    db: DbContext,
+    db?: DbContext,
   ): Promise<StudentDomain>;
 
   abstract softDelete(
