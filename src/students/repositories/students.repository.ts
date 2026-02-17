@@ -11,6 +11,12 @@ export interface CreateStudentsData {
   schoolId: string;
 }
 
+export interface UpdateStudentsData {
+  name?: string;
+  dateOfBirth?: Date;
+  gender?: GENDER;
+}
+
 export interface GetStudentsParams {
   schoolId: string;
   page: number;
@@ -48,6 +54,14 @@ export abstract class StudentsRepository {
     schoolId: string,
     db?: DbContext,
   ): Promise<StudentDomain[]>;
+
+  abstract update(
+    id: string,
+    schoolId: string,
+    data: UpdateStudentsData,
+    db: DbContext,
+  ): Promise<StudentDomain>;
+
   abstract softDelete(
     id: string,
     schoolId: string,
