@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { StudentsRepository } from '../repositories/students.repository';
+import { StudentsRepository } from '../repositories/students.repository';
 import type { UpdateStudentDTO } from '../dto/update-student.dto';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { StudentNotFoundError } from '../errors/student-not-found.error';

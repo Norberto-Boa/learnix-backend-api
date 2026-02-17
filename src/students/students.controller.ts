@@ -33,7 +33,7 @@ import {
   updateStudentSchema,
   type UpdateStudentDTO,
 } from './dto/update-student.dto';
-import type { UpdateStudentUseCase } from './use-cases/update-student.use-case';
+import { UpdateStudentUseCase } from './use-cases/update-student.use-case';
 
 @Controller('students')
 export class StudentsController {
