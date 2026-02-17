@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -26,6 +27,7 @@ import {
   GetStudentByIdParamsDTO,
 } from './dto/get-student-by-id-params.dto';
 import { GetStudentsUseCase } from './use-cases/get-students.use-case';
+import { getStudentsSchema, type GetStudentsDTO } from './dto/get-students.dto';
 
 @Controller('students')
 export class StudentsController {
@@ -119,17 +121,12 @@ export class StudentsController {
   @UsePipes()
   @UseGuards(RolesGuard)
   @Get()
-  async getStudents(@GetSchoolId('schoolId') schoolId: string) {
+  async getStudents(
+    @GetSchoolId('schoolId') schoolId: string,
+    @Query(new ZodValidationPipe(getStudentsSchema)) query: GetStudentsDTO,
+  ) {
     return this.prismaService.$transaction((tx) => {
-      return this.getStudentsUseCase.execute(schoolId, tx);
+      return this.getStudentsUseCase.execute(query, schoolId, tx);
     });
-  }
-
-  @Roles('MANAGER', 'ADMIN', 'CLERK')
-  @UsePipes()
-  @UseGuards(RolesGuard)
-  @Get()
-  async findManyStudents(@GetSchoolId('schoolId') schoolId: string) {
-    return this.getStudentsUseCase.execute(schoolId);
   }
 }
