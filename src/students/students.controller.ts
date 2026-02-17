@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -28,6 +29,11 @@ import {
 } from './dto/get-student-by-id-params.dto';
 import { GetStudentsUseCase } from './use-cases/get-students.use-case';
 import { getStudentsSchema, type GetStudentsDTO } from './dto/get-students.dto';
+import {
+  updateStudentSchema,
+  type UpdateStudentDTO,
+} from './dto/update-student.dto';
+import type { UpdateStudentUseCase } from './use-cases/update-student.use-case';
 
 @Controller('students')
 export class StudentsController {
@@ -35,6 +41,7 @@ export class StudentsController {
     private createStudentUseCase: CreateStudentUseCase,
     private getStudentByIdUseCase: GetStudentByIdUseCase,
     private getStudentsUseCase: GetStudentsUseCase,
+    private updateStudentUseCase: UpdateStudentUseCase,
     private auditService: AuditService,
     private prismaService: PrismaService,
   ) {}
@@ -127,6 +134,35 @@ export class StudentsController {
   ) {
     return this.prismaService.$transaction((tx) => {
       return this.getStudentsUseCase.execute(query, schoolId, tx);
+    });
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(updateStudentSchema)) data: UpdateStudentDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const student = await this.updateStudentUseCase.execute(
+        id,
+        schoolId,
+        data,
+        tx,
+      );
+
+      await this.auditService.log(
+        {
+          action: 'UPDATE_STUDENT',
+          entity: 'STUDENT',
+          entityId: id,
+          schoolId,
+          userId,
+          newData: data,
+        },
+        tx,
+      );
     });
   }
 }
