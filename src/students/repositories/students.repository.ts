@@ -1,6 +1,5 @@
 import type { Student } from '@/generated/prisma/client';
 import type { GENDER, STUDENT_STATUS } from '@/generated/prisma/enums';
-import type { StudentDomain } from '../domain/student';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { StudentDomain } from '../domain/student';
 
