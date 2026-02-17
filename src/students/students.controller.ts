@@ -124,4 +124,12 @@ export class StudentsController {
       return this.getStudentsUseCase.execute(schoolId, tx);
     });
   }
+
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @UsePipes()
+  @UseGuards(RolesGuard)
+  @Get()
+  async findManyStudents(@GetSchoolId('schoolId') schoolId: string) {
+    return this.getStudentsUseCase.execute(schoolId);
+  }
 }
