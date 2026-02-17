@@ -72,6 +72,7 @@ export class StudentsController {
           },
         },
         schoolId,
+        tx,
       );
 
       await this.auditService.log(
@@ -92,6 +93,7 @@ export class StudentsController {
         },
         tx,
       );
+      return student;
     });
   }
 
@@ -104,7 +106,13 @@ export class StudentsController {
     { id }: GetStudentByIdParamsDTO,
     @GetSchoolId('schoolId') schoolId: string,
   ) {
-    return this.getStudentByIdUseCase.execute({ studentId: id }, schoolId);
+    return this.prismaService.$transaction((tx) => {
+      return this.getStudentByIdUseCase.execute(
+        { studentId: id },
+        schoolId,
+        tx,
+      );
+    });
   }
 
   @Roles('MANAGER', 'ADMIN', 'CLERK')
@@ -112,6 +120,8 @@ export class StudentsController {
   @UseGuards(RolesGuard)
   @Get()
   async getStudents(@GetSchoolId('schoolId') schoolId: string) {
-    return this.getStudentsUseCase.execute(schoolId);
+    return this.prismaService.$transaction((tx) => {
+      return this.getStudentsUseCase.execute(schoolId, tx);
+    });
   }
 }
