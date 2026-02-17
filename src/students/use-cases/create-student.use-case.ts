@@ -6,6 +6,7 @@ import { StudentAlreadyExistsError } from '../errors/student-already-exists.erro
 import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
 import { StudentMustHaveDocumentError } from '../errors/student-must-have-document.error';
 import { Injectable } from '@nestjs/common';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 export interface CreateStudentRequest {
   name: string;
@@ -30,11 +31,13 @@ export class CreateStudentUseCase {
   async execute(
     data: CreateStudentRequest,
     schoolId: string,
+    db?: DbContext,
   ): Promise<Student> {
     const studentExists =
       await this.studentsRepository.findByRegistrationNumber(
         data.registrationNumber,
         schoolId,
+        db,
       );
 
     if (studentExists) {
@@ -56,21 +59,27 @@ export class CreateStudentUseCase {
       throw new StudentWithSameDocumentAlreadyExistsError();
     }
 
-    const student = await this.studentsRepository.save({
-      name: data.name,
-      registrationNumber: data.registrationNumber,
-      dateOfBirth: data.dateOfBirth,
-      gender: data.gender,
-      schoolId,
-    });
+    const student = await this.studentsRepository.save(
+      {
+        name: data.name,
+        registrationNumber: data.registrationNumber,
+        dateOfBirth: data.dateOfBirth,
+        gender: data.gender,
+        schoolId,
+      },
+      db,
+    );
 
-    await this.StudentDocumentsRepository.save({
-      studentId: student.id,
-      documentTypeId: data.document.documentTypeId,
-      documentNumber: data.document.documentNumber,
-      fileUrl: data.document.documentUrl,
-      schoolId,
-    });
+    await this.StudentDocumentsRepository.save(
+      {
+        studentId: student.id,
+        documentTypeId: data.document.documentTypeId,
+        documentNumber: data.document.documentNumber,
+        fileUrl: data.document.documentUrl,
+        schoolId,
+      },
+      db,
+    );
 
     return student;
   }
