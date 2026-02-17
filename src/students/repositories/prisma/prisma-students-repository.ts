@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import type {
   CreateStudentsData,
+  GetStudentsParams,
   StudentsRepository,
 } from '../students.repository';
 import { PrismaService } from '@/prisma/prisma.service';
@@ -30,12 +31,50 @@ export class PrismaStudentsRepository implements StudentsRepository {
     });
   }
 
-  async findMany(schoolId: string, db?: DbContext): Promise<StudentDomain[]> {
-    const client = db ?? this.prisma;
+  async findMany(
+    { schoolId, page, limit, search, status }: GetStudentsParams,
+    db?: DbContext,
+  ): Promise<{ data: StudentDomain[]; total: number }> {
+    const skip = (page - 1) * limit;
 
-    return client.student.findMany({
-      where: { schoolId, deletedAt: null },
-    });
+    const where: any = {
+      schoolId,
+      deletedAt: null,
+    };
+
+    if (search) {
+      where.OR = [
+        {
+          name: {
+            contains: search,
+            mode: 'insensitive',
+          },
+          registrationNumber: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+      ];
+    }
+
+    if (status) {
+      where.status = status;
+    }
+
+    const [students, total] = await this.prisma.$transaction([
+      this.prisma.student.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { name: 'desc' },
+      }),
+      this.prisma.student.count({ where }),
+    ]);
+
+    return {
+      data: students,
+      total,
+    };
   }
 
   async findByRegistrationNumber(
