@@ -6,18 +6,14 @@ import type {
 import { PrismaService } from '@/prisma/prisma.service';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDomain } from '@/students/domain/student';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 @Injectable()
 export class PrismaStudentsRepository implements StudentsRepository {
   constructor(private prisma: PrismaService) {}
 
-  async save(
-    data: CreateStudentsData,
-    tx?: TransactionClient,
-  ): Promise<StudentDomain> {
-    const client = tx ?? this.prisma;
-
-    return client.student.create({
+  async save(data: CreateStudentsData, db: DbContext): Promise<StudentDomain> {
+    return db.student.create({
       data,
     });
   }
@@ -25,20 +21,17 @@ export class PrismaStudentsRepository implements StudentsRepository {
   async findById(
     id: string,
     schoolId: string,
-    tx?: TransactionClient,
+    db?: DbContext,
   ): Promise<StudentDomain | null> {
-    const client = tx ?? this.prisma;
+    const client = db ?? this.prisma;
 
     return client.student.findFirst({
       where: { id, schoolId, deletedAt: null },
     });
   }
 
-  async findMany(
-    schoolId: string,
-    tx?: TransactionClient,
-  ): Promise<StudentDomain[]> {
-    const client = tx ?? this.prisma;
+  async findMany(schoolId: string, db?: DbContext): Promise<StudentDomain[]> {
+    const client = db ?? this.prisma;
 
     return client.student.findMany({
       where: { schoolId, deletedAt: null },
@@ -48,9 +41,9 @@ export class PrismaStudentsRepository implements StudentsRepository {
   async findByRegistrationNumber(
     registrationNumber: string,
     schoolId: string,
-    tx?: TransactionClient,
+    db?: DbContext,
   ): Promise<StudentDomain | null> {
-    const client = tx ?? this.prisma;
+    const client = db ?? this.prisma;
 
     return client.student.findFirst({
       where: { registrationNumber, schoolId, deletedAt: null },
@@ -60,9 +53,9 @@ export class PrismaStudentsRepository implements StudentsRepository {
   async findByName(
     name: string,
     schoolId: string,
-    tx?: TransactionClient,
+    db?: DbContext,
   ): Promise<StudentDomain[]> {
-    const client = tx ?? this.prisma;
+    const client = db ?? this.prisma;
 
     return client.student.findMany({
       where: {
@@ -83,14 +76,8 @@ export class PrismaStudentsRepository implements StudentsRepository {
     return [];
   }
 
-  async softDelete(
-    id: string,
-    schoolId: string,
-    tx?: TransactionClient,
-  ): Promise<void> {
-    const client = tx ?? this.prisma;
-
-    await client.student.update({
+  async softDelete(id: string, schoolId: string, db: DbContext): Promise<void> {
+    await db.student.update({
       where: { id, schoolId },
       data: { deletedAt: new Date() },
     });

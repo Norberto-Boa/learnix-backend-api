@@ -6,6 +6,8 @@ import type {
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDocumentDomain } from '@/student-documents/domain/student-document';
 import { PrismaService } from '@/prisma/prisma.service';
+import { error } from 'console';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 @Injectable()
 export class PrismaStudentDocumentsRepository implements StudentDocumentsRepository {
@@ -13,11 +15,11 @@ export class PrismaStudentDocumentsRepository implements StudentDocumentsReposit
 
   async save(
     data: CreateStudentsDocumentData,
-    tx?: TransactionClient,
+    db?: DbContext,
   ): Promise<StudentDocumentDomain> {
-    const client = tx ?? this.prisma;
+    const client = db ?? this.prisma;
 
-    return client.studentDocument.create({
+    return await client.studentDocument.create({
       data,
     });
   }
