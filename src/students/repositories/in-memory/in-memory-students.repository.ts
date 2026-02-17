@@ -6,11 +6,15 @@ import type {
 import { randomUUID } from 'crypto';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { Student } from '@/generated/prisma/client';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 export class InMemoryStudentsRepository implements StudentsRepository {
   public items: StudentDomain[] = [];
 
-  async save(data: CreateStudentsData): Promise<StudentDomain> {
+  async save(
+    data: CreateStudentsData,
+    _db?: DbContext,
+  ): Promise<StudentDomain> {
     const student: StudentDomain = {
       id: randomUUID(),
       name: data.name,
@@ -28,10 +32,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     return student;
   }
 
-  async findMany(
-    schoolId: string,
-    tx?: TransactionClient,
-  ): Promise<StudentDomain[]> {
+  async findMany(schoolId: string, _db: DbContext): Promise<StudentDomain[]> {
     const students = this.items.filter((item) => item.schoolId === schoolId);
 
     return students;
@@ -40,7 +41,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
   async findById(
     id: string,
     schoolId: string,
-    tx?: TransactionClient,
+    _db: DbContext,
   ): Promise<StudentDomain | null> {
     return (
       this.items.find((item) => item.id === id && item.schoolId === schoolId) ??
@@ -51,7 +52,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
   async findByRegistrationNumber(
     registrationNumber: string,
     schoolId: string,
-    tx?: TransactionClient,
+    _db: DbContext,
   ): Promise<StudentDomain | null> {
     return (
       this.items.find(
@@ -65,7 +66,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
   async findByName(
     name: string,
     schoolId: string,
-    tx?: TransactionClient,
+    _db: DbContext,
   ): Promise<StudentDomain[]> {
     return this.items.filter(
       (item) => item.name.includes(name) && item.schoolId === schoolId,
@@ -75,7 +76,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
   async findByAge(
     age: number,
     schoolId: string,
-    tx?: TransactionClient,
+    _db: DbContext,
   ): Promise<StudentDomain[]> {
     const birthYear = new Date().getFullYear() - age;
     const students = this.items.filter(
@@ -90,7 +91,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
   async softDelete(
     id: string,
     schoolId: string,
-    tx?: TransactionClient,
+    _db: DbContext,
   ): Promise<void> {
     const student = this.items.find(
       (item) => item.id === id && item.schoolId === schoolId,
