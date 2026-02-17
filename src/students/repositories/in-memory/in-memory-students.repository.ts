@@ -1,7 +1,9 @@
 import type { StudentDomain } from '@/students/domain/student';
 import type {
   CreateStudentsData,
+  GetStudentsParams,
   StudentsRepository,
+  UpdateStudentsData,
 } from '../students.repository';
 import { randomUUID } from 'crypto';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
@@ -32,10 +34,18 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     return student;
   }
 
-  async findMany(schoolId: string, _db: DbContext): Promise<StudentDomain[]> {
-    const students = this.items.filter((item) => item.schoolId === schoolId);
+  async findMany(
+    params: GetStudentsParams,
+    _db: DbContext,
+  ): Promise<{ students: StudentDomain[]; total: number }> {
+    const students = this.items.filter(
+      (item) => item.schoolId === params.schoolId,
+    );
 
-    return students;
+    return {
+      students,
+      total: students.length,
+    };
   }
 
   async findById(
@@ -86,6 +96,33 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     );
 
     return students;
+  }
+
+  async update(
+    id: string,
+    schoolId: string,
+    data: UpdateStudentsData,
+    db: DbContext,
+  ): Promise<StudentDomain> {
+    let index = this.items.findIndex(
+      (item) => item.id === id && item.schoolId === schoolId && !item.deletedAt,
+    );
+
+    if (index === -1) {
+      throw new Error('Student not found');
+    }
+
+    const student = this.items[index];
+
+    const updated: StudentDomain = {
+      ...student,
+      ...data,
+      updatedAt: new Date(),
+    };
+
+    this.items[index] = updated;
+
+    return updated;
   }
 
   async softDelete(
