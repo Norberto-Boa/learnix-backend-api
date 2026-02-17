@@ -1,5 +1,6 @@
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDocumentDomain } from '../domain/student-document';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 export interface CreateStudentsDocumentData {
   studentId: string;
@@ -12,7 +13,7 @@ export interface CreateStudentsDocumentData {
 export abstract class StudentDocumentsRepository {
   abstract save(
     data: CreateStudentsDocumentData,
-    tx?: TransactionClient,
+    db?: DbContext,
   ): Promise<StudentDocumentDomain>;
   abstract findTypeAndNumber(
     documentTypeId: string,
