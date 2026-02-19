@@ -7,7 +7,7 @@ import type {
 } from '../students.repository';
 import { randomUUID } from 'crypto';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
-import type { Student } from '@/generated/prisma/client';
+import type { Student, STUDENT_STATUS } from '@/generated/prisma/client';
 import type { DbContext } from '@/prisma/shared/db-context';
 
 export class InMemoryStudentsRepository implements StudentsRepository {
@@ -117,6 +117,33 @@ export class InMemoryStudentsRepository implements StudentsRepository {
     const updated: StudentDomain = {
       ...student,
       ...data,
+      updatedAt: new Date(),
+    };
+
+    this.items[index] = updated;
+
+    return updated;
+  }
+
+  async setStatus(
+    id: string,
+    schoolId: string,
+    status: STUDENT_STATUS,
+    db?: DbContext,
+  ): Promise<StudentDomain> {
+    const index = this.items.findIndex(
+      (item) => item.id === id && item.schoolId === schoolId && !item.deletedAt,
+    );
+
+    if (index === -1) {
+      throw new Error('Student not found');
+    }
+
+    const existing = this.items[index];
+
+    const updated: StudentDomain = {
+      ...existing,
+      status,
       updatedAt: new Date(),
     };
 
