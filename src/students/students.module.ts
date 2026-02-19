@@ -8,6 +8,8 @@ import { PrismaStudentDocumentsRepository } from '../student-documents/repositor
 import { GetStudentByIdUseCase } from './use-cases/get-student-by-id.use-case';
 import { GetStudentsUseCase } from './use-cases/get-students.use-case';
 import { UpdateStudentUseCase } from './use-cases/update-student.use-case';
+import { DeactivateStudentUseCase } from './use-cases/deactivate-student.use-case';
+import { ActivateStudentUseCase } from './use-cases/activate-student.use-case';
 
 @Module({
   controllers: [StudentsController],
@@ -16,6 +18,8 @@ import { UpdateStudentUseCase } from './use-cases/update-student.use-case';
     GetStudentByIdUseCase,
     GetStudentsUseCase,
     UpdateStudentUseCase,
+    DeactivateStudentUseCase,
+    ActivateStudentUseCase,
     {
       provide: StudentsRepository,
       useClass: PrismaStudentsRepository,
