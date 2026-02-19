@@ -176,6 +176,38 @@ export class StudentsController {
   @Roles('MANAGER', 'ADMIN', 'CLERK')
   @UsePipes()
   @UseGuards(RolesGuard)
+  @Patch(':id/activate')
+  async activate(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const student = await this.activateStudentUseCase.execute(
+        id,
+        schoolId,
+        tx,
+      );
+
+      await this.auditService.log(
+        {
+          action: 'ACTIVATE_STUDENT',
+          entity: 'STUDENT',
+          entityId: id,
+          schoolId,
+          userId,
+          newData: {
+            status: student.status,
+          },
+        },
+        tx,
+      );
+    });
+  }
+
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @UsePipes()
+  @UseGuards(RolesGuard)
   @Patch(':id/deactivate')
   async deactivate(
     @Param('id') id: string,
