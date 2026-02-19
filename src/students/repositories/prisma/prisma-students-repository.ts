@@ -9,6 +9,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import type { TransactionClient } from '@/generated/prisma/internal/prismaNamespace';
 import type { StudentDomain } from '@/students/domain/student';
 import type { DbContext } from '@/prisma/shared/db-context';
+import type { STUDENT_STATUS } from '@/generated/prisma/enums';
 
 @Injectable()
 export class PrismaStudentsRepository implements StudentsRepository {
@@ -127,6 +128,23 @@ export class PrismaStudentsRepository implements StudentsRepository {
     return client.student.update({
       where: { id, schoolId },
       data,
+    });
+  }
+
+  async setStatus(
+    id: string,
+    schoolId: string,
+    status: STUDENT_STATUS,
+    db?: DbContext,
+  ): Promise<StudentDomain> {
+    const client = db ?? this.prisma;
+
+    return client.student.update({
+      where: { id, schoolId, deletedAt: null },
+      data: {
+        status,
+        updatedAt: new Date(),
+      },
     });
   }
 
