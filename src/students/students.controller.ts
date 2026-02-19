@@ -34,6 +34,8 @@ import {
   type UpdateStudentDTO,
 } from './dto/update-student.dto';
 import { UpdateStudentUseCase } from './use-cases/update-student.use-case';
+import type { DeactivateStudentUseCase } from './use-cases/deactivate-student.use-case';
+import type { ActivateStudentUseCase } from './use-cases/activate-student.use-case';
 
 @Controller('students')
 export class StudentsController {
@@ -42,6 +44,8 @@ export class StudentsController {
     private getStudentByIdUseCase: GetStudentByIdUseCase,
     private getStudentsUseCase: GetStudentsUseCase,
     private updateStudentUseCase: UpdateStudentUseCase,
+    private deactivateStudentUseCase: DeactivateStudentUseCase,
+    private activateStudentUseCase: ActivateStudentUseCase,
     private auditService: AuditService,
     private prismaService: PrismaService,
   ) {}
@@ -137,6 +141,9 @@ export class StudentsController {
     });
   }
 
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @UsePipes()
+  @UseGuards(RolesGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -160,6 +167,38 @@ export class StudentsController {
           schoolId,
           userId,
           newData: data,
+        },
+        tx,
+      );
+    });
+  }
+
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @UsePipes()
+  @UseGuards(RolesGuard)
+  @Patch(':id/deactivate')
+  async deactivate(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const student = await this.deactivateStudentUseCase.execute(
+        id,
+        schoolId,
+        tx,
+      );
+
+      await this.auditService.log(
+        {
+          action: 'DEACTIVATE_STUDENT',
+          entity: 'STUDENT',
+          entityId: id,
+          schoolId,
+          userId,
+          newData: {
+            status: student.status,
+          },
         },
         tx,
       );
