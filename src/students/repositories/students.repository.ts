@@ -62,6 +62,13 @@ export abstract class StudentsRepository {
     db?: DbContext,
   ): Promise<StudentDomain>;
 
+  abstract setStatus(
+    id: string,
+    schoolId: string,
+    status: STUDENT_STATUS,
+    db?: DbContext,
+  ): Promise<StudentDomain>;
+
   abstract softDelete(
     id: string,
     schoolId: string,
