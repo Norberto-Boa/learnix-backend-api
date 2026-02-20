@@ -9,6 +9,7 @@ export interface CreateStudentsData {
   dateOfBirth: Date;
   gender: GENDER;
   schoolId: string;
+  status?: STUDENT_STATUS;
 }
 
 export interface UpdateStudentsData {

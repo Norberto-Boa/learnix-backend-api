@@ -24,7 +24,7 @@ export class InMemoryStudentsRepository implements StudentsRepository {
       dateOfBirth: data.dateOfBirth,
       gender: data.gender,
       schoolId: data.schoolId,
-      status: 'ACTIVE',
+      status: data.status ?? 'ACTIVE',
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,
