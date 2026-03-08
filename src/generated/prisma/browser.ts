@@ -52,3 +52,8 @@ export type Student = Prisma.StudentModel
  * 
  */
 export type StudentDocument = Prisma.StudentDocumentModel
+/**
+ * Model Grade
+ * 
+ */
+export type Grade = Prisma.GradeModel
