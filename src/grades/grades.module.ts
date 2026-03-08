@@ -1,9 +1,15 @@
 import { Module } from '@nestjs/common';
-import { GradesService } from './grades.service';
 import { GradesController } from './grades.controller';
+import { GradesRepository } from './repositories/grades.repository';
+import { PrismaGradesRepository } from './repositories/prisma/prisma-grades.repository';
 
 @Module({
   controllers: [GradesController],
-  providers: [GradesService],
+  providers: [
+    {
+      provide: GradesRepository,
+      useClass: PrismaGradesRepository,
+    },
+  ],
 })
 export class GradesModule {}

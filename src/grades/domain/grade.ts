@@ -3,7 +3,7 @@ export interface GradeDomainProps {
   name: string;
   order: number;
   schoolId: string;
-  createAt: Date;
+  createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
 }
@@ -32,7 +32,7 @@ export class GradeDomain {
   }
 
   get createdAt() {
-    return this.props.createAt;
+    return this.props.createdAt;
   }
 
   get updatedAt() {
