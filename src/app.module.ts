@@ -15,6 +15,8 @@ import { AllExceptionsFilter } from './shared/filters/http-exception.filter';
 import { AcademicYearsModule } from './academic-years/academic-years.module';
 import { DocumentTypesModule } from './document-types/document-types.module';
 import { StudentsModule } from './students/students.module';
+import { GradesModule } from './grades/grades.module';
+import { GradesModule } from './grades/grades.module';
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { StudentsModule } from './students/students.module';
     AcademicYearsModule,
     DocumentTypesModule,
     StudentsModule,
+    GradesModule,
   ],
   providers: [
     {
