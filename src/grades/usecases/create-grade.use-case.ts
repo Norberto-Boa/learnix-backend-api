@@ -1,9 +1,10 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import type {
   CreateGradeData,
   GradesRepository,
 } from '../repositories/grades.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
+import { GradeAlreadyExistsError } from '../errors/grade-already-exists.error';
 
 @Injectable()
 export class CreateGradeUseCase {
@@ -16,9 +17,7 @@ export class CreateGradeUseCase {
     );
 
     if (existing) {
-      throw new ConflictException(
-        'A grade with this name already exists in your school',
-      );
+      throw new GradeAlreadyExistsError();
     }
 
     const grade = await this.gradesRepository.save(
