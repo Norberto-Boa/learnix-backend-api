@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import type {
-  CreateGradeData,
+import {
+  type CreateGradeData,
   GradesRepository,
 } from '../repositories/grades.repository';
 import type { DbContext } from '@/prisma/shared/db-context';

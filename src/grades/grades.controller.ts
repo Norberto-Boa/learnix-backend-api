@@ -1,14 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { CreateGradeDto } from './dto/create-grade.dto';
-import { UpdateGradeDto } from './dto/update-grade.dto';
+import { Controller } from '@nestjs/common';
 
 @Controller('grades')
 export class GradesController {}

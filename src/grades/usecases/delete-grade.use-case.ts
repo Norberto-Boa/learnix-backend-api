@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { GradesRepository } from '../repositories/grades.repository';
+import { GradesRepository } from '../repositories/grades.repository';
 import { GradeNotFoundError } from '../errors/grade-not-found.error';
 
 @Injectable()

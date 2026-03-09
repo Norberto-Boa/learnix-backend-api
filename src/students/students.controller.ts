@@ -34,8 +34,8 @@ import {
   type UpdateStudentDTO,
 } from './dto/update-student.dto';
 import { UpdateStudentUseCase } from './use-cases/update-student.use-case';
-import type { DeactivateStudentUseCase } from './use-cases/deactivate-student.use-case';
-import type { ActivateStudentUseCase } from './use-cases/activate-student.use-case';
+import { DeactivateStudentUseCase } from './use-cases/deactivate-student.use-case';
+import { ActivateStudentUseCase } from './use-cases/activate-student.use-case';
 
 @Controller('students')
 export class StudentsController {
