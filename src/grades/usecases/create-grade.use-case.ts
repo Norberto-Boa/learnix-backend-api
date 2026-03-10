@@ -10,10 +10,10 @@ import { GradeAlreadyExistsError } from '../errors/grade-already-exists.error';
 export class CreateGradeUseCase {
   constructor(private gradesRepository: GradesRepository) {}
 
-  async execute(schoolId: string, data: CreateGradeData, db?: DbContext) {
+  async execute(data: CreateGradeData, db?: DbContext) {
     const existing = await this.gradesRepository.findByName(
       data.name,
-      schoolId,
+      data.schoolId,
     );
 
     if (existing) {
@@ -23,7 +23,6 @@ export class CreateGradeUseCase {
     const grade = await this.gradesRepository.save(
       {
         ...data,
-        schoolId,
       },
       db,
     );
