@@ -58,7 +58,8 @@ export const ModelName = {
   DocumentType: 'DocumentType',
   Student: 'Student',
   StudentDocument: 'StudentDocument',
-  Grade: 'Grade'
+  Grade: 'Grade',
+  Classroom: 'Classroom'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -193,6 +194,21 @@ export const GradeScalarFieldEnum = {
 } as const
 
 export type GradeScalarFieldEnum = (typeof GradeScalarFieldEnum)[keyof typeof GradeScalarFieldEnum]
+
+
+export const ClassroomScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  capacity: 'capacity',
+  gradeId: 'gradeId',
+  academicYearId: 'academicYearId',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ClassroomScalarFieldEnum = (typeof ClassroomScalarFieldEnum)[keyof typeof ClassroomScalarFieldEnum]
 
 
 export const SortOrder = {
