@@ -16,6 +16,7 @@ import { AcademicYearsModule } from './academic-years/academic-years.module';
 import { DocumentTypesModule } from './document-types/document-types.module';
 import { StudentsModule } from './students/students.module';
 import { GradesModule } from './grades/grades.module';
+import { ClassroomModule } from './classroom/classroom.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { GradesModule } from './grades/grades.module';
     DocumentTypesModule,
     StudentsModule,
     GradesModule,
+    ClassroomModule,
   ],
   providers: [
     {
