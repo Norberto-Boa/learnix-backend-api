@@ -221,9 +221,9 @@ model Classroom {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt DateTime
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   @@unique([schoolId, name, gradeId, academicYearId])
   @@map("classrooms")

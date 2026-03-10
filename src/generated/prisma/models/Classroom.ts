@@ -212,7 +212,7 @@ export type ClassroomGroupByOutputType = {
   schoolId: string
   createdAt: Date
   updatedAt: Date
-  deletedAt: Date
+  deletedAt: Date | null
   _count: ClassroomCountAggregateOutputType | null
   _avg: ClassroomAvgAggregateOutputType | null
   _sum: ClassroomSumAggregateOutputType | null
@@ -247,7 +247,7 @@ export type ClassroomWhereInput = {
   schoolId?: Prisma.StringFilter<"Classroom"> | string
   createdAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Classroom"> | Date | string | null
   grade?: Prisma.XOR<Prisma.GradeScalarRelationFilter, Prisma.GradeWhereInput>
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -262,7 +262,7 @@ export type ClassroomOrderByWithRelationInput = {
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   grade?: Prisma.GradeOrderByWithRelationInput
   academicYear?: Prisma.AcademicYearOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
@@ -281,7 +281,7 @@ export type ClassroomWhereUniqueInput = Prisma.AtLeast<{
   schoolId?: Prisma.StringFilter<"Classroom"> | string
   createdAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Classroom"> | Date | string | null
   grade?: Prisma.XOR<Prisma.GradeScalarRelationFilter, Prisma.GradeWhereInput>
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
@@ -296,7 +296,7 @@ export type ClassroomOrderByWithAggregationInput = {
   schoolId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ClassroomCountOrderByAggregateInput
   _avg?: Prisma.ClassroomAvgOrderByAggregateInput
   _max?: Prisma.ClassroomMaxOrderByAggregateInput
@@ -316,7 +316,7 @@ export type ClassroomScalarWhereWithAggregatesInput = {
   schoolId?: Prisma.StringWithAggregatesFilter<"Classroom"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Classroom"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Classroom"> | Date | string
-  deletedAt?: Prisma.DateTimeWithAggregatesFilter<"Classroom"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Classroom"> | Date | string | null
 }
 
 export type ClassroomCreateInput = {
@@ -325,7 +325,7 @@ export type ClassroomCreateInput = {
   capacity: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   grade: Prisma.GradeCreateNestedOneWithoutClassroomsInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutClassroomsInput
   school: Prisma.SchoolCreateNestedOneWithoutClassroomsInput
@@ -340,7 +340,7 @@ export type ClassroomUncheckedCreateInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomUpdateInput = {
@@ -349,7 +349,7 @@ export type ClassroomUpdateInput = {
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   grade?: Prisma.GradeUpdateOneRequiredWithoutClassroomsNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutClassroomsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutClassroomsNestedInput
@@ -364,7 +364,7 @@ export type ClassroomUncheckedUpdateInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomCreateManyInput = {
@@ -376,7 +376,7 @@ export type ClassroomCreateManyInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomUpdateManyMutationInput = {
@@ -385,7 +385,7 @@ export type ClassroomUpdateManyMutationInput = {
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomUncheckedUpdateManyInput = {
@@ -397,7 +397,7 @@ export type ClassroomUncheckedUpdateManyInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomListRelationFilter = {
@@ -593,7 +593,7 @@ export type ClassroomCreateWithoutSchoolInput = {
   capacity: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   grade: Prisma.GradeCreateNestedOneWithoutClassroomsInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutClassroomsInput
 }
@@ -606,7 +606,7 @@ export type ClassroomUncheckedCreateWithoutSchoolInput = {
   academicYearId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomCreateOrConnectWithoutSchoolInput = {
@@ -647,7 +647,7 @@ export type ClassroomScalarWhereInput = {
   schoolId?: Prisma.StringFilter<"Classroom"> | string
   createdAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
-  deletedAt?: Prisma.DateTimeFilter<"Classroom"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Classroom"> | Date | string | null
 }
 
 export type ClassroomCreateWithoutAcademicYearInput = {
@@ -656,7 +656,7 @@ export type ClassroomCreateWithoutAcademicYearInput = {
   capacity: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   grade: Prisma.GradeCreateNestedOneWithoutClassroomsInput
   school: Prisma.SchoolCreateNestedOneWithoutClassroomsInput
 }
@@ -669,7 +669,7 @@ export type ClassroomUncheckedCreateWithoutAcademicYearInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomCreateOrConnectWithoutAcademicYearInput = {
@@ -704,7 +704,7 @@ export type ClassroomCreateWithoutGradeInput = {
   capacity: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutClassroomsInput
   school: Prisma.SchoolCreateNestedOneWithoutClassroomsInput
 }
@@ -717,7 +717,7 @@ export type ClassroomUncheckedCreateWithoutGradeInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomCreateOrConnectWithoutGradeInput = {
@@ -754,7 +754,7 @@ export type ClassroomCreateManySchoolInput = {
   academicYearId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomUpdateWithoutSchoolInput = {
@@ -763,7 +763,7 @@ export type ClassroomUpdateWithoutSchoolInput = {
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   grade?: Prisma.GradeUpdateOneRequiredWithoutClassroomsNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutClassroomsNestedInput
 }
@@ -776,7 +776,7 @@ export type ClassroomUncheckedUpdateWithoutSchoolInput = {
   academicYearId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomUncheckedUpdateManyWithoutSchoolInput = {
@@ -787,7 +787,7 @@ export type ClassroomUncheckedUpdateManyWithoutSchoolInput = {
   academicYearId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomCreateManyAcademicYearInput = {
@@ -798,7 +798,7 @@ export type ClassroomCreateManyAcademicYearInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomUpdateWithoutAcademicYearInput = {
@@ -807,7 +807,7 @@ export type ClassroomUpdateWithoutAcademicYearInput = {
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   grade?: Prisma.GradeUpdateOneRequiredWithoutClassroomsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutClassroomsNestedInput
 }
@@ -820,7 +820,7 @@ export type ClassroomUncheckedUpdateWithoutAcademicYearInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomUncheckedUpdateManyWithoutAcademicYearInput = {
@@ -831,7 +831,7 @@ export type ClassroomUncheckedUpdateManyWithoutAcademicYearInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomCreateManyGradeInput = {
@@ -842,7 +842,7 @@ export type ClassroomCreateManyGradeInput = {
   schoolId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  deletedAt: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClassroomUpdateWithoutGradeInput = {
@@ -851,7 +851,7 @@ export type ClassroomUpdateWithoutGradeInput = {
   capacity?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutClassroomsNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutClassroomsNestedInput
 }
@@ -864,7 +864,7 @@ export type ClassroomUncheckedUpdateWithoutGradeInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClassroomUncheckedUpdateManyWithoutGradeInput = {
@@ -875,7 +875,7 @@ export type ClassroomUncheckedUpdateManyWithoutGradeInput = {
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -970,7 +970,7 @@ export type $ClassroomPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     schoolId: string
     createdAt: Date
     updatedAt: Date
-    deletedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["classroom"]>
   composites: {}
 }
