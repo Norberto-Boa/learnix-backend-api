@@ -18,6 +18,7 @@ export interface CreateClassroomData {
   capacity: number;
   gradeId: string;
   academicYearId: string;
+  schoolId: string;
 }
 
 export interface UpdateClassroomData {

@@ -15,7 +15,7 @@ export interface SaveAcademicYearInput {
 export class AcademicYearsRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async findById(id: string) {
+  async findById(id: string, schoolId: string) {
     return await this.prismaService.academicYear.findUnique({
       where: { id },
     });

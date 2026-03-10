@@ -74,7 +74,10 @@ export class AcademicYearsService {
     schoolId: string,
     performedByUserId: string,
   ) {
-    const academicYear = await this.academicYearsRepository.findById(id);
+    const academicYear = await this.academicYearsRepository.findById(
+      id,
+      schoolId,
+    );
     if (!academicYear || academicYear.schoolId !== schoolId) {
       throw new ConflictException('Academic year not found.');
     }
@@ -120,7 +123,10 @@ export class AcademicYearsService {
     schoolId: string,
     performedByUserId: string,
   ) {
-    const academicYear = await this.academicYearsRepository.findById(id);
+    const academicYear = await this.academicYearsRepository.findById(
+      id,
+      schoolId,
+    );
     if (!academicYear || academicYear.schoolId !== schoolId) {
       throw new ConflictException('Academic year not found.');
     }
