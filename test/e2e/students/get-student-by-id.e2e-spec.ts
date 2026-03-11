@@ -6,8 +6,8 @@ import { createTestApp } from '@test/create-test-app';
 import { resetdb } from '../helpers/resetDatabase.e2e';
 import type { School, Student, User } from '@prisma/client';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
-import { schoolFactory } from '../factories/school.factory';
-import { userFactory } from '../factories/user.factory';
+import { schoolFactory } from '../../factories/school.factory';
+import { userFactory } from '../../factories/user.factory';
 import type { DocumentType } from '@/generated/prisma/client';
 import { randomUUID } from 'crypto';
 

@@ -5,8 +5,8 @@ import type { INestApplication } from '@nestjs/common';
 import type { School, User } from '@prisma/client';
 import { createTestApp } from '@test/create-test-app';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
-import { schoolFactory } from '../factories/school.factory';
-import { userFactory } from '../factories/user.factory';
+import { schoolFactory } from '../../factories/school.factory';
+import { userFactory } from '../../factories/user.factory';
 import type { DocumentType } from '@/generated/prisma/client';
 import { resetdb } from '../helpers/resetDatabase.e2e';
 

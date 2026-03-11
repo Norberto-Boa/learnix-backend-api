@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 
 import { createTestApp } from '@test/create-test-app';
 import { PrismaService } from '@/prisma/prisma.service';
-import { schoolFactory } from '../factories/school.factory';
-import { userFactory } from '../factories/user.factory';
+import { schoolFactory } from '../../factories/school.factory';
+import { userFactory } from '../../factories/user.factory';
 import { authenticate, type AuthResult } from '../helpers/auth.e2e';
 import type { School, User } from '@/generated/prisma/client';
 import {

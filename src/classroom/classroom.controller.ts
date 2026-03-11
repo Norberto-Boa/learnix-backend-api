@@ -34,12 +34,12 @@ import {
   type UpdateClassroomDTO,
 } from './dto/update-classsroom.dto';
 import { UpdateClassroomUseCase } from './use-cases/update-classroom.use-case';
-import type { DeleteClassroomUseCase } from './use-cases/delete-classroom.use-case';
+import { DeleteClassroomUseCase } from './use-cases/delete-classroom.use-case';
 import {
   GetClassroomsParamsSchema,
   type GetClassroomsParamsDTO,
 } from './dto/get-classroom.dto';
-import type { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
+import { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
 
 @Controller('classroom')
 export class ClassroomController {

@@ -1,4 +1,4 @@
-import { studentFactory } from '@test/e2e/factories/student.factory';
+import { studentFactory } from '@test/factories/student.factory';
 import { InMemoryStudentsRepository } from '../repositories/in-memory/in-memory-students.repository';
 import { ActivateStudentUseCase } from '../use-cases/activate-student.use-case';
 import { StudentAlreadyActiveError } from '../errors/student-already-active.error';

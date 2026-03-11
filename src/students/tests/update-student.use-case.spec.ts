@@ -1,6 +1,6 @@
 import { UpdateStudentUseCase } from '../use-cases/update-student.use-case';
 import { InMemoryStudentsRepository } from '../repositories/in-memory/in-memory-students.repository';
-import { studentFactory } from '@test/e2e/factories/student.factory';
+import { studentFactory } from '@test/factories/student.factory';
 import { StudentNotFoundError } from '../errors/student-not-found.error';
 
 describe('UpdantStudentUseCase', () => {

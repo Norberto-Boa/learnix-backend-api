@@ -1,4 +1,4 @@
-import { studentFactory } from '@test/e2e/factories/student.factory';
+import { studentFactory } from '@test/factories/student.factory';
 import { InMemoryStudentsRepository } from '../repositories/in-memory/in-memory-students.repository';
 import type { CreateStudentRequest } from '../use-cases/create-student.use-case';
 import { GetStudentByIdUseCase } from '../use-cases/get-student-by-id.use-case';

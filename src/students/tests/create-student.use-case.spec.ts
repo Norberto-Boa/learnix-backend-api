@@ -8,7 +8,7 @@ import {
   CreateStudentUseCase,
   type CreateStudentRequest,
 } from '../use-cases/create-student.use-case';
-import { studentFactory } from '@test/e2e/factories/student.factory';
+import { studentFactory } from '@test/factories/student.factory';
 import { StudentAlreadyExistsError } from '../errors/student-already-exists.error';
 import { StudentWithSameDocumentAlreadyExistsError } from '../errors/student-document-already-exists.error';
 import { StudentMustHaveDocumentError } from '../errors/student-must-have-document.error';

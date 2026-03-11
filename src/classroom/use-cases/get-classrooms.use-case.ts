@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { ClassroomRepository } from '../repositories/classroom.repository';
+import { ClassroomRepository } from '../repositories/classroom.repository';
 
 interface GetClassroomUseCaseRequest {
   gradeId?: string;
