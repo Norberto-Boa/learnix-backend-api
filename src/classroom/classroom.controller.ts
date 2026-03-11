@@ -40,6 +40,7 @@ import {
   type GetClassroomsParamsDTO,
 } from './dto/get-classroom.dto';
 import { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
+import type { GetClassroomByIdUseCase } from './use-cases/get-classroom-by-id.use-case';
 
 @Controller('classroom')
 export class ClassroomController {
@@ -48,6 +49,7 @@ export class ClassroomController {
     private readonly updateClassroomUseCase: UpdateClassroomUseCase,
     private readonly deleteClassroomUseCase: DeleteClassroomUseCase,
     private readonly getClassroomsUseCase: GetClassroomUseCase,
+    private readonly getClassroomByIdUseCase: GetClassroomByIdUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -108,6 +110,15 @@ export class ClassroomController {
     @GetSchoolId('schoolId') schoolId: string,
   ) {
     return await this.getClassroomsUseCase.execute(data, schoolId);
+  }
+
+  @Get(':id')
+  @UseGuards(RolesGuard)
+  async getById(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return await this.getClassroomByIdUseCase.execute(id, schoolId);
   }
 
   @Put(':id')
