@@ -1,4 +1,4 @@
-import { InMemoryAcademicYearsRepository } from '@test/repositories/in-memory-academic-years-repository';
+import { InMemoryAcademicYearsRepository } from '@/academic-years/repositories/in-memory/in-memory-academic-years-repository';
 import { AcademicYearsService } from './academic-years.service';
 import { ConflictException } from '@nestjs/common';
 
