@@ -40,7 +40,7 @@ import {
   type GetClassroomsParamsDTO,
 } from './dto/get-classroom.dto';
 import { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
-import type { GetClassroomByIdUseCase } from './use-cases/get-classroom-by-id.use-case';
+import { GetClassroomByIdUseCase } from './use-cases/get-classroom-by-id.use-case';
 
 @Controller('classroom')
 export class ClassroomController {

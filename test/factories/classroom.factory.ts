@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-type GradesFactoryOverrides = Partial<{
+type ClassroomFactoryOverrides = Partial<{
   name: string;
   capacity: number;
   gradeId: string;
@@ -8,7 +8,7 @@ type GradesFactoryOverrides = Partial<{
   schoolId: string;
 }>;
 
-export function gradeFactory(overrides: GradesFactoryOverrides = {}) {
+export function classroomFactory(overrides: ClassroomFactoryOverrides = {}) {
   return {
     name:
       overrides.name ?? faker.string.fromCharacters('abcd', { min: 1, max: 1 }),

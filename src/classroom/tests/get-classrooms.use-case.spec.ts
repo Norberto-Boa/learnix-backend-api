@@ -1,6 +1,4 @@
-import { gradeFactory } from '@test/factories/grades.factory';
-import { ClassroomAlreadyExistsError } from '../errors/classroom-already-exists.error';
-import { ClassroomNotFoundError } from '../errors/classroom-not-found.error';
+import { classroomFactory } from '@test/factories/classroom.factory';
 import { InMemoryClassroomRepository } from '../repositories/in-memory/in-memory-classroom.repository';
 import { GetClassroomUseCase } from '../use-cases/get-classrooms.use-case';
 
@@ -14,9 +12,9 @@ describe('Get Classroom Use Case', async () => {
   });
 
   it('Should be able to get classrooms from a school', async () => {
-    await classroomRepository.save(gradeFactory({ schoolId: 'school-1' }));
-    await classroomRepository.save(gradeFactory({ schoolId: 'school-1' }));
-    await classroomRepository.save(gradeFactory());
+    await classroomRepository.save(classroomFactory({ schoolId: 'school-1' }));
+    await classroomRepository.save(classroomFactory({ schoolId: 'school-1' }));
+    await classroomRepository.save(classroomFactory());
 
     const classrooms = await sut.execute({}, 'school-1');
 
