@@ -24,8 +24,6 @@ export interface CreateClassroomData {
 export interface UpdateClassroomData {
   name?: string;
   capacity?: number;
-  gradeId?: string;
-  academicYearId?: string;
 }
 
 export abstract class ClassroomRepository {
