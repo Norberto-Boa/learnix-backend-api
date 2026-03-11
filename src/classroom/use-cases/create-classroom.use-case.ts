@@ -57,7 +57,7 @@ export class CreateClassroomUseCase {
       throw new ClassroomAlreadyExistsError();
     }
 
-    const classroom = await this.classroomRepository.create({
+    const classroom = await this.classroomRepository.save({
       name: data.name,
       capacity: data.capacity,
       gradeId: data.gradeId,
