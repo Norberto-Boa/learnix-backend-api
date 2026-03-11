@@ -29,16 +29,22 @@ export interface UpdateClassroomData {
 }
 
 export abstract class ClassroomRepository {
-  abstract create(
+  abstract save(
     data: CreateClassroomData,
     db?: DbContext,
   ): Promise<ClassroomDomain>;
-  abstract findById(id: string, schoolId: string): Promise<ClassroomDomain>;
+  abstract findById(
+    id: string,
+    schoolId: string,
+  ): Promise<ClassroomDomain | null>;
   abstract findByUniqueKeys(
     params: GetUniqueClassroomParams,
     schoolId: string,
   ): Promise<ClassroomDomain | null>;
-  abstract findMany(params: GetClassroomsParams, schoolId: string);
+  abstract findMany(
+    params: GetClassroomsParams,
+    schoolId: string,
+  ): Promise<ClassroomDomain[]>;
   abstract update(
     id: string,
     schoolId: string,
