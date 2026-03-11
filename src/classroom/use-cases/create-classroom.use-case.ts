@@ -4,6 +4,7 @@ import { GradesRepository } from '@/grades/repositories/grades.repository';
 import { AcademicYearsRepository } from '../../academic-years/repositories/academic-years.repository';
 import { GradeNotFoundError } from '@/grades/errors/grade-not-found.error';
 import { ClassroomAlreadyExistsError } from '../errors/classroom-already-exists.error';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 interface CreateClassroomUseCaseRequest {
   name: string;
@@ -21,7 +22,7 @@ export class CreateClassroomUseCase {
     private academicYearRepository: AcademicYearsRepository,
   ) {}
 
-  async execute(data: CreateClassroomUseCaseRequest) {
+  async execute(data: CreateClassroomUseCaseRequest, db?: DbContext) {
     const grade = await this.gradeRepository.findById(
       data.gradeId,
       data.schoolId,
@@ -53,13 +54,16 @@ export class CreateClassroomUseCase {
       throw new ClassroomAlreadyExistsError();
     }
 
-    const classroom = await this.classroomRepository.save({
-      name: data.name,
-      capacity: data.capacity,
-      gradeId: data.gradeId,
-      academicYearId: data.academicYearId,
-      schoolId: data.schoolId,
-    });
+    const classroom = await this.classroomRepository.save(
+      {
+        name: data.name,
+        capacity: data.capacity,
+        gradeId: data.gradeId,
+        academicYearId: data.academicYearId,
+        schoolId: data.schoolId,
+      },
+      db,
+    );
 
     return classroom;
   }

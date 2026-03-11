@@ -15,11 +15,16 @@ import {
   type CreateClassroomDTO,
 } from './dto/create-classroom.dto';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
+import { GetUser } from '@/auth/decorators/get-user.decorator';
+import { PrismaService } from '@/prisma/prisma.service';
+import { AuditService } from '@/audit/audit.service';
 
 @Controller('classroom')
 export class ClassroomController {
   constructor(
     private readonly createClassroomUseCase: CreateClassroomUseCase,
+    private readonly prismaService: PrismaService,
+    private readonly auditService: AuditService,
   ) {}
 
   @Post()
@@ -36,12 +41,36 @@ export class ClassroomController {
     @Body(new ZodValidationPipe(CreateClassroomSchema))
     data: CreateClassroomDTO,
     @GetSchoolId('school') schoolId: string,
+    @GetUser('id') userId: string,
   ) {
-    const result = await this.createClassroomUseCase.execute({
-      ...data,
-      schoolId,
-    });
+    return this.prismaService.$transaction(async (tx) => {
+      const classroom = await this.createClassroomUseCase.execute(
+        {
+          ...data,
+          schoolId,
+        },
+        tx,
+      );
 
-    return result;
+      await this.auditService.log(
+        {
+          action: 'CREATE_CLASSROOM',
+          entity: 'CLASSROOM',
+          schoolId,
+          userId,
+          entityId: classroom.id,
+          newData: {
+            id: classroom.id,
+            name: classroom.name,
+            capacity: classroom.capacity,
+            gradeId: classroom.gradeId,
+            academicYearId: classroom.academicYearId,
+          },
+        },
+        tx,
+      );
+
+      return classroom;
+    });
   }
 }
