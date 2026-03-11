@@ -94,6 +94,7 @@ export class PrismaClassroomRepository implements ClassroomRepository {
       where: {
         id,
         schoolId,
+        deletedAt: null,
       },
       data,
     });
@@ -106,6 +107,7 @@ export class PrismaClassroomRepository implements ClassroomRepository {
       where: {
         id,
         schoolId,
+        deletedAt: null,
       },
       data: {
         deletedAt: new Date(),
