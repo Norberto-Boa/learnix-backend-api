@@ -1,4 +1,12 @@
-import { Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { CreateClassroomUseCase } from './use-cases/create-classroom.use-case';
 import { JwtAuthGuard } from '@/auth/guard/auth.guard';
 import { RolesGuard } from '@/auth/guard/roles.guard';
@@ -18,11 +26,17 @@ import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { PrismaService } from '@/prisma/prisma.service';
 import { AuditService } from '@/audit/audit.service';
+import {
+  UpdateClassroomSchema,
+  type UpdateClassroomDTO,
+} from './dto/update-classsroom.dto';
+import { UpdateClassroomUseCase } from './use-cases/update-classroom.use-case';
 
 @Controller('classroom')
 export class ClassroomController {
   constructor(
     private readonly createClassroomUseCase: CreateClassroomUseCase,
+    private readonly updateClassroomUseCase: UpdateClassroomUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -71,6 +85,39 @@ export class ClassroomController {
       );
 
       return classroom;
+    });
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(UpdateClassroomSchema))
+    data: UpdateClassroomDTO,
+    @GetUser('id') userId: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return await this.prismaService.$transaction(async (tx) => {
+      const updatedClassroom = await this.updateClassroomUseCase.execute(
+        { id, ...data },
+        schoolId,
+        tx,
+      );
+
+      await this.auditService.log(
+        {
+          action: 'UPDATE_CLASSROOM',
+          entity: 'CLASSROOM',
+          schoolId,
+          userId,
+          entityId: updatedClassroom.id,
+          newData: {
+            id: updatedClassroom.id,
+            name: updatedClassroom.name,
+            capacity: updatedClassroom.capacity,
+          },
+        },
+        tx,
+      );
     });
   }
 }

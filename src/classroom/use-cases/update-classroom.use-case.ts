@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { ClassroomRepository } from '../repositories/classroom.repository';
+import { ClassroomRepository } from '../repositories/classroom.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { ClassroomNotFoundError } from '../errors/classroom-not-found.error';
 import { ClassroomAlreadyExistsError } from '../errors/classroom-already-exists.error';
