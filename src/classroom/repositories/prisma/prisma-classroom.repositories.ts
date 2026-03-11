@@ -6,7 +6,7 @@ import type {
   GetUniqueClassroomParams,
   UpdateClassroomData,
 } from '../classroom.repository';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { ClassroomDomain } from '@/classroom/domain/classroom';
 

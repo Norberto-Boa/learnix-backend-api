@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common';
-import type { CreateClassroomUseCase } from './use-cases/create-classroom.use-case';
+import { CreateClassroomUseCase } from './use-cases/create-classroom.use-case';
 import { JwtAuthGuard } from '@/auth/guard/auth.guard';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { Roles } from '@/auth/decorators/roles.decorator';

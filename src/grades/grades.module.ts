@@ -21,5 +21,6 @@ import { DeleteGradeUseCase } from './usecases/delete-grade.use-case';
       useClass: PrismaGradesRepository,
     },
   ],
+  exports: [GradesRepository],
 })
 export class GradesModule {}

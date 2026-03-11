@@ -1,10 +1,6 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import type { ClassroomRepository } from '../repositories/classroom.repository';
-import type { GradesRepository } from '@/grades/repositories/grades.repository';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { ClassroomRepository } from '../repositories/classroom.repository';
+import { GradesRepository } from '@/grades/repositories/grades.repository';
 import { AcademicYearsRepository } from '../../academic-years/repositories/academic-years.repository';
 import { GradeNotFoundError } from '@/grades/errors/grade-not-found.error';
 import { ClassroomAlreadyExistsError } from '../errors/classroom-already-exists.error';

@@ -13,5 +13,6 @@ import { PrismaAcademicYearsRepository } from './repositories/prisma/prisma-acad
     },
   ],
   controllers: [AcademicYearsController],
+  exports: [AcademicYearsRepository],
 })
 export class AcademicYearsModule {}
