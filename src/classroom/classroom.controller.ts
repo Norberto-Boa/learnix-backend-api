@@ -2,9 +2,11 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -33,6 +35,11 @@ import {
 } from './dto/update-classsroom.dto';
 import { UpdateClassroomUseCase } from './use-cases/update-classroom.use-case';
 import type { DeleteClassroomUseCase } from './use-cases/delete-classroom.use-case';
+import {
+  GetClassroomsParamsSchema,
+  type GetClassroomsParamsDTO,
+} from './dto/get-classroom.dto';
+import type { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
 
 @Controller('classroom')
 export class ClassroomController {
@@ -40,6 +47,7 @@ export class ClassroomController {
     private readonly createClassroomUseCase: CreateClassroomUseCase,
     private readonly updateClassroomUseCase: UpdateClassroomUseCase,
     private readonly deleteClassroomUseCase: DeleteClassroomUseCase,
+    private readonly getClassroomsUseCase: GetClassroomUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -89,6 +97,17 @@ export class ClassroomController {
 
       return classroom;
     });
+  }
+
+  @Get()
+  @UseGuards(RolesGuard)
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  async getMany(
+    @Query(new ZodValidationPipe(GetClassroomsParamsSchema))
+    data: GetClassroomsParamsDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return await this.getClassroomsUseCase.execute(data, schoolId);
   }
 
   @Put(':id')
