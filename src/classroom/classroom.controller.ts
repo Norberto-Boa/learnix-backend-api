@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Param,
   Post,
   Put,
@@ -31,12 +32,14 @@ import {
   type UpdateClassroomDTO,
 } from './dto/update-classsroom.dto';
 import { UpdateClassroomUseCase } from './use-cases/update-classroom.use-case';
+import type { DeleteClassroomUseCase } from './use-cases/delete-classroom.use-case';
 
 @Controller('classroom')
 export class ClassroomController {
   constructor(
     private readonly createClassroomUseCase: CreateClassroomUseCase,
     private readonly updateClassroomUseCase: UpdateClassroomUseCase,
+    private readonly deleteClassroomUseCase: DeleteClassroomUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -114,6 +117,31 @@ export class ClassroomController {
             id: updatedClassroom.id,
             name: updatedClassroom.name,
             capacity: updatedClassroom.capacity,
+          },
+        },
+        tx,
+      );
+    });
+  }
+
+  @Delete(':id')
+  async delete(
+    @Param('id') id: string,
+    @GetUser('id') userId: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    await this.prismaService.$transaction(async (tx) => {
+      await this.deleteClassroomUseCase.execute({ id }, schoolId, tx);
+
+      await this.auditService.log(
+        {
+          action: 'DELETE_CLASSROOM',
+          entity: 'CLASSROOM',
+          schoolId,
+          userId,
+          entityId: id,
+          oldData: {
+            id,
           },
         },
         tx,
