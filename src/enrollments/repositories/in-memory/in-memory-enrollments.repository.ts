@@ -1,4 +1,3 @@
-import type { Enrollment } from '@/enrollments/domain/enrollment';
 import type {
   EnrollmentsRepository,
   GetManyEnrollmentsParams,
@@ -11,7 +10,7 @@ import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
   public items: Enrollment[] = [];
 
-  async create(data: SaveEnrollmentRepositoryData) {
+  async save(data: SaveEnrollmentRepositoryData) {
     const enrollment: Enrollment = {
       id: randomUUID(),
       studentId: data.studentId,
