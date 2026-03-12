@@ -9,11 +9,13 @@ import { ClassroomRepository } from '@/classroom/repositories/classroom.reposito
 import { PrismaClassroomRepository } from '@/classroom/repositories/prisma/prisma-classroom.repositories';
 import { AcademicYearsRepository } from '@/academic-years/repositories/academic-years.repository';
 import { PrismaAcademicYearsRepository } from '@/academic-years/repositories/prisma/prisma-academic-year.repository';
+import { GetEnrollmentByIdUseCase } from './use-cases/get-enrollment-by-id.use-case';
 
 @Module({
   controllers: [EnrollmentsController],
   providers: [
     CreateEnrollmentUseCase,
+    GetEnrollmentByIdUseCase,
     {
       provide: EnrollmentsRepository,
       useClass: PrismaEnrollmentsRepository,

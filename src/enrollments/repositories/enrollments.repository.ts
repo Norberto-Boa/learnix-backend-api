@@ -14,7 +14,7 @@ export interface GetManyEnrollmentsParams {
   academicYearId?: string;
   classroomId?: string;
   studentId?: string;
-  status: ENROLLMENT_STATUS;
+  status?: ENROLLMENT_STATUS;
 }
 
 export abstract class EnrollmentsRepository {
