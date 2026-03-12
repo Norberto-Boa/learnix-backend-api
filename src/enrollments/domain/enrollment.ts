@@ -6,7 +6,6 @@ export interface Enrollment {
   academicYearId: string;
   schoolId: string;
   status: ENROLLMENT_STATUS;
-  enrolledAt: Date;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

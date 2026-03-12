@@ -12,7 +12,6 @@ export interface SaveEnrollmentRepositoryData {
 }
 
 export interface GetManyEnrollmentsParams {
-  schoolId: string;
   academicYearId?: string;
   classroomId?: string;
   studentId?: string;
@@ -35,5 +34,9 @@ export abstract class EnrollmentsRepository {
     classroomId: string,
     schoolId: string,
   ): Promise<{ count: number }>;
-  abstract findMany(params: GetManyEnrollmentsParams): Promise<Enrollment[]>;
+
+  abstract findMany(
+    params: GetManyEnrollmentsParams,
+    schoolId: string,
+  ): Promise<Enrollment[]>;
 }
