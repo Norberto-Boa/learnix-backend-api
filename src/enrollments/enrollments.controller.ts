@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -21,12 +22,18 @@ import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { GetEnrollmentByIdUseCase } from './use-cases/get-enrollment-by-id.use-case';
+import {
+  GetEnrollmentsParamsDTO,
+  GetEnrollmentsParamsSchema,
+} from './dto/get-enrollments.dto';
+import { FetchEnrollmentUseCase } from './use-cases/fetch-enrollments.use-case';
 
 @Controller('enrollments')
 export class EnrollmentsController {
   constructor(
     private readonly createEnrollmentUseCase: CreateEnrollmentUseCase,
     private readonly getEnrollmentByIdUseCase: GetEnrollmentByIdUseCase,
+    private readonly fetchEnrollmentsUseCase: FetchEnrollmentUseCase,
     private readonly auditService: AuditService,
     private readonly prismaService: PrismaService,
   ) {}
@@ -85,5 +92,17 @@ export class EnrollmentsController {
   @Get(':id')
   async getById(@Param('id') id: string, @GetSchoolId() schoolId: string) {
     return this.getEnrollmentByIdUseCase.execute(id, schoolId);
+  }
+
+  @ApiOperation({ summary: 'Fetch enrollments with filters' })
+  @ApiResponse({ status: 200, description: 'Enrollments fetched successfully' })
+  @Roles('ADMIN', 'MANAGER', 'CLERK')
+  @Get()
+  fetch(
+    @Query(new ZodValidationPipe(GetEnrollmentsParamsSchema))
+    params: GetEnrollmentsParamsDTO,
+    @GetSchoolId() schoolId: string,
+  ) {
+    return this.fetchEnrollmentsUseCase.execute(schoolId, params);
   }
 }

@@ -72,13 +72,13 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
   }
 
   async findMany(
-    params: GetManyEnrollmentsParams,
     schoolId: string,
+    params: GetManyEnrollmentsParams,
   ): Promise<Enrollment[]> {
-    return this.items
+    const enrollment = this.items
       .filter((item) => {
         if (item.schoolId !== schoolId) return false;
-        if (!item.deletedAt) return false;
+        if (item.deletedAt !== null) return false;
         if (
           params.academicYearId &&
           item.academicYearId !== params.academicYearId
@@ -93,5 +93,7 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
         return true;
       })
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+    return enrollment;
   }
 }

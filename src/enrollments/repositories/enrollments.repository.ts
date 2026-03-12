@@ -35,7 +35,7 @@ export abstract class EnrollmentsRepository {
   ): Promise<{ count: number }>;
 
   abstract findMany(
-    params: GetManyEnrollmentsParams,
     schoolId: string,
+    params: GetManyEnrollmentsParams,
   ): Promise<Enrollment[]>;
 }

@@ -80,8 +80,8 @@ export class PrismaEnrollmentsRepository implements EnrollmentsRepository {
   }
 
   async findMany(
-    params: GetManyEnrollmentsParams,
     schoolId: string,
+    params: GetManyEnrollmentsParams,
   ): Promise<Enrollment[]> {
     return await this.prisma.enrollment.findMany({
       where: {

@@ -13,7 +13,7 @@ interface FetchEnrollmentUseCaseRequest {
 export class FetchEnrollmentUseCase {
   constructor(private readonly enrollmentsRepository: EnrollmentsRepository) {}
 
-  async execute(params: FetchEnrollmentUseCaseRequest, schoolId: string) {
-    return this.enrollmentsRepository.findMany(params, schoolId);
+  async execute(schoolId: string, params: FetchEnrollmentUseCaseRequest) {
+    return await this.enrollmentsRepository.findMany(schoolId, params);
   }
 }
