@@ -7,8 +7,7 @@ export interface SaveEnrollmentRepositoryData {
   classroomId: string;
   academicYearId: string;
   schoolId: string;
-  status: ENROLLMENT_STATUS;
-  enrolledAt?: Date;
+  status?: ENROLLMENT_STATUS;
 }
 
 export interface GetManyEnrollmentsParams {
