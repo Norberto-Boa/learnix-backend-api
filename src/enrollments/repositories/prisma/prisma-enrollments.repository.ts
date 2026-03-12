@@ -4,7 +4,7 @@ import type {
   GetManyEnrollmentsParams,
   SaveEnrollmentRepositoryData,
 } from '../enrollments.repository';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { Enrollment } from '@/enrollments/domain/enrollment';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
