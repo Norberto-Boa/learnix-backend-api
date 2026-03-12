@@ -8,6 +8,7 @@ import { AcademicYearsModule } from '@/academic-years/academic-years.module';
 import { UpdateClassroomUseCase } from './use-cases/update-classroom.use-case';
 import { DeleteClassroomUseCase } from './use-cases/delete-classroom.use-case';
 import { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
+import { GetClassroomByIdUseCase } from './use-cases/get-classroom-by-id.use-case';
 
 @Module({
   controllers: [ClassroomController],
@@ -16,6 +17,7 @@ import { GetClassroomUseCase } from './use-cases/get-classrooms.use-case';
     UpdateClassroomUseCase,
     DeleteClassroomUseCase,
     GetClassroomUseCase,
+    GetClassroomByIdUseCase,
     {
       provide: ClassroomRepository,
       useClass: PrismaClassroomRepository,
