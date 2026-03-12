@@ -62,3 +62,8 @@ export type Grade = Prisma.GradeModel
  * 
  */
 export type Classroom = Prisma.ClassroomModel
+/**
+ * Model enrollment
+ * 
+ */
+export type enrollment = Prisma.enrollmentModel

@@ -294,6 +294,23 @@ export type EnumSTUDENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumSTUDENT_STATUSFilter<$PrismaModel>
 }
 
+export type EnumENROLLMENT_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.ENROLLMENT_STATUS | Prisma.EnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel> | $Enums.ENROLLMENT_STATUS
+}
+
+export type EnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ENROLLMENT_STATUS | Prisma.EnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.ENROLLMENT_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -558,6 +575,23 @@ export type NestedEnumSTUDENT_STATUSWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSTUDENT_STATUSFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSTUDENT_STATUSFilter<$PrismaModel>
+}
+
+export type NestedEnumENROLLMENT_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.ENROLLMENT_STATUS | Prisma.EnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel> | $Enums.ENROLLMENT_STATUS
+}
+
+export type NestedEnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ENROLLMENT_STATUS | Prisma.EnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ENROLLMENT_STATUS[] | Prisma.ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.ENROLLMENT_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
 }
 
 

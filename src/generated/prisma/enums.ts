@@ -41,3 +41,14 @@ export const GENDER = {
 } as const
 
 export type GENDER = (typeof GENDER)[keyof typeof GENDER]
+
+
+export const ENROLLMENT_STATUS = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  TRANSFERRED: 'TRANSFERRED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type ENROLLMENT_STATUS = (typeof ENROLLMENT_STATUS)[keyof typeof ENROLLMENT_STATUS]
