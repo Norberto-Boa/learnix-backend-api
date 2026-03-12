@@ -3,7 +3,10 @@ import type {
   GetManyEnrollmentsParams,
   SaveEnrollmentRepositoryData,
 } from '../enrollments.repository';
-import { Enrollment } from '../../domain/enrollment';
+import {
+  Enrollment,
+  ACTIVE_ENROLLMENT_STATUSES,
+} from '../../domain/enrollment';
 import { randomUUID } from 'crypto';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 
@@ -53,11 +56,6 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
     );
   }
 
-  ACTIVE_ENROLLMENT_STATUSES: ENROLLMENT_STATUS[] = [
-    ENROLLMENT_STATUS.PENDING,
-    ENROLLMENT_STATUS.ACTIVE,
-  ];
-
   async countActiveEnrollmentsByClassroom(
     classroomId: string,
     schoolId: string,
@@ -67,7 +65,7 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
         item.classroomId === classroomId &&
         item.schoolId === schoolId &&
         !item.deletedAt &&
-        this.ACTIVE_ENROLLMENT_STATUSES.includes(item.status),
+        ACTIVE_ENROLLMENT_STATUSES.includes(item.status),
     ).length;
 
     return { count };

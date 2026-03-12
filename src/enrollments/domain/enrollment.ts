@@ -1,4 +1,4 @@
-import type { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
+import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 
 export interface Enrollment {
   id: string;
@@ -11,3 +11,8 @@ export interface Enrollment {
   updatedAt: Date;
   deletedAt: Date | null;
 }
+
+export const ACTIVE_ENROLLMENT_STATUSES: ENROLLMENT_STATUS[] = [
+  ENROLLMENT_STATUS.PENDING,
+  ENROLLMENT_STATUS.ACTIVE,
+];
