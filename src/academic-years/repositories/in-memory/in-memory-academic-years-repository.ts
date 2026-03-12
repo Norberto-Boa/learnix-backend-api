@@ -17,7 +17,8 @@ export class InMemoryAcademicYearsRepository implements AcademicYearsRepository 
     endDate,
     schoolId,
     isActive,
-  }: SaveAcademicYearData): Promise<AcademicYear> {
+    isClosed,
+  }: SaveAcademicYearData) {
     const academicYear = {
       id: randomUUID(),
       year: year,
@@ -26,7 +27,7 @@ export class InMemoryAcademicYearsRepository implements AcademicYearsRepository 
       endDate: endDate,
       schoolId: schoolId,
       isActive: isActive ?? false,
-      isClosed: false,
+      isClosed: isClosed ?? false,
       createdAt: new Date(),
       updatedAt: new Date(),
       deletedAt: null,

@@ -11,6 +11,9 @@ import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 import { StudentNotFoundError } from '@/students/errors/student-not-found.error';
 import { ClassroomNotFoundError } from '@/classroom/errors/classroom-not-found.error';
 import type { DbContext } from '@/prisma/shared/db-context';
+import { AcademicYearAndClassroomYearDoNotMatchFoundError } from '../errors/academic-year-and-classroom-year-do-not-match.error';
+import { ClassroomCapacityAlreadyExceedError } from '../errors/classroom-capacity-already-exceed.error';
+import { AcademicYearClosedError } from '../errors/academic-year-closed.error';
 
 interface CreateEnrollmentUseCaseRequest {
   studentId: string;
@@ -63,11 +66,11 @@ export class CreateEnrollmentUseCase {
     }
 
     if (classroom.academicYearId !== academicYearId) {
-      throw new Error();
+      throw new AcademicYearAndClassroomYearDoNotMatchFoundError();
     }
 
     if (academicYear.isClosed === true) {
-      throw new Error();
+      throw new AcademicYearClosedError();
     }
 
     const existingEnrollment =
@@ -90,7 +93,7 @@ export class CreateEnrollmentUseCase {
       );
 
     if (activeEnrollments.count >= classroom.capacity) {
-      throw new ConflictException('A turma ja esta cheia!');
+      throw new ClassroomCapacityAlreadyExceedError();
     }
 
     return this.enrollmentsRepository.save(

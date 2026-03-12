@@ -8,6 +8,7 @@ export interface SaveAcademicYearData {
   endDate: Date;
   schoolId: string;
   isActive?: boolean;
+  isClosed?: boolean;
 }
 
 export abstract class AcademicYearsRepository {
