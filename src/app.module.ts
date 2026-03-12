@@ -17,6 +17,7 @@ import { DocumentTypesModule } from './document-types/document-types.module';
 import { StudentsModule } from './students/students.module';
 import { GradesModule } from './grades/grades.module';
 import { ClassroomModule } from './classroom/classroom.module';
+import { EnrollmentsModule } from './enrollments/enrollments.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ClassroomModule } from './classroom/classroom.module';
     StudentsModule,
     GradesModule,
     ClassroomModule,
+    EnrollmentsModule,
   ],
   providers: [
     {
