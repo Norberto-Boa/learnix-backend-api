@@ -1,4 +1,12 @@
-import { Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { CreateEnrollmentUseCase } from './use-cases/create-enrollment.use-case';
 import { AuditService } from '@/audit/audit.service';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
@@ -12,11 +20,13 @@ import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import { RolesGuard } from '@/auth/guard/roles.guard';
+import { GetEnrollmentByIdUseCase } from './use-cases/get-enrollment-by-id.use-case';
 
 @Controller('enrollments')
 export class EnrollmentsController {
   constructor(
     private readonly createEnrollmentUseCase: CreateEnrollmentUseCase,
+    private readonly getEnrollmentByIdUseCase: GetEnrollmentByIdUseCase,
     private readonly auditService: AuditService,
     private readonly prismaService: PrismaService,
   ) {}
@@ -65,5 +75,15 @@ export class EnrollmentsController {
         tx,
       );
     });
+  }
+
+  @ApiOperation({ summary: 'Get enrollment by id' })
+  @ApiResponse({ status: 200, description: 'Enrollment fetched successfully' })
+  @ApiResponse({ status: 404, description: 'Enrollment not found' })
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'MANAGER', 'CLERK')
+  @Get(':id')
+  async getById(@Param('id') id: string, @GetSchoolId() schoolId: string) {
+    return this.getEnrollmentByIdUseCase.execute(id, schoolId);
   }
 }
