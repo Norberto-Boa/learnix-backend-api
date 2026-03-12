@@ -6,7 +6,10 @@ import type {
 } from '../enrollments.repository';
 import { PrismaService } from '@/prisma/prisma.service';
 import type { DbContext } from '@/prisma/shared/db-context';
-import type { Enrollment } from '@/enrollments/domain/enrollment';
+import {
+  ACTIVE_ENROLLMENT_STATUSES,
+  type Enrollment,
+} from '@/enrollments/domain/enrollment';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 
 @Injectable()
@@ -52,7 +55,7 @@ export class PrismaEnrollmentsRepository implements EnrollmentsRepository {
         schoolId,
         deletedAt: null,
         status: {
-          in: [ENROLLMENT_STATUS.PENDING, ENROLLMENT_STATUS.ACTIVE],
+          in: ACTIVE_ENROLLMENT_STATUSES,
         },
       },
     });
