@@ -38,4 +38,11 @@ export abstract class EnrollmentsRepository {
     schoolId: string,
     params: GetManyEnrollmentsParams,
   ): Promise<Enrollment[]>;
+
+  abstract updateStatus(
+    id: string,
+    schoolId: string,
+    status: ENROLLMENT_STATUS,
+    db: DbContext,
+  ): Promise<Enrollment>;
 }

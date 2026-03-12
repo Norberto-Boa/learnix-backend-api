@@ -9,6 +9,8 @@ import {
 } from '../../domain/enrollment';
 import { randomUUID } from 'crypto';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
+import type { DbContext } from '@/prisma/shared/db-context';
+import { EnrollmentNotFoundError } from '@/enrollments/errors/enrollment-not-found.error';
 
 export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
   public items: Enrollment[] = [];
@@ -95,5 +97,29 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
     return enrollment;
+  }
+
+  async updateStatus(
+    id: string,
+    schoolId: string,
+    status: ENROLLMENT_STATUS,
+    db: DbContext,
+  ): Promise<Enrollment> {
+    const enrollmentIndex = this.items.findIndex(
+      (item) =>
+        item.id === id && item.schoolId === schoolId && item.deletedAt === null,
+    );
+
+    if (enrollmentIndex < 0) {
+      throw new EnrollmentNotFoundError();
+    }
+
+    this.items[enrollmentIndex] = {
+      ...this.items[enrollmentIndex],
+      status,
+      updatedAt: new Date(),
+    };
+
+    return this.items[enrollmentIndex];
   }
 }
