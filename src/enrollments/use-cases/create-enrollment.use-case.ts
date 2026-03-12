@@ -6,7 +6,7 @@ import {
 import { EnrollmentsRepository } from '../repositories/enrollments.repository';
 import { StudentsRepository } from '../../students/repositories/students.repository';
 import { ClassroomRepository } from '../../classroom/repositories/classroom.repository';
-import type { AcademicYearsRepository } from '@/academic-years/repositories/academic-years.repository';
+import { AcademicYearsRepository } from '@/academic-years/repositories/academic-years.repository';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 import { StudentNotFoundError } from '@/students/errors/student-not-found.error';
 import { ClassroomNotFoundError } from '@/classroom/errors/classroom-not-found.error';
