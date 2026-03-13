@@ -12,6 +12,7 @@ import { PrismaAcademicYearsRepository } from '@/academic-years/repositories/pri
 import { GetEnrollmentByIdUseCase } from './use-cases/get-enrollment-by-id.use-case';
 import { FetchEnrollmentUseCase } from './use-cases/fetch-enrollments.use-case';
 import { CancelEnrollmentUseCase } from './use-cases/cancel-enrollment.use-case';
+import { ChangeEnrollmentClassroomUseCase } from './use-cases/change-enrollment-classroom.use-case';
 
 @Module({
   controllers: [EnrollmentsController],
@@ -20,6 +21,7 @@ import { CancelEnrollmentUseCase } from './use-cases/cancel-enrollment.use-case'
     GetEnrollmentByIdUseCase,
     FetchEnrollmentUseCase,
     CancelEnrollmentUseCase,
+    ChangeEnrollmentClassroomUseCase,
     {
       provide: EnrollmentsRepository,
       useClass: PrismaEnrollmentsRepository,
