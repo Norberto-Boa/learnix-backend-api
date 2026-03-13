@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -27,6 +28,9 @@ import {
   GetEnrollmentsParamsSchema,
 } from './dto/get-enrollments.dto';
 import { FetchEnrollmentUseCase } from './use-cases/fetch-enrollments.use-case';
+import type { CancelEnrollmentParamsDTO } from './dto/cancel-enrollment.dto';
+import { cancelEnrollmentParamsSchema } from './dto/cancel-enrollment.dto';
+import { CancelEnrollmentUseCase } from './use-cases/cancel-enrollment.use-case';
 
 @Controller('enrollments')
 export class EnrollmentsController {
@@ -34,6 +38,7 @@ export class EnrollmentsController {
     private readonly createEnrollmentUseCase: CreateEnrollmentUseCase,
     private readonly getEnrollmentByIdUseCase: GetEnrollmentByIdUseCase,
     private readonly fetchEnrollmentsUseCase: FetchEnrollmentUseCase,
+    private readonly cancelEnrollmentUseCase: CancelEnrollmentUseCase,
     private readonly auditService: AuditService,
     private readonly prismaService: PrismaService,
   ) {}
@@ -104,5 +109,35 @@ export class EnrollmentsController {
     @GetSchoolId() schoolId: string,
   ) {
     return this.fetchEnrollmentsUseCase.execute(schoolId, params);
+  }
+
+  @Patch(':id/cancel')
+  async cancel(
+    @Param(new ZodValidationPipe(cancelEnrollmentParamsSchema))
+    { id }: CancelEnrollmentParamsDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const cancelledEnrollment = await this.cancelEnrollmentUseCase.execute(
+        id,
+        schoolId,
+        tx,
+      );
+
+      await this.auditService.log(
+        {
+          action: 'CANCEL',
+          entity: 'ENROLLMENT',
+          entityId: cancelledEnrollment.id,
+          schoolId,
+          userId,
+          newData: {
+            status: cancelledEnrollment.id,
+          },
+        },
+        tx,
+      );
+    });
   }
 }

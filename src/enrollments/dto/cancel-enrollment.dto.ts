@@ -2,6 +2,10 @@ import { z } from 'zod';
 import { createZodDto } from 'nestjs-zod';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
 
-export const cancelEnrollmentSchema = z.object({});
+export const cancelEnrollmentParamsSchema = z.object({
+  id: z.uuid(),
+});
 
-export class CancelEnrollmentDTO extends createZodDto(cancelEnrollmentSchema) {}
+export class CancelEnrollmentParamsDTO extends createZodDto(
+  cancelEnrollmentParamsSchema,
+) {}
