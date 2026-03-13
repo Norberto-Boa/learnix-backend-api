@@ -43,6 +43,6 @@ export abstract class EnrollmentsRepository {
     id: string,
     schoolId: string,
     status: ENROLLMENT_STATUS,
-    db: DbContext,
+    db?: DbContext,
   ): Promise<Enrollment>;
 }
