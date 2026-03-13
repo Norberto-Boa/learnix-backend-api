@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { EnrollmentsRepository } from '../repositories/enrollments.repository';
+import { EnrollmentsRepository } from '../repositories/enrollments.repository';
 import type { Enrollment } from '../domain/enrollment';
 import { EnrollmentNotFoundError } from '../errors/enrollment-not-found.error';
 import { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
