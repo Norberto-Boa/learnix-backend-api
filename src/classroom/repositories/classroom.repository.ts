@@ -31,7 +31,10 @@ export abstract class ClassroomRepository {
     data: CreateClassroomData,
     db?: DbContext,
   ): Promise<ClassroomDomain>;
-  abstract findById(id: string, schoolId: string): Promise<ClassroomDomain>;
+  abstract findById(
+    id: string,
+    schoolId: string,
+  ): Promise<ClassroomDomain | null>;
   abstract findByUniqueKeys(
     params: GetUniqueClassroomParams,
     schoolId: string,

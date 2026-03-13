@@ -1,6 +1,6 @@
 import type { DomainException } from '@/shared/@types/DomainException';
 
-export class enrollmentNotActiveError extends Error implements DomainException {
+export class EnrollmentNotActiveError extends Error implements DomainException {
   statusCode = 400;
 
   constructor() {
