@@ -103,7 +103,6 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
     id: string,
     schoolId: string,
     status: ENROLLMENT_STATUS,
-    db: DbContext,
   ): Promise<Enrollment> {
     const enrollmentIndex = this.items.findIndex(
       (item) =>
@@ -117,6 +116,30 @@ export class InMemoryEnrollmentsRepository implements EnrollmentsRepository {
     this.items[enrollmentIndex] = {
       ...this.items[enrollmentIndex],
       status,
+      updatedAt: new Date(),
+    };
+
+    return this.items[enrollmentIndex];
+  }
+
+  async updateClassroom(
+    id: string,
+    schoolId: string,
+    classroomId: string,
+    db?: DbContext,
+  ): Promise<Enrollment> {
+    const enrollmentIndex = this.items.findIndex(
+      (item) =>
+        item.id === id && item.schoolId === schoolId && item.deletedAt === null,
+    );
+
+    if (enrollmentIndex < 0) {
+      throw new EnrollmentNotFoundError();
+    }
+
+    this.items[enrollmentIndex] = {
+      ...this.items[enrollmentIndex],
+      classroomId,
       updatedAt: new Date(),
     };
 

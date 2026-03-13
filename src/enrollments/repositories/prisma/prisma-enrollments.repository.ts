@@ -121,4 +121,23 @@ export class PrismaEnrollmentsRepository implements EnrollmentsRepository {
       },
     });
   }
+
+  async updateClassroom(
+    id: string,
+    schoolId: string,
+    classroomId: string,
+    db?: DbContext,
+  ): Promise<Enrollment> {
+    const client = this.getClient(db);
+
+    return client.enrollment.update({
+      where: {
+        id,
+        schoolId,
+      },
+      data: {
+        classroomId,
+      },
+    });
+  }
 }

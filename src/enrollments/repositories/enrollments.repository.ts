@@ -45,4 +45,11 @@ export abstract class EnrollmentsRepository {
     status: ENROLLMENT_STATUS,
     db?: DbContext,
   ): Promise<Enrollment>;
+
+  abstract updateClassroom(
+    id: string,
+    schoolId: string,
+    classroomId: string,
+    db?: DbContext,
+  ): Promise<Enrollment>;
 }
