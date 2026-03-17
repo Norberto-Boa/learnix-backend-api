@@ -311,6 +311,23 @@ export type EnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
 }
 
+export type EnumFEE_TYPE_CATEGORYFilter<$PrismaModel = never> = {
+  equals?: $Enums.FEE_TYPE_CATEGORY | Prisma.EnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  in?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel> | $Enums.FEE_TYPE_CATEGORY
+}
+
+export type EnumFEE_TYPE_CATEGORYWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FEE_TYPE_CATEGORY | Prisma.EnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  in?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFEE_TYPE_CATEGORYWithAggregatesFilter<$PrismaModel> | $Enums.FEE_TYPE_CATEGORY
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -592,6 +609,23 @@ export type NestedEnumENROLLMENT_STATUSWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
   _max?: Prisma.NestedEnumENROLLMENT_STATUSFilter<$PrismaModel>
+}
+
+export type NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel = never> = {
+  equals?: $Enums.FEE_TYPE_CATEGORY | Prisma.EnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  in?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel> | $Enums.FEE_TYPE_CATEGORY
+}
+
+export type NestedEnumFEE_TYPE_CATEGORYWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FEE_TYPE_CATEGORY | Prisma.EnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  in?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FEE_TYPE_CATEGORY[] | Prisma.ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFEE_TYPE_CATEGORYWithAggregatesFilter<$PrismaModel> | $Enums.FEE_TYPE_CATEGORY
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFEE_TYPE_CATEGORYFilter<$PrismaModel>
 }
 
 

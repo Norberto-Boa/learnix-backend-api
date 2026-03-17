@@ -52,3 +52,19 @@ export const ENROLLMENT_STATUS = {
 } as const
 
 export type ENROLLMENT_STATUS = (typeof ENROLLMENT_STATUS)[keyof typeof ENROLLMENT_STATUS]
+
+
+export const FEE_TYPE_CATEGORY = {
+  NORMAL: 'NORMAL',
+  PENALTY: 'PENALTY'
+} as const
+
+export type FEE_TYPE_CATEGORY = (typeof FEE_TYPE_CATEGORY)[keyof typeof FEE_TYPE_CATEGORY]
+
+
+export const FEE_SCOPE = {
+  SCHOOL: 'SCHOOL',
+  GRADE: 'GRADE'
+} as const
+
+export type FEE_SCOPE = (typeof FEE_SCOPE)[keyof typeof FEE_SCOPE]

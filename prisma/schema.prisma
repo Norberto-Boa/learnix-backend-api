@@ -69,6 +69,7 @@ model School {
   grades           Grade[]
   classrooms       Classroom[]
   enrollments      enrollment[]
+  feeTypes         FeeType[]
 
   @@map("schools")
 }
@@ -264,4 +265,33 @@ model enrollment {
 
   @@unique([schoolId, studentId, academicYearId])
   @@map("enrollments")
+}
+
+enum FEE_TYPE_CATEGORY {
+  NORMAL
+  PENALTY
+}
+
+enum FEE_SCOPE {
+  SCHOOL
+  GRADE
+}
+
+model FeeType {
+  id String @id @default(uuid())
+
+  name        String
+  code        String
+  category    FEE_TYPE_CATEGORY @default(NORMAL)
+  isRecurring Boolean           @default(false)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([schoolId, code])
+  @@map("fee_types")
 }

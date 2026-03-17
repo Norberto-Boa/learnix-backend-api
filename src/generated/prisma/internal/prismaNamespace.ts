@@ -393,7 +393,8 @@ export const ModelName = {
   StudentDocument: 'StudentDocument',
   Grade: 'Grade',
   Classroom: 'Classroom',
-  enrollment: 'enrollment'
+  enrollment: 'enrollment',
+  FeeType: 'FeeType'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment"
+    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment" | "feeType"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1154,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FeeType: {
+      payload: Prisma.$FeeTypePayload<ExtArgs>
+      fields: Prisma.FeeTypeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FeeTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FeeTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        findFirst: {
+          args: Prisma.FeeTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FeeTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        findMany: {
+          args: Prisma.FeeTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>[]
+        }
+        create: {
+          args: Prisma.FeeTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        createMany: {
+          args: Prisma.FeeTypeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FeeTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>[]
+        }
+        delete: {
+          args: Prisma.FeeTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        update: {
+          args: Prisma.FeeTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        deleteMany: {
+          args: Prisma.FeeTypeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FeeTypeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FeeTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>[]
+        }
+        upsert: {
+          args: Prisma.FeeTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FeeTypePayload>
+        }
+        aggregate: {
+          args: Prisma.FeeTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFeeType>
+        }
+        groupBy: {
+          args: Prisma.FeeTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeTypeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FeeTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FeeTypeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1340,6 +1415,21 @@ export const EnrollmentScalarFieldEnum = {
 export type EnrollmentScalarFieldEnum = (typeof EnrollmentScalarFieldEnum)[keyof typeof EnrollmentScalarFieldEnum]
 
 
+export const FeeTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  category: 'category',
+  isRecurring: 'isRecurring',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type FeeTypeScalarFieldEnum = (typeof FeeTypeScalarFieldEnum)[keyof typeof FeeTypeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1520,6 +1610,20 @@ export type ListEnumENROLLMENT_STATUSFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'FEE_TYPE_CATEGORY'
+ */
+export type EnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FEE_TYPE_CATEGORY'>
+    
+
+
+/**
+ * Reference to a field of type 'FEE_TYPE_CATEGORY[]'
+ */
+export type ListEnumFEE_TYPE_CATEGORYFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FEE_TYPE_CATEGORY[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1637,6 +1741,7 @@ export type GlobalOmitConfig = {
   grade?: Prisma.GradeOmit
   classroom?: Prisma.ClassroomOmit
   enrollment?: Prisma.enrollmentOmit
+  feeType?: Prisma.FeeTypeOmit
 }
 
 /* Types for Logging */
