@@ -4,10 +4,10 @@ export interface FeeTypeDomain {
   id: string;
   name: string;
   code: string;
-  catefory: FEE_TYPE_CATEGORY,
+  category: FEE_TYPE_CATEGORY,
   isRecurring: boolean,
   schoolId: string,
-  createdAt: string,
-  updatedAt: string,
-  deletedAt: string
+  createdAt: Date,
+  updatedAt: Date,
+  deletedAt: Date | null
 }
