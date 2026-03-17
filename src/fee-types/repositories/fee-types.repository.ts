@@ -24,9 +24,9 @@ export interface UpdateFeeTypeRepositoryData {
 
 export abstract class FeeTypesRepository {
   abstract save(data: CreateFeeTypeRepositoryData, schoolId: string, db?: DbContext): Promise<FeeTypeDomain>
-  abstract findById(id: string, schoolId: string): Promise<FeeTypeDomain>
-  abstract findByCode(code: string, schoolId: string): Promise<FeeTypeDomain>
+  abstract findById(id: string, schoolId: string): Promise<FeeTypeDomain | null>
+  abstract findByCode(code: string, schoolId: string): Promise<FeeTypeDomain | null>
   abstract findMany(schoolId: string, params: FindManyFeeTypesParams): Promise<FeeTypeDomain[]>
-  abstract update(id: string, schoolId: string, data: UpdateFeeTypeRepositoryData): Promise<FeeTypeDomain>
-  abstract delete(id: string, schoolId: string): Promise<void>
+  abstract update(id: string, schoolId: string, data: UpdateFeeTypeRepositoryData, db?: DbContext): Promise<FeeTypeDomain>
+  abstract delete(id: string, schoolId: string, db?: DbContext): Promise<void>
 }

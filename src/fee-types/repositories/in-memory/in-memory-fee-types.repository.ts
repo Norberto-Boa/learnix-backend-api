@@ -24,25 +24,25 @@ export class InMemoryFeeTypesRepository implements FeeTypesRepository {
     return feeType;
   }
 
-  async findById(id: string, schoolId: string): Promise<FeeTypeDomain> {
+  async findById(id: string, schoolId: string): Promise<FeeTypeDomain | null> {
     const feeType = this.items.find(
       (item) => item.id === id && item.schoolId === schoolId && item.deletedAt === null
     )
 
     if (!feeType) {
-      throw new Error('Not found')
+      return null
     }
 
     return feeType
   }
 
-  async findByCode(code: string, schoolId: string): Promise<FeeTypeDomain> {
+  async findByCode(code: string, schoolId: string): Promise<FeeTypeDomain | null> {
     const feeType = this.items.find(
       (item) => item.code === code && item.schoolId === schoolId && item.deletedAt === null
     )
 
     if (!feeType) {
-      throw new Error('Not found')
+      return null
     }
 
     return feeType
