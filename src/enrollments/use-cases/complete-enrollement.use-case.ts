@@ -11,7 +11,7 @@ import { EnrollmentNotActiveError } from "../errors/enrollment-not-active.error"
 export class CompleteEnrollmentUseCase {
   constructor (private enrollmentsRepository: EnrollmentsRepository){}
 
-  async execute (id: string, schoolId: string, db: DbContext) : Promise<Enrollment>{
+  async execute (id: string, schoolId: string, db?: DbContext) : Promise<Enrollment>{
     const enrollment = await this.enrollmentsRepository.findById(id, schoolId);
 
     if(!enrollment){ 
@@ -22,7 +22,7 @@ export class CompleteEnrollmentUseCase {
       throw new enrollmentAlreadyCompletedError()
     }
 
-    if(ACTIVE_ENROLLMENT_STATUSES.includes(enrollment.status)){
+    if(!ACTIVE_ENROLLMENT_STATUSES.includes(enrollment.status)){
       throw new EnrollmentNotActiveError();
     }
 
