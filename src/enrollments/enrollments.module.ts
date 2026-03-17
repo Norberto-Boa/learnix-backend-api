@@ -13,6 +13,7 @@ import { GetEnrollmentByIdUseCase } from './use-cases/get-enrollment-by-id.use-c
 import { FetchEnrollmentUseCase } from './use-cases/fetch-enrollments.use-case';
 import { CancelEnrollmentUseCase } from './use-cases/cancel-enrollment.use-case';
 import { ChangeEnrollmentClassroomUseCase } from './use-cases/change-enrollment-classroom.use-case';
+import { CompleteEnrollmentUseCase } from './use-cases/complete-enrollement.use-case';
 
 @Module({
   controllers: [EnrollmentsController],
@@ -20,6 +21,7 @@ import { ChangeEnrollmentClassroomUseCase } from './use-cases/change-enrollment-
     CreateEnrollmentUseCase,
     GetEnrollmentByIdUseCase,
     FetchEnrollmentUseCase,
+    CompleteEnrollmentUseCase,
     CancelEnrollmentUseCase,
     ChangeEnrollmentClassroomUseCase,
     {

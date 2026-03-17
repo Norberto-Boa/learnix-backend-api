@@ -38,6 +38,7 @@ import {
   type ChangeEnrollmentClassroomBodyDTO,
   type ChangeEnrollmentClassroomParamsDTO,
 } from './dto/change-enrollment-classroom.dto';
+import { CompleteEnrollmentUseCase } from './use-cases/complete-enrollement.use-case';
 
 @Controller('enrollments')
 export class EnrollmentsController {
@@ -47,9 +48,10 @@ export class EnrollmentsController {
     private readonly fetchEnrollmentsUseCase: FetchEnrollmentUseCase,
     private readonly cancelEnrollmentUseCase: CancelEnrollmentUseCase,
     private readonly changeEnrollmentUseCase: ChangeEnrollmentClassroomUseCase,
+    private readonly completeEnrollmentUseCase: CompleteEnrollmentUseCase,
     private readonly auditService: AuditService,
     private readonly prismaService: PrismaService,
-  ) {}
+  ) { }
 
   @ApiOperation({ summary: 'Create a new enrollment' })
   @ApiResponse({ status: 201, description: 'Enrollment Created successfully' })
@@ -205,4 +207,33 @@ export class EnrollmentsController {
       );
     });
   }
+
+  @Roles('ADMIN', 'MANAGER', 'CLERK')
+  @Patch(':id/complete')
+  async complete(
+    @Param(new ZodValidationPipe(cancelEnrollmentParamsSchema)) { id }: CancelEnrollmentParamsDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const { previous, current } = await this.completeEnrollmentUseCase.execute(id, schoolId, tx);
+
+      this.auditService.log({
+        action: 'COMPLETE',
+        entity: 'ENROLLMENT',
+        entityId: previous.id,
+        schoolId,
+        userId,
+        newData: {
+          status: current.status
+        },
+        oldData: {
+          status: previous.status
+        }
+      },
+        tx
+      )
+    })
+  }
+
 }

@@ -21,7 +21,7 @@ describe("Complete Enrollments Use Case", () => {
 
     const result = await sut.execute(enrollment.id, 'school-1');
 
-    expect(result.status).toBe(ENROLLMENT_STATUS.COMPLETED);
+    expect(result.current.status).toBe(ENROLLMENT_STATUS.COMPLETED);
   })
 
   it.skip('Should not complete a pending enrollment', async () => {

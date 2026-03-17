@@ -11,7 +11,7 @@ import { EnrollmentNotActiveError } from "../errors/enrollment-not-active.error"
 export class CompleteEnrollmentUseCase {
   constructor (private enrollmentsRepository: EnrollmentsRepository){}
 
-  async execute (id: string, schoolId: string, db?: DbContext) : Promise<Enrollment>{
+  async execute (id: string, schoolId: string, db?: DbContext) : Promise<{previous: Enrollment, current: Enrollment}>{
     const enrollment = await this.enrollmentsRepository.findById(id, schoolId);
 
     if(!enrollment){ 
@@ -33,6 +33,9 @@ export class CompleteEnrollmentUseCase {
       db
     );
 
-    return updatedEnrollment;
+    return {
+      previous: enrollment,
+      current: updatedEnrollment
+    };
   }
 }
