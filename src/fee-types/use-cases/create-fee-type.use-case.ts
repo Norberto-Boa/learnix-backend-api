@@ -15,7 +15,7 @@ interface CreateFeeTypeUseCaseRequest {
 export class CreateFeeTypeUseCase {
   constructor(private readonly feeTypesRepository: FeeTypesRepository) { }
 
-  async execute({ name, code, category, isRecurring }: CreateFeeTypeUseCaseRequest, schoolId, db?: DbContext) {
+  async execute({ name, code, category, isRecurring }: CreateFeeTypeUseCaseRequest, schoolId: string, db?: DbContext) {
     const existingFeeType = await this.feeTypesRepository.findByCode(code, schoolId);
 
     if (existingFeeType) {
