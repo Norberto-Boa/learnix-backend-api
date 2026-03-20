@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import type { CreateFeeTypeRepositoryData, FeeTypesRepository, FindManyFeeTypesParams, UpdateFeeTypeRepositoryData } from "../fee-types.repository";
-import type { PrismaService } from "@/prisma/prisma.service";
+import { PrismaService } from "@/prisma/prisma.service";
 import type { FeeTypeDomain } from "@/fee-types/domain/fee-type";
 import type { DbContext } from "@/prisma/shared/db-context";
 
