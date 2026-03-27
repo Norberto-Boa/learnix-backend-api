@@ -1,7 +1,7 @@
 import type { FEE_TYPE_CATEGORY } from '@/generated/prisma/enums';
 import type { FeeTypeDomain } from '../domain/fee-type';
 import { Injectable } from '@nestjs/common';
-import type { FeeTypesRepository } from '../repositories/fee-types.repository';
+import { FeeTypesRepository } from '../repositories/fee-types.repository';
 
 interface GetFeeTypeUseCaseRequest {
   search?: string;
