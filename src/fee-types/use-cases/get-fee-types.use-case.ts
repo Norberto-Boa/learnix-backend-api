@@ -14,7 +14,7 @@ interface GetFeeTypeUseCaseResponse {
 }
 
 @Injectable()
-export class GetFeeTypeUseCase {
+export class GetFeeTypesUseCase {
   constructor(private readonly feeTypesRepository: FeeTypesRepository) { }
 
   async execute(
