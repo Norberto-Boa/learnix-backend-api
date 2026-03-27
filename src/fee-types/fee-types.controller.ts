@@ -1,8 +1,8 @@
-import type { AuditService } from '@/audit/audit.service';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { AuditService } from '@/audit/audit.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Body, Controller, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import type { CreateFeeTypeUseCase } from './use-cases/create-fee-type.use-case';
+import { CreateFeeTypeUseCase } from './use-cases/create-fee-type.use-case';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import {
   CreateFeeTypeDTO,
