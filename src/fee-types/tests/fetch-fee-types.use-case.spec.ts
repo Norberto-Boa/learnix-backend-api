@@ -1,14 +1,14 @@
 import { feeTypeFactory } from "@test/factories/feeType.factory";
 import { InMemoryFeeTypesRepository } from "../repositories/in-memory/in-memory-fee-types.repository";
-import { GetFeeTypesUseCase } from "../use-cases/get-fee-types.use-case";
+import { FetchFeeTypesUseCase } from "../use-cases/fetch-fee-types.use-case";
 
 let inMemoryFeeTypesRepository: InMemoryFeeTypesRepository;
-let sut: GetFeeTypesUseCase;
+let sut: FetchFeeTypesUseCase;
 
 describe('Get Fee Types Use Case', () => {
   beforeEach(() => {
     inMemoryFeeTypesRepository = new InMemoryFeeTypesRepository();
-    sut = new GetFeeTypesUseCase(inMemoryFeeTypesRepository);
+    sut = new FetchFeeTypesUseCase(inMemoryFeeTypesRepository);
   })
 
   it('should be able to list fee types', async () => {

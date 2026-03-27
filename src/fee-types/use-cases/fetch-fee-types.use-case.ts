@@ -3,24 +3,24 @@ import type { FeeTypeDomain } from '../domain/fee-type';
 import { Injectable } from '@nestjs/common';
 import { FeeTypesRepository } from '../repositories/fee-types.repository';
 
-interface GetFeeTypeUseCaseRequest {
+interface FetchFeeTypesUseCaseRequest {
   search?: string;
   category?: FEE_TYPE_CATEGORY;
   isRecurring?: boolean;
 }
 
-interface GetFeeTypeUseCaseResponse {
+interface FetchFeeTypesUseCaseResponse {
   feeTypes: FeeTypeDomain[];
 }
 
 @Injectable()
-export class GetFeeTypesUseCase {
+export class FetchFeeTypesUseCase {
   constructor(private readonly feeTypesRepository: FeeTypesRepository) { }
 
   async execute(
     schoolId: string,
-    { search, category, isRecurring }: GetFeeTypeUseCaseRequest,
-  ): Promise<GetFeeTypeUseCaseResponse> {
+    { search, category, isRecurring }: FetchFeeTypesUseCaseRequest,
+  ): Promise<FetchFeeTypesUseCaseResponse> {
     const feeTypes = await this.feeTypesRepository.findMany(schoolId, {
       search,
       category,

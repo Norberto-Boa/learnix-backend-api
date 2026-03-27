@@ -13,14 +13,14 @@ import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import { queryFeeTypesSchema, type QueryFeeTypesDTO } from './dto/query-fee-types.dto';
-import { GetFeeTypesUseCase } from './use-cases/get-fee-types.use-case';
+import { FetchFeeTypesUseCase } from './use-cases/fetch-fee-types.use-case';
 
 @ApiTags('Fee Types')
 @Controller('fee-types')
 export class FeeTypesController {
   constructor(
     private readonly createFeeTypeUseCase: CreateFeeTypeUseCase,
-    private readonly getFeeTypesUseCase: GetFeeTypesUseCase,
+    private readonly getFeeTypesUseCase: FetchFeeTypesUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) { }
