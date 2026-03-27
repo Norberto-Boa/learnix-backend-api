@@ -1,6 +1,6 @@
 import { AuditService } from '@/audit/audit.service';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Body, Controller, Get, Post, Query, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UseGuards, UsePipes } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateFeeTypeUseCase } from './use-cases/create-fee-type.use-case';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
@@ -14,13 +14,16 @@ import { RolesGuard } from '@/auth/guard/roles.guard';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import { queryFeeTypesSchema, type QueryFeeTypesDTO } from './dto/query-fee-types.dto';
 import { FetchFeeTypesUseCase } from './use-cases/fetch-fee-types.use-case';
+import { GetFeeTypeUseCase } from './use-cases/get-fee-type.use-case';
+import { queryFeeTypeByIdSchema, type QueryFeeTypeByIdDTO } from './dto/query-fee-type-by-id.dto';
 
 @ApiTags('Fee Types')
 @Controller('fee-types')
 export class FeeTypesController {
   constructor(
     private readonly createFeeTypeUseCase: CreateFeeTypeUseCase,
-    private readonly getFeeTypesUseCase: FetchFeeTypesUseCase,
+    private readonly getFeeTypeByIdUseCase: GetFeeTypeUseCase,
+    private readonly fetchFeeTypesUseCase: FetchFeeTypesUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) { }
@@ -74,10 +77,20 @@ export class FeeTypesController {
     @Query(new ZodValidationPipe(queryFeeTypesSchema)) { search, category, isRecurring }: QueryFeeTypesDTO,
     @GetSchoolId('schoolId') schoolId: string
   ) {
-    const { feeTypes } = await this.getFeeTypesUseCase.execute(schoolId, {
+    const { feeTypes } = await this.fetchFeeTypesUseCase.execute(schoolId, {
       search, category, isRecurring
     })
 
     return feeTypes;
+  }
+
+  @Get(':id')
+  async fetchById(
+    @Param(new ZodValidationPipe(queryFeeTypesSchema)) { id }: QueryFeeTypeByIdDTO,
+    @GetSchoolId('schoolId') schoolId: string
+  ) {
+    const { feeType } = await this.getFeeTypeByIdUseCase.execute(id, schoolId)
+
+    return feeType;
   }
 }
