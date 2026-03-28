@@ -52,6 +52,7 @@ export class UpdateFeeTypeUseCase {
 
     return {
       feeType: updatedFeeType,
+      oldFeeType: feeType
     };
   }
 }

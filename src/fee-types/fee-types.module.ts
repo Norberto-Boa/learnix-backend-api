@@ -6,6 +6,7 @@ import { FeeTypesRepository } from './repositories/fee-types.repository';
 import { PrismaFeeTypesRepository } from './repositories/prisma/prisma-fee-types.repository';
 import { FetchFeeTypesUseCase } from './use-cases/fetch-fee-types.use-case';
 import { GetFeeTypeUseCase } from './use-cases/get-fee-type.use-case';
+import { UpdateFeeTypeUseCase } from './use-cases/update-fee-type.use-case';
 
 @Module({
   controllers: [FeeTypesController],
@@ -14,6 +15,7 @@ import { GetFeeTypeUseCase } from './use-cases/get-fee-type.use-case';
     CreateFeeTypeUseCase,
     GetFeeTypeUseCase,
     FetchFeeTypesUseCase,
+    UpdateFeeTypeUseCase,
     {
       provide: FeeTypesRepository,
       useClass: PrismaFeeTypesRepository
