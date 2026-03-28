@@ -61,7 +61,8 @@ export const ModelName = {
   Grade: 'Grade',
   Classroom: 'Classroom',
   enrollment: 'enrollment',
-  FeeType: 'FeeType'
+  FeeType: 'FeeType',
+  FeeStructure: 'FeeStructure'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -241,6 +242,22 @@ export const FeeTypeScalarFieldEnum = {
 } as const
 
 export type FeeTypeScalarFieldEnum = (typeof FeeTypeScalarFieldEnum)[keyof typeof FeeTypeScalarFieldEnum]
+
+
+export const FeeStructureScalarFieldEnum = {
+  id: 'id',
+  feeTypeId: 'feeTypeId',
+  scope: 'scope',
+  academicYearId: 'academicYearId',
+  gradeId: 'gradeId',
+  amount: 'amount',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type FeeStructureScalarFieldEnum = (typeof FeeStructureScalarFieldEnum)[keyof typeof FeeStructureScalarFieldEnum]
 
 
 export const SortOrder = {

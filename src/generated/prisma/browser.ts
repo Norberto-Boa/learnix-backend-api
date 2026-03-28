@@ -72,3 +72,8 @@ export type enrollment = Prisma.enrollmentModel
  * 
  */
 export type FeeType = Prisma.FeeTypeModel
+/**
+ * Model FeeStructure
+ * 
+ */
+export type FeeStructure = Prisma.FeeStructureModel

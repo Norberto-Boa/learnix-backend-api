@@ -215,6 +215,7 @@ export type FeeTypeWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"FeeType"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"FeeType"> | Date | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  feeStructures?: Prisma.FeeStructureListRelationFilter
 }
 
 export type FeeTypeOrderByWithRelationInput = {
@@ -228,6 +229,7 @@ export type FeeTypeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
+  feeStructures?: Prisma.FeeStructureOrderByRelationAggregateInput
 }
 
 export type FeeTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +247,7 @@ export type FeeTypeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"FeeType"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"FeeType"> | Date | string | null
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  feeStructures?: Prisma.FeeStructureListRelationFilter
 }, "id" | "schoolId_code">
 
 export type FeeTypeOrderByWithAggregationInput = {
@@ -287,6 +290,7 @@ export type FeeTypeCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
+  feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateInput = {
@@ -299,6 +303,7 @@ export type FeeTypeUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUpdateInput = {
@@ -311,6 +316,7 @@ export type FeeTypeUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
+  feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateInput = {
@@ -323,6 +329,7 @@ export type FeeTypeUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeCreateManyInput = {
@@ -411,6 +418,11 @@ export type FeeTypeMinOrderByAggregateInput = {
   deletedAt?: Prisma.SortOrder
 }
 
+export type FeeTypeScalarRelationFilter = {
+  is?: Prisma.FeeTypeWhereInput
+  isNot?: Prisma.FeeTypeWhereInput
+}
+
 export type FeeTypeCreateNestedManyWithoutSchoolInput = {
   create?: Prisma.XOR<Prisma.FeeTypeCreateWithoutSchoolInput, Prisma.FeeTypeUncheckedCreateWithoutSchoolInput> | Prisma.FeeTypeCreateWithoutSchoolInput[] | Prisma.FeeTypeUncheckedCreateWithoutSchoolInput[]
   connectOrCreate?: Prisma.FeeTypeCreateOrConnectWithoutSchoolInput | Prisma.FeeTypeCreateOrConnectWithoutSchoolInput[]
@@ -457,6 +469,20 @@ export type EnumFEE_TYPE_CATEGORYFieldUpdateOperationsInput = {
   set?: $Enums.FEE_TYPE_CATEGORY
 }
 
+export type FeeTypeCreateNestedOneWithoutFeeStructuresInput = {
+  create?: Prisma.XOR<Prisma.FeeTypeCreateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedCreateWithoutFeeStructuresInput>
+  connectOrCreate?: Prisma.FeeTypeCreateOrConnectWithoutFeeStructuresInput
+  connect?: Prisma.FeeTypeWhereUniqueInput
+}
+
+export type FeeTypeUpdateOneRequiredWithoutFeeStructuresNestedInput = {
+  create?: Prisma.XOR<Prisma.FeeTypeCreateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedCreateWithoutFeeStructuresInput>
+  connectOrCreate?: Prisma.FeeTypeCreateOrConnectWithoutFeeStructuresInput
+  upsert?: Prisma.FeeTypeUpsertWithoutFeeStructuresInput
+  connect?: Prisma.FeeTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FeeTypeUpdateToOneWithWhereWithoutFeeStructuresInput, Prisma.FeeTypeUpdateWithoutFeeStructuresInput>, Prisma.FeeTypeUncheckedUpdateWithoutFeeStructuresInput>
+}
+
 export type FeeTypeCreateWithoutSchoolInput = {
   id?: string
   name: string
@@ -466,6 +492,7 @@ export type FeeTypeCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateWithoutSchoolInput = {
@@ -477,6 +504,7 @@ export type FeeTypeUncheckedCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeCreateOrConnectWithoutSchoolInput = {
@@ -520,6 +548,70 @@ export type FeeTypeScalarWhereInput = {
   deletedAt?: Prisma.DateTimeNullableFilter<"FeeType"> | Date | string | null
 }
 
+export type FeeTypeCreateWithoutFeeStructuresInput = {
+  id?: string
+  name: string
+  code: string
+  category?: $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
+}
+
+export type FeeTypeUncheckedCreateWithoutFeeStructuresInput = {
+  id?: string
+  name: string
+  code: string
+  category?: $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: boolean
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type FeeTypeCreateOrConnectWithoutFeeStructuresInput = {
+  where: Prisma.FeeTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.FeeTypeCreateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedCreateWithoutFeeStructuresInput>
+}
+
+export type FeeTypeUpsertWithoutFeeStructuresInput = {
+  update: Prisma.XOR<Prisma.FeeTypeUpdateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedUpdateWithoutFeeStructuresInput>
+  create: Prisma.XOR<Prisma.FeeTypeCreateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedCreateWithoutFeeStructuresInput>
+  where?: Prisma.FeeTypeWhereInput
+}
+
+export type FeeTypeUpdateToOneWithWhereWithoutFeeStructuresInput = {
+  where?: Prisma.FeeTypeWhereInput
+  data: Prisma.XOR<Prisma.FeeTypeUpdateWithoutFeeStructuresInput, Prisma.FeeTypeUncheckedUpdateWithoutFeeStructuresInput>
+}
+
+export type FeeTypeUpdateWithoutFeeStructuresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumFEE_TYPE_CATEGORYFieldUpdateOperationsInput | $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
+}
+
+export type FeeTypeUncheckedUpdateWithoutFeeStructuresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumFEE_TYPE_CATEGORYFieldUpdateOperationsInput | $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type FeeTypeCreateManySchoolInput = {
   id?: string
   name: string
@@ -540,6 +632,7 @@ export type FeeTypeUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateWithoutSchoolInput = {
@@ -551,6 +644,7 @@ export type FeeTypeUncheckedUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateManyWithoutSchoolInput = {
@@ -565,6 +659,35 @@ export type FeeTypeUncheckedUpdateManyWithoutSchoolInput = {
 }
 
 
+/**
+ * Count Type FeeTypeCountOutputType
+ */
+
+export type FeeTypeCountOutputType = {
+  feeStructures: number
+}
+
+export type FeeTypeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  feeStructures?: boolean | FeeTypeCountOutputTypeCountFeeStructuresArgs
+}
+
+/**
+ * FeeTypeCountOutputType without action
+ */
+export type FeeTypeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeeTypeCountOutputType
+   */
+  select?: Prisma.FeeTypeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FeeTypeCountOutputType without action
+ */
+export type FeeTypeCountOutputTypeCountFeeStructuresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeeStructureWhereInput
+}
+
 
 export type FeeTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -577,6 +700,8 @@ export type FeeTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   deletedAt?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  feeStructures?: boolean | Prisma.FeeType$feeStructuresArgs<ExtArgs>
+  _count?: boolean | Prisma.FeeTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feeType"]>
 
 export type FeeTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -620,6 +745,8 @@ export type FeeTypeSelectScalar = {
 export type FeeTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "code" | "category" | "isRecurring" | "schoolId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["feeType"]>
 export type FeeTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  feeStructures?: boolean | Prisma.FeeType$feeStructuresArgs<ExtArgs>
+  _count?: boolean | Prisma.FeeTypeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FeeTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
@@ -632,6 +759,7 @@ export type $FeeTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "FeeType"
   objects: {
     school: Prisma.$SchoolPayload<ExtArgs>
+    feeStructures: Prisma.$FeeStructurePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1038,6 +1166,7 @@ readonly fields: FeeTypeFieldRefs;
 export interface Prisma__FeeTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  feeStructures<T extends Prisma.FeeType$feeStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeType$feeStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeeStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1469,6 +1598,30 @@ export type FeeTypeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many FeeTypes to delete.
    */
   limit?: number
+}
+
+/**
+ * FeeType.feeStructures
+ */
+export type FeeType$feeStructuresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeeStructure
+   */
+  select?: Prisma.FeeStructureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeeStructure
+   */
+  omit?: Prisma.FeeStructureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeeStructureInclude<ExtArgs> | null
+  where?: Prisma.FeeStructureWhereInput
+  orderBy?: Prisma.FeeStructureOrderByWithRelationInput | Prisma.FeeStructureOrderByWithRelationInput[]
+  cursor?: Prisma.FeeStructureWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeeStructureScalarFieldEnum | Prisma.FeeStructureScalarFieldEnum[]
 }
 
 /**
