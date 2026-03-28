@@ -1,4 +1,4 @@
-import type { FEE_SCOPE } from "@/generated/prisma/enums";
+import type { FEE_SCOPE } from '@/generated/prisma/enums';
 
 export interface FeeStructureDomain {
   id: string;
