@@ -19,6 +19,7 @@ import { GradesModule } from './grades/grades.module';
 import { ClassroomModule } from './classroom/classroom.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
 import { FeeTypesModule } from './fee-types/fee-types.module';
+import { FeeStructuresModule } from './fee-structures/fee-structures.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { FeeTypesModule } from './fee-types/fee-types.module';
     ClassroomModule,
     EnrollmentsModule,
     FeeTypesModule,
+    FeeStructuresModule,
   ],
   providers: [
     {
