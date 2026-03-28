@@ -25,6 +25,5 @@ export const updateFeeTypeParamsSchema = z.object({
 })
 
 
-
 export class UpdateFeeTypeDTO extends createZodDto(updateFeeTypeSchema) { }
 export class UpdateFeeTypeParamsDTO extends createZodDto(updateFeeTypeParamsSchema) { }
