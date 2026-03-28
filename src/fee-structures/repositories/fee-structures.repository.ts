@@ -8,7 +8,6 @@ export interface CreateFeeStructurInput {
   academicYearId: string;
   gradeId?: string;
   amount: number;
-  schoolId: string;
 }
 
 export interface UpdateFeeStructureInput {
@@ -27,7 +26,7 @@ export interface FindManyFeeStructuresParams {
   scope?: FEE_SCOPE;
 }
 
-export abstract class FeeStructureRepository {
+export abstract class FeeStructuresRepository {
   abstract save(data: CreateFeeStructurInput, schoolId: string, db?: DbContext): Promise<FeeStructureDomain>;
   abstract update(id: string, schoolId: string, data: UpdateFeeStructureInput, db?: DbContext): Promise<FeeStructureDomain>;
   abstract findById(id: string, schoolId: string): Promise<FeeStructureDomain | null>;
