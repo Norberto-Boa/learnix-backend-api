@@ -3,6 +3,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -39,6 +40,8 @@ import {
   type UpdateFeeTypeDTO,
   type UpdateFeeTypeParamsDTO,
 } from './dto/update-fee-type.dto';
+import { deleteFeeTypeSchema, type DeleteFeeTypeDTO } from './dto/delete-fee-type.dto';
+import { DeleteFeeTypeUseCase } from './use-cases/delete-fee-type.use-case';
 
 @ApiTags('Fee Types')
 @Controller('fee-types')
@@ -48,6 +51,7 @@ export class FeeTypesController {
     private readonly getFeeTypeByIdUseCase: GetFeeTypeUseCase,
     private readonly fetchFeeTypesUseCase: FetchFeeTypesUseCase,
     private readonly updateFeeTypeUseCase: UpdateFeeTypeUseCase,
+    private readonly deleteFeeTypeUseCase: DeleteFeeTypeUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) { }
@@ -131,6 +135,14 @@ export class FeeTypesController {
     return feeType;
   }
 
+
+  @ApiOperation({ summary: 'Updates a fee type' })
+  @ApiResponse({ status: 200, description: 'Fee type successfully updated' })
+  @ApiResponse({ status: 404, description: 'Fee type not found' })
+  @ApiResponse({ status: 409, description: 'Fee type code already exists' })
+  @ApiResponse({ status: 400, description: 'Input validation error' })
+  @UseGuards(RolesGuard)
+  @Roles('MANAGER', 'ADMIN')
   @Patch(':id')
   async update(
     @Param(new ZodValidationPipe(updateFeeTypeParamsSchema))
@@ -173,5 +185,27 @@ export class FeeTypesController {
 
       return feeType;
     });
+  }
+
+  @Delete(':id')
+  async delete(
+    @Param(new ZodValidationPipe(deleteFeeTypeSchema)) { id }: DeleteFeeTypeDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      await this.deleteFeeTypeUseCase.execute(id, schoolId, tx);
+
+      await this.auditService.log(
+        {
+          action: 'DELETE_FEE_TYPE',
+          entity: 'FEE_TYPE',
+          schoolId,
+          userId,
+          entityId: id
+        },
+        tx
+      )
+    })
   }
 }
