@@ -187,6 +187,11 @@ export class FeeTypesController {
     });
   }
 
+  @ApiOperation({ summary: 'Deletes a fee type' })
+  @ApiResponse({ status: 200, description: 'Fee type successfully deleted' })
+  @ApiResponse({ status: 404, description: 'Fee type not found' })
+  @UseGuards(RolesGuard)
+  @Roles('MANAGER', 'ADMIN')
   @Delete(':id')
   async delete(
     @Param(new ZodValidationPipe(deleteFeeTypeSchema)) { id }: DeleteFeeTypeDTO,
