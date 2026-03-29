@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { FeeStructuresRepository } from '../repositories/fee-structures.repository';
+import { FeeStructuresRepository } from '../repositories/fee-structures.repository';
 import { FindManyFeeStructuresParams } from '../repositories/fee-structures.repository';
 
 interface FetchFeeStructuresParams extends FindManyFeeStructuresParams {}

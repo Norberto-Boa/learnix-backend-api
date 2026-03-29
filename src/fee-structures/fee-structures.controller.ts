@@ -1,5 +1,5 @@
-import type { AuditService } from '@/audit/audit.service';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { AuditService } from '@/audit/audit.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { ZodValidationPipe } from '@/shared/pipes/zod-validation.pipe';
 import {
   Body,
@@ -19,7 +19,7 @@ import {
 } from './dto/create-fee-structure.dto';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
-import type { CreateFeeStructureUseCase } from './use-case/create-fee-structure.use-case';
+import { CreateFeeStructureUseCase } from './use-case/create-fee-structure.use-case';
 import { RolesGuard } from '@/auth/guard/roles.guard';
 import { Roles } from '@/auth/decorators/roles.decorator';
 import {

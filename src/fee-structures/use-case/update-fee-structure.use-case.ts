@@ -18,7 +18,7 @@ interface UpdateFeeStructureUseCaseRequest {
   feeTypeId?: string;
   scope?: FEE_SCOPE;
   academicYearId?: string;
-  gradeId?: string;
+  gradeId?: string | null;
   amount?: number;
 }
 

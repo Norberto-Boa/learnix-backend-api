@@ -1,4 +1,4 @@
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import type {
   CreateFeeStructureInput,
@@ -48,7 +48,7 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
       where: {
         schoolId,
         feeTypeId,
-        academicyearId: academicYearId,
+        academicYearId: academicYearId,
         gradeId,
         deletedAt: null,
       },

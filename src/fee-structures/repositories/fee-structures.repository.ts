@@ -14,14 +14,14 @@ export interface UpdateFeeStructureInput {
   feeTypeId?: string;
   scope?: FEE_SCOPE;
   academicYearId?: string;
-  gradeId?: string;
+  gradeId?: string | null;
   amount?: number;
   schoolId?: string;
 }
 
 export interface FindManyFeeStructuresParams {
   feeTypeId?: string;
-  academicYearId: string;
+  academicYearId?: string;
   gradeId?: string;
   scope?: FEE_SCOPE;
 }
