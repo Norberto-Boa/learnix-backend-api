@@ -2,11 +2,11 @@ import type { FEE_SCOPE } from '@/generated/prisma/enums';
 import type { FeeStructureDomain } from '../domain/fee-structure';
 import type { DbContext } from '@/prisma/shared/db-context';
 
-export interface CreateFeeStructurInput {
+export interface CreateFeeStructureInput {
   feeTypeId: string;
   scope: FEE_SCOPE;
   academicYearId: string;
-  gradeId?: string;
+  gradeId: string | null;
   amount: number;
 }
 
@@ -28,7 +28,7 @@ export interface FindManyFeeStructuresParams {
 
 export abstract class FeeStructuresRepository {
   abstract save(
-    data: CreateFeeStructurInput,
+    data: CreateFeeStructureInput,
     schoolId: string,
     db?: DbContext,
   ): Promise<FeeStructureDomain>;
@@ -41,6 +41,12 @@ export abstract class FeeStructuresRepository {
   abstract findById(
     id: string,
     schoolId: string,
+  ): Promise<FeeStructureDomain | null>;
+  abstract findByUniqueCombination(
+    schoolId: string,
+    feeTypeId: string,
+    academicYearId: string,
+    gradeId: string | null,
   ): Promise<FeeStructureDomain | null>;
   abstract findMany(
     params: FindManyFeeStructuresParams,

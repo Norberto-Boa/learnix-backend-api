@@ -1,7 +1,7 @@
 import type { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import type {
-  CreateFeeStructurInput,
+  CreateFeeStructureInput,
   FeeStructuresRepository,
   FindManyFeeStructuresParams,
   UpdateFeeStructureInput,
@@ -12,14 +12,14 @@ import { Prisma } from '@/generated/prisma/client';
 
 @Injectable()
 export class PrismaFeeStructresRepository implements FeeStructuresRepository {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   getClient(db?: DbContext) {
     return db ?? this.prisma;
   }
 
   async save(
-    data: CreateFeeStructurInput,
+    data: CreateFeeStructureInput,
     schoolId: string,
     db?: DbContext,
   ): Promise<FeeStructureDomain> {
@@ -28,14 +28,38 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
     const feeStructure = await client.feeStructure.create({
       data: {
         ...data,
-        schoolId
-      }
+        schoolId,
+      },
     });
 
     return {
       ...feeStructure,
       amount: Number(feeStructure.amount),
     };
+  }
+
+  async findByUniqueCombination(
+    schoolId: string,
+    feeTypeId: string,
+    academicYearId: string,
+    gradeId: string | null,
+  ): Promise<FeeStructureDomain | null> {
+    const feeStructure = await this.prisma.feeStructure.findFirst({
+      where: {
+        schoolId,
+        feeTypeId,
+        academicyearId: academicYearId,
+        gradeId,
+        deletedAt: null,
+      },
+    });
+
+    return feeStructure
+      ? {
+          ...feeStructure,
+          amount: Number(feeStructure.amount),
+        }
+      : null;
   }
 
   async update(
@@ -71,13 +95,16 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
     };
   }
 
-  async findById(id: string, schoolId: string): Promise<FeeStructureDomain | null> {
+  async findById(
+    id: string,
+    schoolId: string,
+  ): Promise<FeeStructureDomain | null> {
     const feeStructure = await this.prisma.feeStructure.findFirst({
       where: {
         id,
         schoolId,
         deletedAt: null,
-      }
+      },
     });
 
     if (!feeStructure) return null;
@@ -85,25 +112,30 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
     return {
       ...feeStructure,
       amount: Number(feeStructure.amount),
-    }
+    };
   }
 
-  async findMany(params: FindManyFeeStructuresParams, schoolId: string): Promise<FeeStructureDomain[]> {
+  async findMany(
+    params: FindManyFeeStructuresParams,
+    schoolId: string,
+  ): Promise<FeeStructureDomain[]> {
     const feeStructure = await this.prisma.feeStructure.findMany({
       where: {
         schoolId,
         deletedAt: null,
         ...(params.feeTypeId ? { feeTypeId: params.feeTypeId } : {}),
-        ...(params.academicYearId ? { academicyearId: params.academicYearId } : {}),
+        ...(params.academicYearId
+          ? { academicyearId: params.academicYearId }
+          : {}),
         ...(params.gradeId ? { gradeId: params.gradeId } : {}),
         ...(params.scope ? { scope: params.scope } : {}),
       },
       orderBy: {
         createdAt: 'desc',
-      }
+      },
     });
 
-    return feeStructure.map(item => ({
+    return feeStructure.map((item) => ({
       ...item,
       amount: Number(item.amount),
     }));
@@ -120,7 +152,7 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
       },
       data: {
         deletedAt: new Date(),
-      }
-    })
+      },
+    });
   }
 }
