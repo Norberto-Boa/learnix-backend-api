@@ -1,16 +1,17 @@
 import { FEE_SCOPE } from '@/generated/prisma/enums';
 import { Injectable } from '@nestjs/common';
-import type { FeeStructuresRepository } from '../repositories/fee-structures.repository';
-import type { FeeTypesRepository } from '@/fee-types/repositories/fee-types.repository';
-import type { AcademicYearsRepository } from '@/academic-years/repositories/academic-years.repository';
-import type { GradesRepository } from '@/grades/repositories/grades.repository';
-import type { FeeStructureDomain } from '../domain/fee-structure';
+import { FeeStructuresRepository } from '../repositories/fee-structures.repository';
+import { FeeTypesRepository } from '@/fee-types/repositories/fee-types.repository';
+import { AcademicYearsRepository } from '@/academic-years/repositories/academic-years.repository';
+import { GradesRepository } from '@/grades/repositories/grades.repository';
+import { FeeStructureDomain } from '../domain/fee-structure';
 import { FeeStructureNotFoundError } from '../errors/fee-structure-not-found.error';
 import { AmountLessThanZeroError } from '../errors/amount-less-than-zero.error';
 import { AcademicYearNotFoundError } from '@/academic-years/errors/academic-year-not-found.error';
 import { ScopeSchoolCannotHaveGradeError } from '../errors/scope-school-cannot-have-grade.error';
 import { GradeNotFoundError } from '@/grades/errors/grade-not-found.error';
 import { FeeStructureAlreadyExistsError } from '../errors/fee-structure-already-exists.error';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 interface UpdateFeeStructureUseCaseRequest {
   id: string;
@@ -45,6 +46,7 @@ export class UpdateFeeStructureUseCase {
       amount,
     }: UpdateFeeStructureUseCaseRequest,
     schoolId: string,
+    db?: DbContext,
   ): Promise<UpdateFeeStructureUseCaseResponse> {
     const current = await this.feeStructuresRepository.findById(id, schoolId);
 
@@ -106,13 +108,18 @@ export class UpdateFeeStructureUseCase {
       throw new FeeStructureAlreadyExistsError();
     }
 
-    const updated = await this.feeStructuresRepository.update(id, schoolId, {
-      feeTypeId,
-      scope,
-      academicYearId,
-      gradeId,
-      amount,
-    });
+    const updated = await this.feeStructuresRepository.update(
+      id,
+      schoolId,
+      {
+        feeTypeId,
+        scope,
+        academicYearId,
+        gradeId,
+        amount,
+      },
+      db,
+    );
 
     return {
       oldFeeStructure: current,
