@@ -116,8 +116,8 @@ export class PrismaFeeStructresRepository implements FeeStructuresRepository {
   }
 
   async findMany(
-    params: FindManyFeeStructuresParams,
     schoolId: string,
+    params: FindManyFeeStructuresParams,
   ): Promise<FeeStructureDomain[]> {
     const feeStructure = await this.prisma.feeStructure.findMany({
       where: {

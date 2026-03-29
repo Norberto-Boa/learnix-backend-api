@@ -49,8 +49,8 @@ export abstract class FeeStructuresRepository {
     gradeId: string | null,
   ): Promise<FeeStructureDomain | null>;
   abstract findMany(
-    params: FindManyFeeStructuresParams,
     schoolId: string,
+    params: FindManyFeeStructuresParams,
   ): Promise<FeeStructureDomain[]>;
   abstract delete(id: string, schoolId: string, db?: DbContext): Promise<void>;
 }

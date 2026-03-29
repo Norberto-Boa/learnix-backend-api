@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { FeeStructuresRepository } from '../repositories/fee-structures.repository';
-import type { DbContext } from '@/prisma/shared/db-context';
+import { FeeStructuresRepository } from '../repositories/fee-structures.repository';
 import { FeeStructureNotFoundError } from '../errors/fee-structure-not-found.error';
 
 @Injectable()

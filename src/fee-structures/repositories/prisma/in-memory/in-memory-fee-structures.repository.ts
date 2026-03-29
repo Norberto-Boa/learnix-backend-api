@@ -1,6 +1,6 @@
 import type { FeeStructureDomain } from '@/fee-structures/domain/fee-structure';
 import type {
-  CreateFeeStructurInput,
+  CreateFeeStructureInput,
   FeeStructuresRepository,
   FindManyFeeStructuresParams,
   UpdateFeeStructureInput,
@@ -11,7 +11,7 @@ export class InMemoryFeeStructuresRepository implements FeeStructuresRepository 
   public items: FeeStructureDomain[] = [];
 
   async save(
-    data: CreateFeeStructurInput,
+    data: CreateFeeStructureInput,
     schoolId: string,
   ): Promise<FeeStructureDomain> {
     const feeStructure: FeeStructureDomain = {
@@ -45,8 +45,8 @@ export class InMemoryFeeStructuresRepository implements FeeStructuresRepository 
   }
 
   async findMany(
-    params: FindManyFeeStructuresParams,
     schoolId: string,
+    params: FindManyFeeStructuresParams,
   ): Promise<FeeStructureDomain[]> {
     return this.items
       .filter((item) => {
@@ -66,6 +66,23 @@ export class InMemoryFeeStructuresRepository implements FeeStructuresRepository 
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
 
+  async findByUniqueCombination(
+    schoolId: string,
+    feeTypeId: string,
+    academicYearId: string,
+    gradeId: string | null,
+  ): Promise<FeeStructureDomain | null> {
+    const feeStructure = this.items.find(
+      (item) =>
+        item.schoolId === schoolId &&
+        item.feeTypeId === feeTypeId &&
+        item.academicYearId === academicYearId &&
+        item.gradeId === gradeId &&
+        item.deletedAt === null,
+    );
+
+    return feeStructure ?? null;
+  }
   async update(
     id: string,
     schoolId: string,
