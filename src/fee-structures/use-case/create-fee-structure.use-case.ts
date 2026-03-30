@@ -12,6 +12,7 @@ import { GradeNotFoundError } from '@/grades/errors/grade-not-found.error';
 import { FeeStructureAlreadyExistsError } from '../errors/fee-structure-already-exists.error';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { FeeStructureDomain } from '../domain/fee-structure';
+import { ScopeSchoolCannotHaveGradeError } from '../errors/scope-school-cannot-have-grade.error';
 
 interface CreateFeeStructureUseCaseRequest {
   feeTypeId: string;
@@ -66,6 +67,10 @@ export class CreateFeeStructureUseCase {
 
     if (scope === FEE_SCOPE.GRADE && !gradeId) {
       throw new GradeIdRequiredError();
+    }
+
+    if (scope === FEE_SCOPE.SCHOOL && gradeId) {
+      throw new ScopeSchoolCannotHaveGradeError();
     }
 
     if (gradeId) {
