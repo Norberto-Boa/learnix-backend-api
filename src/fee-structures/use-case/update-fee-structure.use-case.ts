@@ -12,6 +12,7 @@ import { ScopeSchoolCannotHaveGradeError } from '../errors/scope-school-cannot-h
 import { GradeNotFoundError } from '@/grades/errors/grade-not-found.error';
 import { FeeStructureAlreadyExistsError } from '../errors/fee-structure-already-exists.error';
 import type { DbContext } from '@/prisma/shared/db-context';
+import { GradeIdRequiredError } from '../errors/grade-id-required.error';
 
 interface UpdateFeeStructureUseCaseRequest {
   id: string;
@@ -86,6 +87,10 @@ export class UpdateFeeStructureUseCase {
     if (nextScope === FEE_SCOPE.SCHOOL) {
       if (gradeId !== undefined && gradeId !== null) {
         throw new ScopeSchoolCannotHaveGradeError();
+      }
+    } else {
+      if (nextGradeId === null) {
+        throw new GradeIdRequiredError();
       }
     }
 
