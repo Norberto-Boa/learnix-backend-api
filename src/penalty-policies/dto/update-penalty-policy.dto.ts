@@ -1,3 +1,4 @@
+import { createZodDto } from 'nestjs-zod';
 import z from 'zod';
 
 export const updatePenaltyPolicySchema = z
@@ -29,3 +30,7 @@ export const updatePenaltyPolicySchema = z
   .refine((data) => Object.keys(data).length > 0, {
     message: 'At least one field must be provided for update',
   });
+
+export class UpdatePenaltyPolicyDTO extends createZodDto(
+  updatePenaltyPolicySchema,
+) {}
