@@ -71,6 +71,7 @@ model School {
   enrollments      enrollment[]
   feeTypes         FeeType[]
   feeStructures    FeeStructure[]
+  penaltyPolicies  PenaltyPolicy[]
 
   @@map("schools")
 }
@@ -128,12 +129,13 @@ model AcademicYear {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     DateTime?
-  classrooms    Classroom[]
-  enrollments   enrollment[]
-  feeStructures FeeStructure[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  deletedAt       DateTime?
+  classrooms      Classroom[]
+  enrollments     enrollment[]
+  feeStructures   FeeStructure[]
+  penaltyPolicies PenaltyPolicy[]
 
   @@unique([year, schoolId])
   @@map("academic_years")
@@ -211,11 +213,12 @@ model Grade {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     DateTime?
-  classrooms    Classroom[]
-  feeStructures FeeStructure[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  deletedAt       DateTime?
+  classrooms      Classroom[]
+  feeStructures   FeeStructure[]
+  penaltyPolicies PenaltyPolicy[]
 
   @@unique([schoolId, name])
   @@map("grades")
@@ -291,10 +294,12 @@ model FeeType {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  deletedAt     DateTime?
-  feeStructures FeeStructure[]
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  deletedAt         DateTime?
+  feeStructures     FeeStructure[]
+  penaltyFeeType    PenaltyPolicy[] @relation("PenaltyPolicy_penaltyFeeType")
+  penaltyFeeTrigger PenaltyPolicy[] @relation("PenaltyPolicy_triggerFeeType")
 
   @@unique([schoolId, code])
   @@map("fee_types")
@@ -325,4 +330,46 @@ model FeeStructure {
 
   @@unique([schoolId, feeTypeId, academicYearId, gradeId])
   @@map("fee_structures")
+}
+
+enum PENALTY_MODE {
+  FIXED
+  PERCENTAGE
+  INTERVAL_FIXED
+  INTERVAL_PERCENTAGE
+}
+
+model PenaltyPolicy {
+  id String @id @default(uuid())
+
+  name String
+
+  triggerFeeTypeId String
+  triggerFeeType   FeeType @relation("PenaltyPolicy_triggerFeeType", fields: [triggerFeeTypeId], references: [id])
+
+  penaltyFeeTypeId String
+  penaltyFeeType   FeeType @relation("PenaltyPolicy_penaltyFeeType", fields: [penaltyFeeTypeId], references: [id])
+
+  academicYearId String
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  gradeId String?
+  grade   Grade?  @relation(fields: [gradeId], references: [id])
+
+  mode  PENALTY_MODE
+  value Decimal      @db.Decimal(10, 2)
+
+  isActive Boolean @default(true)
+
+  graceDay     Int
+  intervalDays Int?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("penalty_policies")
 }

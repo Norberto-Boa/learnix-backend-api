@@ -68,3 +68,13 @@ export const FEE_SCOPE = {
 } as const
 
 export type FEE_SCOPE = (typeof FEE_SCOPE)[keyof typeof FEE_SCOPE]
+
+
+export const PENALTY_MODE = {
+  FIXED: 'FIXED',
+  PERCENTAGE: 'PERCENTAGE',
+  INTERVAL_FIXED: 'INTERVAL_FIXED',
+  INTERVAL_PERCENTAGE: 'INTERVAL_PERCENTAGE'
+} as const
+
+export type PENALTY_MODE = (typeof PENALTY_MODE)[keyof typeof PENALTY_MODE]

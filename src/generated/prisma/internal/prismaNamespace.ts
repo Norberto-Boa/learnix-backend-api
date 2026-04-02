@@ -395,7 +395,8 @@ export const ModelName = {
   Classroom: 'Classroom',
   enrollment: 'enrollment',
   FeeType: 'FeeType',
-  FeeStructure: 'FeeStructure'
+  FeeStructure: 'FeeStructure',
+  PenaltyPolicy: 'PenaltyPolicy'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment" | "feeType" | "feeStructure"
+    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment" | "feeType" | "feeStructure" | "penaltyPolicy"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1303,6 +1304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PenaltyPolicy: {
+      payload: Prisma.$PenaltyPolicyPayload<ExtArgs>
+      fields: Prisma.PenaltyPolicyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PenaltyPolicyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PenaltyPolicyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        findFirst: {
+          args: Prisma.PenaltyPolicyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PenaltyPolicyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        findMany: {
+          args: Prisma.PenaltyPolicyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>[]
+        }
+        create: {
+          args: Prisma.PenaltyPolicyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        createMany: {
+          args: Prisma.PenaltyPolicyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PenaltyPolicyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>[]
+        }
+        delete: {
+          args: Prisma.PenaltyPolicyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        update: {
+          args: Prisma.PenaltyPolicyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        deleteMany: {
+          args: Prisma.PenaltyPolicyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PenaltyPolicyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PenaltyPolicyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>[]
+        }
+        upsert: {
+          args: Prisma.PenaltyPolicyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PenaltyPolicyPayload>
+        }
+        aggregate: {
+          args: Prisma.PenaltyPolicyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePenaltyPolicy>
+        }
+        groupBy: {
+          args: Prisma.PenaltyPolicyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PenaltyPolicyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PenaltyPolicyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PenaltyPolicyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1519,6 +1594,27 @@ export const FeeStructureScalarFieldEnum = {
 } as const
 
 export type FeeStructureScalarFieldEnum = (typeof FeeStructureScalarFieldEnum)[keyof typeof FeeStructureScalarFieldEnum]
+
+
+export const PenaltyPolicyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  triggerFeeTypeId: 'triggerFeeTypeId',
+  penaltyFeeTypeId: 'penaltyFeeTypeId',
+  academicYearId: 'academicYearId',
+  schoolId: 'schoolId',
+  gradeId: 'gradeId',
+  mode: 'mode',
+  value: 'value',
+  isActive: 'isActive',
+  graceDay: 'graceDay',
+  intervalDays: 'intervalDays',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type PenaltyPolicyScalarFieldEnum = (typeof PenaltyPolicyScalarFieldEnum)[keyof typeof PenaltyPolicyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1743,6 +1839,20 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
 
 
 /**
+ * Reference to a field of type 'PENALTY_MODE'
+ */
+export type EnumPENALTY_MODEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PENALTY_MODE'>
+    
+
+
+/**
+ * Reference to a field of type 'PENALTY_MODE[]'
+ */
+export type ListEnumPENALTY_MODEFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PENALTY_MODE[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1862,6 +1972,7 @@ export type GlobalOmitConfig = {
   enrollment?: Prisma.enrollmentOmit
   feeType?: Prisma.FeeTypeOmit
   feeStructure?: Prisma.FeeStructureOmit
+  penaltyPolicy?: Prisma.PenaltyPolicyOmit
 }
 
 /* Types for Logging */
