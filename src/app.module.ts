@@ -20,6 +20,7 @@ import { ClassroomModule } from './classroom/classroom.module';
 import { EnrollmentsModule } from './enrollments/enrollments.module';
 import { FeeTypesModule } from './fee-types/fee-types.module';
 import { FeeStructuresModule } from './fee-structures/fee-structures.module';
+import { PenaltyPoliciesModule } from './penalty-policies/penalty-policies.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { FeeStructuresModule } from './fee-structures/fee-structures.module';
     EnrollmentsModule,
     FeeTypesModule,
     FeeStructuresModule,
+    PenaltyPoliciesModule,
   ],
   providers: [
     {
