@@ -5,7 +5,7 @@ import type { UpdatePenaltyPolicyDTO } from '../dto/update-penalty-policy.dto';
 import type { GetPenaltyPoliciesQueryDTO } from '../dto/get-penalty-policy.dto';
 
 export abstract class PenaltyPolicyRepository {
-  abstract create(
+  abstract save(
     data: CreatePenaltyPolicyDTO,
     schoolId: string,
     db?: DbContext,
@@ -16,7 +16,7 @@ export abstract class PenaltyPolicyRepository {
     data: UpdatePenaltyPolicyDTO,
     db?: DbContext,
   ): Promise<PenaltyPolicyDomain>;
-  abstract delete(id: string, schoolId: string): Promise<void>;
+  abstract delete(id: string, schoolId: string, db?: DbContext): Promise<void>;
   abstract findById(
     id: string,
     schoolId: string,

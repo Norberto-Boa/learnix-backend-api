@@ -10,6 +10,7 @@ export const createPenaltyPolicySchema = z
     academicYearId: z.uuid('Ano acadêmico inválido'),
     gradeId: z.uuid('Turma inválida').nullable().optional(),
     mode: z.enum(PENALTY_MODE),
+    graceDay: z.coerce.number().int(),
     value: z.coerce.number().positive('Valor deve ser um número positivo'),
     intervalDays: z.coerce
       .number()
