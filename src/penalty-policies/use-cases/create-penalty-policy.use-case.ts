@@ -93,10 +93,7 @@ export class CreatePenaltyPolicyUseCase {
     }
 
     if (gradeId) {
-      const grade = await this.academicYearsRepository.findById(
-        gradeId,
-        schoolId,
-      );
+      const grade = await this.gradesRepository.findById(gradeId, schoolId);
 
       if (!grade) {
         throw new GradeNotFoundError();

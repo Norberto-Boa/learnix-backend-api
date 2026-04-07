@@ -6,7 +6,7 @@ import { CreatePenaltyPolicyUseCase } from '../use-cases/create-penalty-policy.u
 import { feeTypeFactory } from '@test/factories/feeType.factory';
 import { academicYearFactory } from '../../../test/factories/academicYear.factory';
 import { penaltyPolicyFactory } from '../../../test/factories/penaltyPolicy.factory';
-import { FeeTypeDomain } from '../../../dist/src/fee-types/domain/fee-type';
+import { FeeTypeDomain } from '@/fee-types/domain/fee-type';
 import { AcademicYearDomain } from '../../academic-years/domain/academic-year';
 import { TriggerFeeTypeNotFoundError } from '../errors/trigger-fee-type-not-found.error';
 import { PenaltyFeeTypeNotFoundError } from '../errors/penalty-fee-type-not-found.error';
