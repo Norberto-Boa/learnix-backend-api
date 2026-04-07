@@ -22,6 +22,6 @@ export class GetPenaltyPolicyUseCase {
       throw new PenaltyPolicyNotFoundError();
     }
 
-    return penaltyPolicy;
+    return { penaltyPolicy };
   }
 }
