@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
 import { CreatePenaltyPolicyUseCase } from './use-cases/create-penalty-policy.use-case';
@@ -11,17 +11,19 @@ import {
 } from './dto/create-penalty-policy.dto';
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
+import { GetPenaltyPolicyUseCase } from './use-cases/get-penalty-policy.use-case';
 
 @Controller('penalty-policies')
 export class PenaltyPoliciesController {
   constructor(
     private readonly createPenaltyPolicyUseCase: CreatePenaltyPolicyUseCase,
+    private readonly getPenaltyPolicyUseCase: GetPenaltyPolicyUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
 
   @UseGuards(RolesGuard)
-  @Roles('ADMIN', 'CLERK', 'MANAGER')
+  @Roles('ADMIN', 'MANAGER')
   @Post()
   async create(
     @Body(new ZodValidationPipe(createPenaltyPolicySchema))
@@ -53,5 +55,15 @@ export class PenaltyPoliciesController {
 
       return penaltyPolicy;
     });
+  }
+
+  @UseGuards(RolesGuard)
+  @Roles('ADMIN', 'CLERK', 'MANAGER')
+  @Get(':id')
+  async getById(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return await this.getPenaltyPolicyUseCase.execute({ id }, schoolId);
   }
 }

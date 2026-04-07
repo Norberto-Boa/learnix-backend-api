@@ -9,11 +9,13 @@ import { PrismaGradesRepository } from '../grades/repositories/prisma/prisma-gra
 import { PenaltyPolicyRepository } from './repositories/penalty-policy.repository';
 import { PrismaPenaltyPolicyRepository } from './repositories/prisma/prisma-penalty-policy.repository';
 import { CreatePenaltyPolicyUseCase } from './use-cases/create-penalty-policy.use-case';
+import { GetPenaltyPolicyUseCase } from './use-cases/get-penalty-policy.use-case';
 
 @Module({
   controllers: [PenaltyPoliciesController],
   providers: [
     CreatePenaltyPolicyUseCase,
+    GetPenaltyPolicyUseCase,
     {
       provide: FeeTypesRepository,
       useClass: PrismaFeeTypesRepository,
