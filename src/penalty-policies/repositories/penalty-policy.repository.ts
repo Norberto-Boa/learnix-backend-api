@@ -12,8 +12,21 @@ export interface CreatePenaltyPolicyInput {
   academicYearId: string;
   gradeId?: string | null;
   mode: PENALTY_MODE;
-  value: string;
+  value: number;
   graceDay: number;
+  intervalDays?: number | null;
+  isActive?: boolean;
+}
+
+export interface UpdatePenaltyPolicyInput {
+  name?: string;
+  triggerFeeTypeId?: string;
+  penaltyFeeTypeId?: string;
+  academicYearId?: string;
+  gradeId?: string | null;
+  mode?: PENALTY_MODE;
+  value?: number;
+  graceDay?: number;
   intervalDays?: number | null;
   isActive?: boolean;
 }
@@ -27,7 +40,7 @@ export abstract class PenaltyPolicyRepository {
   abstract update(
     id: string,
     schoolId: string,
-    data: UpdatePenaltyPolicyDTO,
+    data: UpdatePenaltyPolicyInput,
     db?: DbContext,
   ): Promise<PenaltyPolicyDomain>;
   abstract delete(id: string, schoolId: string, db?: DbContext): Promise<void>;

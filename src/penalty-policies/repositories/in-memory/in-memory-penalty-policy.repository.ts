@@ -1,15 +1,19 @@
-import type { PenaltyPolicyRepository } from '../penalty-policy.repository';
+import type {
+  PenaltyPolicyRepository,
+  UpdatePenaltyPolicyInput,
+} from '../penalty-policy.repository';
 import { PenaltyPolicyDomain } from '../../domain/penalty-policy';
 import type { CreatePenaltyPolicyDTO } from '@/penalty-policies/dto/create-penalty-policy.dto';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { UpdatePenaltyPolicyDTO } from '@/penalty-policies/dto/update-penalty-policy.dto';
 import type { GetPenaltyPoliciesQueryDTO } from '@/penalty-policies/dto/get-penalty-policy.dto';
+import { CreatePenaltyPolicyInput } from '../penalty-policy.repository';
 
 export class InMemoryPenaltyPolicyRepository implements PenaltyPolicyRepository {
   items: PenaltyPolicyDomain[] = [];
 
   async save(
-    data: CreatePenaltyPolicyDTO,
+    data: CreatePenaltyPolicyInput,
     schoolId: string,
     db?: DbContext,
   ): Promise<PenaltyPolicyDomain> {
@@ -39,7 +43,7 @@ export class InMemoryPenaltyPolicyRepository implements PenaltyPolicyRepository 
   async update(
     id: string,
     schoolId: string,
-    data: UpdatePenaltyPolicyDTO,
+    data: UpdatePenaltyPolicyInput,
     db?: DbContext,
   ): Promise<PenaltyPolicyDomain> {
     const itemIndex = this.items.findIndex(

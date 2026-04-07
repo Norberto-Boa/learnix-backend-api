@@ -1,6 +1,6 @@
 import { PENALTY_MODE } from '@/generated/prisma/enums';
 import type { DbContext } from '@/prisma/shared/db-context';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { TriggerFeeTypeAndPenaltyFeeTypeIsEqualError } from '../errors/trigger-fee-type-and-penalty-fee-type-is-equal.error';
 import { PenaltyPolicyRepository } from '../repositories/penalty-policy.repository';
 import { FeeTypesRepository } from '../../fee-types/repositories/fee-types.repository';
@@ -104,10 +104,17 @@ export class CreatePenaltyPolicyUseCase {
     }
 
     const isIntervalMode =
-      mode === PENALTY_MODE.INTERVAL_FIXED || PENALTY_MODE.INTERVAL_PERCENTAGE;
+      mode === PENALTY_MODE.INTERVAL_FIXED ||
+      mode === PENALTY_MODE.INTERVAL_PERCENTAGE;
 
     if (isIntervalMode && (!intervalDays || intervalDays <= 0)) {
       throw new IntervalDaysMustBeGreaterThanZero();
+    }
+
+    if (!isIntervalMode && intervalDays) {
+      throw new BadRequestException(
+        'Nao pode ter intervalo de dias enquanto multa seja fixa',
+      );
     }
 
     const duplicate = await this.penaltyPolicyRepository.findDuplicate(
@@ -129,7 +136,7 @@ export class CreatePenaltyPolicyUseCase {
         academicYearId,
         gradeId: gradeId ?? null,
         mode,
-        value: value.toFixed(2),
+        value: value,
         graceDay,
         intervalDays: intervalDays ?? null,
         isActive,
