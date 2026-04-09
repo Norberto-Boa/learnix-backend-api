@@ -5,7 +5,7 @@ import { z } from 'zod';
 export const createStudentSchema = z.object({
   name: z.string('Nome é obrigatório'),
   registrationNumber: z.string(),
-  dateOfBirth: z.coerce.date(),
+  dateOfBirth: z.iso.date().transform((value) => new Date(value)),
   gender: z.enum(GENDER),
   status: z.enum(STUDENT_STATUS).optional(),
   documentTypeId: z.string(),
