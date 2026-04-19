@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -32,6 +33,7 @@ import {
   updatePenaltyPolicySchema,
   type UpdatePenaltyPolicyDTO,
 } from './dto/update-penalty-policy.dto';
+import { DeletePenaltyPolicyUseCase } from './use-cases/delete-penalty-policy.use-case';
 
 @Controller('penalty-policies')
 export class PenaltyPoliciesController {
@@ -40,6 +42,7 @@ export class PenaltyPoliciesController {
     private readonly getPenaltyPolicyUseCase: GetPenaltyPolicyUseCase,
     private readonly fetchPenaltyPoliciesUseCase: FetchPenaltyPoliciesUseCase,
     private readonly updatePenaltyPolicyUseCase: UpdatePenaltyPolicyUseCase,
+    private readonly deletePenaltyPolicyUseCase: DeletePenaltyPolicyUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -157,6 +160,42 @@ export class PenaltyPoliciesController {
 
       return {
         currentData,
+      };
+    });
+  }
+
+  @ApiOperation({ summary: 'Delete penalty policy' })
+  @ApiResponse({
+    status: 200,
+    description: 'Penalty policy deleted successfully',
+  })
+  @ApiResponse({ status: 404, description: 'Penalty policy not found' })
+  @Roles('ADMIN', 'MANAGER')
+  @Delete(':id')
+  async delete(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      await this.deletePenaltyPolicyUseCase.execute(id, schoolId);
+
+      this.auditService.log(
+        {
+          action: 'DELETE_PENALTY_POLICY',
+          entity: 'PENALTY_POLICY',
+          entityId: id,
+          schoolId,
+          userId,
+          newData: {
+            id,
+          },
+        },
+        tx,
+      );
+
+      return {
+        message: 'Penalty policy deleted successfully',
       };
     });
   }

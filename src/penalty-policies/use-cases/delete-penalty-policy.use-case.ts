@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { PenaltyPolicyRepository } from '../repositories/penalty-policy.repository';
+import { PenaltyPolicyRepository } from '../repositories/penalty-policy.repository';
 import { PenaltyPolicyNotFoundError } from '../errors/penalty-policy-not-found.error';
 
 @Injectable()

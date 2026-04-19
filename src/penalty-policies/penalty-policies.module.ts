@@ -12,6 +12,7 @@ import { CreatePenaltyPolicyUseCase } from './use-cases/create-penalty-policy.us
 import { GetPenaltyPolicyUseCase } from './use-cases/get-penalty-policy.use-case';
 import { FetchPenaltyPoliciesUseCase } from './use-cases/fetch-penalty-policies.use-case';
 import { UpdatePenaltyPolicyUseCase } from './use-cases/update-penalty-policy.use-case';
+import { DeletePenaltyPolicyUseCase } from './use-cases/delete-penalty-policy.use-case';
 
 @Module({
   controllers: [PenaltyPoliciesController],
@@ -20,6 +21,7 @@ import { UpdatePenaltyPolicyUseCase } from './use-cases/update-penalty-policy.us
     GetPenaltyPolicyUseCase,
     FetchPenaltyPoliciesUseCase,
     UpdatePenaltyPolicyUseCase,
+    DeletePenaltyPolicyUseCase,
     {
       provide: FeeTypesRepository,
       useClass: PrismaFeeTypesRepository,
