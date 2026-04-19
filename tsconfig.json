@@ -28,20 +28,15 @@
         "./src/generated/prisma/client"
       ],
       "@test/*": [
-        "test/*"
+        "./test/*"
       ]
     },
     "types": [
       "vitest/globals"
-    ],
+    ]
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "test",
-    "**/*.spec.ts"
-  ],
-  "include": [
-    "src/**/*"
-  ],
+    "dist"
+  ]
 }
