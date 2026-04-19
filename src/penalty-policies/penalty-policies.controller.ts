@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -26,6 +27,11 @@ import {
 } from './dto/get-penalty-policy.dto';
 import { FetchPenaltyPoliciesUseCase } from './use-cases/fetch-penalty-policies.use-case';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { UpdatePenaltyPolicyUseCase } from './use-cases/update-penalty-policy.use-case';
+import {
+  updatePenaltyPolicySchema,
+  type UpdatePenaltyPolicyDTO,
+} from './dto/update-penalty-policy.dto';
 
 @Controller('penalty-policies')
 export class PenaltyPoliciesController {
@@ -33,6 +39,7 @@ export class PenaltyPoliciesController {
     private readonly createPenaltyPolicyUseCase: CreatePenaltyPolicyUseCase,
     private readonly getPenaltyPolicyUseCase: GetPenaltyPolicyUseCase,
     private readonly fetchPenaltyPoliciesUseCase: FetchPenaltyPoliciesUseCase,
+    private readonly updatePenaltyPolicyUseCase: UpdatePenaltyPolicyUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -107,5 +114,50 @@ export class PenaltyPoliciesController {
     @GetSchoolId() schoolId: string,
   ) {
     return this.fetchPenaltyPoliciesUseCase.execute(query, schoolId);
+  }
+
+  @ApiOperation({ summary: 'Update penalty policy' })
+  @ApiResponse({
+    status: 200,
+    description: 'Penalty policy updated successfully',
+  })
+  @ApiResponse({ status: 404, description: 'Penalty policy not found' })
+  @Roles('ADMIN', 'MANAGER')
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(updatePenaltyPolicySchema))
+    body: UpdatePenaltyPolicyDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      const { oldData, currentData } =
+        await this.updatePenaltyPolicyUseCase.execute(
+          { id, ...body },
+          schoolId,
+        );
+
+      await this.auditService.log(
+        {
+          action: 'UPDATE_PENALTY_POLICY',
+          entity: 'PENALTY_POLICY',
+          entityId: oldData.id,
+          schoolId,
+          userId,
+          oldData: {
+            oldData,
+          },
+          newData: {
+            currentData,
+          },
+        },
+        tx,
+      );
+
+      return {
+        currentData,
+      };
+    });
   }
 }
