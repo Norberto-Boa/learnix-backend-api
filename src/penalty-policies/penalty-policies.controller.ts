@@ -37,6 +37,12 @@ export class PenaltyPoliciesController {
     private readonly auditService: AuditService,
   ) {}
 
+  @ApiOperation({ summary: 'Create penalty policy' })
+  @ApiResponse({
+    status: 201,
+    description: 'Penalty policy created successfully',
+  })
+  @ApiResponse({ status: 400, description: 'Input error' })
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'MANAGER')
   @Post()
@@ -72,6 +78,12 @@ export class PenaltyPoliciesController {
     });
   }
 
+  @ApiOperation({ summary: 'Get penalty policy by id' })
+  @ApiResponse({
+    status: 200,
+    description: 'Penalty policy fetched successfully',
+  })
+  @ApiResponse({ status: 404, description: 'Penalty policy not found' })
   @UseGuards(RolesGuard)
   @Roles('ADMIN', 'CLERK', 'MANAGER')
   @Get(':id')
