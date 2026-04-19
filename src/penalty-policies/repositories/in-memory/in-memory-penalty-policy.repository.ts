@@ -6,7 +6,7 @@ import { PenaltyPolicyDomain } from '../../domain/penalty-policy';
 import type { CreatePenaltyPolicyDTO } from '@/penalty-policies/dto/create-penalty-policy.dto';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { UpdatePenaltyPolicyDTO } from '@/penalty-policies/dto/update-penalty-policy.dto';
-import type { GetPenaltyPoliciesQueryDTO } from '@/penalty-policies/dto/get-penalty-policy.dto';
+import type { FetchPenaltyPoliciesQueryDTO } from '@/penalty-policies/dto/get-penalty-policy.dto';
 import { CreatePenaltyPolicyInput } from '../penalty-policy.repository';
 
 export class InMemoryPenaltyPolicyRepository implements PenaltyPolicyRepository {
@@ -132,7 +132,7 @@ export class InMemoryPenaltyPolicyRepository implements PenaltyPolicyRepository 
 
   async findMany(
     schoolId: string,
-    params: GetPenaltyPoliciesQueryDTO,
+    params: FetchPenaltyPoliciesQueryDTO,
   ): Promise<PenaltyPolicyDomain[]> {
     const penaltyPolicies = this.items
       .filter((item) => {
@@ -190,7 +190,7 @@ export class InMemoryPenaltyPolicyRepository implements PenaltyPolicyRepository 
 
   async countMany(
     schoolId: string,
-    params: Omit<GetPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
+    params: Omit<FetchPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
   ): Promise<number> {
     return this.items.filter((item) => {
       if (item.schoolId !== schoolId) return false;

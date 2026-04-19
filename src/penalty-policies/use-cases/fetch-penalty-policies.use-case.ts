@@ -13,7 +13,7 @@ interface FetchPenaltyPoliciesUseCaseRequest {
   isActive?: boolean;
 }
 
-interface FetchPenaltyPoliciesUseCaseResponse {
+export interface FetchPenaltyPoliciesUseCaseResponse {
   items: PenaltyPolicyDomain[];
   meta: {
     page: number;

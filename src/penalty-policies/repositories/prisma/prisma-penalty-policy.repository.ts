@@ -5,7 +5,7 @@ import type { PenaltyPolicyDomain } from '@/penalty-policies/domain/penalty-poli
 import type { CreatePenaltyPolicyDTO } from '@/penalty-policies/dto/create-penalty-policy.dto';
 import type { DbContext } from '@/prisma/shared/db-context';
 import type { UpdatePenaltyPolicyDTO } from '@/penalty-policies/dto/update-penalty-policy.dto';
-import type { GetPenaltyPoliciesQueryDTO } from '@/penalty-policies/dto/get-penalty-policy.dto';
+import type { FetchPenaltyPoliciesQueryDTO } from '@/penalty-policies/dto/get-penalty-policy.dto';
 
 @Injectable()
 export class PrismaPenaltyPolicyRepository implements PenaltyPolicyRepository {
@@ -153,7 +153,7 @@ export class PrismaPenaltyPolicyRepository implements PenaltyPolicyRepository {
 
   async findMany(
     schoolId: string,
-    params: GetPenaltyPoliciesQueryDTO,
+    params: FetchPenaltyPoliciesQueryDTO,
   ): Promise<PenaltyPolicyDomain[]> {
     const penaltyPolicies = await this.prisma.penaltyPolicy.findMany({
       where: {
@@ -196,7 +196,7 @@ export class PrismaPenaltyPolicyRepository implements PenaltyPolicyRepository {
 
   async countMany(
     schoolId: string,
-    params: Omit<GetPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
+    params: Omit<FetchPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
   ): Promise<number> {
     return this.prisma.penaltyPolicy.count({
       where: {

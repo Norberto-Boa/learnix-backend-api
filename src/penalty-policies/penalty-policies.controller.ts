@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AuditService } from '../audit/audit.service';
 import { CreatePenaltyPolicyUseCase } from './use-cases/create-penalty-policy.use-case';
@@ -12,12 +20,19 @@ import {
 import { GetSchoolId } from '@/auth/decorators/get-school.decorator';
 import { GetUser } from '@/auth/decorators/get-user.decorator';
 import { GetPenaltyPolicyUseCase } from './use-cases/get-penalty-policy.use-case';
+import {
+  fetchPenaltyPoliciesQuerySchema,
+  type FetchPenaltyPoliciesQueryDTO,
+} from './dto/get-penalty-policy.dto';
+import { FetchPenaltyPoliciesUseCase } from './use-cases/fetch-penalty-policies.use-case';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('penalty-policies')
 export class PenaltyPoliciesController {
   constructor(
     private readonly createPenaltyPolicyUseCase: CreatePenaltyPolicyUseCase,
     private readonly getPenaltyPolicyUseCase: GetPenaltyPolicyUseCase,
+    private readonly fetchPenaltyPoliciesUseCase: FetchPenaltyPoliciesUseCase,
     private readonly prismaService: PrismaService,
     private readonly auditService: AuditService,
   ) {}
@@ -65,5 +80,20 @@ export class PenaltyPoliciesController {
     @GetSchoolId('schoolId') schoolId: string,
   ) {
     return await this.getPenaltyPolicyUseCase.execute({ id }, schoolId);
+  }
+
+  @ApiOperation({ summary: 'Fetch Penalty policies' })
+  @ApiResponse({
+    status: 200,
+    description: 'Penalty policies fetched successfully',
+  })
+  @Roles('ADMIN', 'MANAGER', 'CLERK')
+  @Get()
+  async findMany(
+    @Query(new ZodValidationPipe(fetchPenaltyPoliciesQuerySchema))
+    query: FetchPenaltyPoliciesQueryDTO,
+    @GetSchoolId() schoolId: string,
+  ) {
+    return this.fetchPenaltyPoliciesUseCase.execute(query, schoolId);
   }
 }

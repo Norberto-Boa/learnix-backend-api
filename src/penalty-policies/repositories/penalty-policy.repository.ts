@@ -2,7 +2,7 @@ import type { DbContext } from '@/prisma/shared/db-context';
 import type { CreatePenaltyPolicyDTO } from '../dto/create-penalty-policy.dto';
 import type { PenaltyPolicyDomain } from '../domain/penalty-policy';
 import type { UpdatePenaltyPolicyDTO } from '../dto/update-penalty-policy.dto';
-import type { GetPenaltyPoliciesQueryDTO } from '../dto/get-penalty-policy.dto';
+import type { FetchPenaltyPoliciesQueryDTO } from '../dto/get-penalty-policy.dto';
 import type { PENALTY_MODE } from '@/generated/prisma/enums';
 
 export interface CreatePenaltyPolicyInput {
@@ -57,10 +57,10 @@ export abstract class PenaltyPolicyRepository {
   ): Promise<PenaltyPolicyDomain | null>;
   abstract findMany(
     schoolId: string,
-    params: GetPenaltyPoliciesQueryDTO,
+    params: FetchPenaltyPoliciesQueryDTO,
   ): Promise<PenaltyPolicyDomain[]>;
   abstract countMany(
     schoolId: string,
-    params: Omit<GetPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
+    params: Omit<FetchPenaltyPoliciesQueryDTO, 'page' | 'limit'>,
   ): Promise<number>;
 }

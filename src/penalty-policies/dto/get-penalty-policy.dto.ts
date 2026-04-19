@@ -1,7 +1,7 @@
 import { createZodDto } from 'nestjs-zod';
 import z from 'zod';
 
-export const getPenaltyPoliciesQuerySchema = z.object({
+export const fetchPenaltyPoliciesQuerySchema = z.object({
   page: z.coerce.number().int().positive().min(1).max(20).optional().default(1),
   limit: z.coerce
     .number()
@@ -26,6 +26,6 @@ export const getPenaltyPoliciesQuerySchema = z.object({
     }),
 });
 
-export class GetPenaltyPoliciesQueryDTO extends createZodDto(
-  getPenaltyPoliciesQuerySchema,
+export class FetchPenaltyPoliciesQueryDTO extends createZodDto(
+  fetchPenaltyPoliciesQuerySchema,
 ) {}
