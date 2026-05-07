@@ -72,6 +72,7 @@ model School {
   feeTypes         FeeType[]
   feeStructures    FeeStructure[]
   penaltyPolicies  PenaltyPolicy[]
+  products         Product[]
 
   @@map("schools")
 }
@@ -372,4 +373,22 @@ model PenaltyPolicy {
   deletedAt DateTime?
 
   @@map("penalty_policies")
+}
+
+model Product {
+  id String @id @default(uuid())
+
+  name  String
+  code  String
+  price Decimal @db.Decimal(10, 2)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([schoolId, name])
+  @@map("products")
 }

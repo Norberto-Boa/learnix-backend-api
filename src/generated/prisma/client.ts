@@ -102,3 +102,8 @@ export type FeeStructure = Prisma.FeeStructureModel
  * 
  */
 export type PenaltyPolicy = Prisma.PenaltyPolicyModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel

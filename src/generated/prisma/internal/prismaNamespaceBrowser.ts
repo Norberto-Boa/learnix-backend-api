@@ -63,7 +63,8 @@ export const ModelName = {
   enrollment: 'enrollment',
   FeeType: 'FeeType',
   FeeStructure: 'FeeStructure',
-  PenaltyPolicy: 'PenaltyPolicy'
+  PenaltyPolicy: 'PenaltyPolicy',
+  Product: 'Product'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -280,6 +281,20 @@ export const PenaltyPolicyScalarFieldEnum = {
 } as const
 
 export type PenaltyPolicyScalarFieldEnum = (typeof PenaltyPolicyScalarFieldEnum)[keyof typeof PenaltyPolicyScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  price: 'price',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
 export const SortOrder = {
