@@ -36,4 +36,6 @@ export abstract class ProductsRepository {
     schoolId: string,
     params: Pick<FindManyProductsParams, 'search'>,
   ): Promise<number>;
+
+  abstract delete(id: string, schoolId: string, tx?: DbContext): Promise<void>;
 }
