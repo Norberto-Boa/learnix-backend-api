@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from '../../../dist/products/domain/product';
 import { ProductsRepository } from '../repositories/products.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { ProductAlreadyExistsError } from '../errors/product-already-exists.error';
 import { ProductNotFoundError } from '../errors/product-not-found.error';
+import type { Product } from '../domain/product';
 
 export interface UpdateProductUseCaseRequest {
   id: string;
