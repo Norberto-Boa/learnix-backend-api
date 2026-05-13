@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -26,6 +27,7 @@ import {
   updateProductSchema,
   type UpdateProductDto,
 } from './dto/update-product.dto';
+import type { DeleteProductUseCase } from './use-cases/delete-product.use-case';
 
 @Controller('products')
 export class ProductsController {
@@ -34,11 +36,15 @@ export class ProductsController {
     private readonly auditService: AuditService,
     private readonly createProductUseCase: CreateProductUseCase,
     private readonly updateProductUseCase: UpdateProductUseCase,
+    private readonly deleteProductUseCase: DeleteProductUseCase,
   ) {}
 
   @Post()
   @Roles('MANAGER', 'ADMIN')
   @UseGuards(RolesGuard)
+  @ApiOperation({ summary: 'Create a new product' })
+  @ApiResponse({ status: 201, description: 'Product successfully created' })
+  @ApiResponse({ status: 409, description: 'Product already exists' })
   async create(
     @Body(new ZodValidationPipe(createProductSchema))
     { name, code, price }: CreateProductDto,
@@ -93,7 +99,7 @@ export class ProductsController {
 
       await this.auditService.log(
         {
-          action: 'CREATE_PRODUCT',
+          action: 'UPDATE_PRODUCT',
           entity: 'PRODUCT',
           entityId: oldProduct.id,
           schoolId,
@@ -116,8 +122,39 @@ export class ProductsController {
 
       return {
         old: oldProduct,
-        new: newProduct
-      }
+        new: newProduct,
+      };
+    });
+  }
+
+  @Delete()
+  @UseGuards(RolesGuard)
+  @Roles('MANAGER', 'ADMIN')
+  @ApiOperation({ summary: 'Delete product' })
+  @ApiResponse({ status: 200, description: 'Product successfully deleted' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
+  async delete(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+    @GetUser('id') userId: string,
+  ) {
+    return this.prismaService.$transaction(async (tx) => {
+      await this.deleteProductUseCase.execute({ id }, schoolId, tx);
+
+      await this.auditService.log(
+        {
+          action: 'DELETE_PRODUCT',
+          entity: 'PRODUCT',
+          entityId: id,
+          schoolId,
+          userId,
+        },
+        tx,
+      );
+
+      return {
+        Message: 'Deleted product successfully!',
+      };
     });
   }
 }
