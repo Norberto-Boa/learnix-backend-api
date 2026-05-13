@@ -4,7 +4,7 @@ import type {
   FindManyProductsParams,
   ProductsRepository,
 } from '../products.repository';
-import type { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { Product } from '../../domain/product';
 

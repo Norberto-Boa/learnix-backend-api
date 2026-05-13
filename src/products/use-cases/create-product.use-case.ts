@@ -1,6 +1,6 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Product } from '../domain/product';
-import type { ProductsRepository } from '../repositories/products.repository';
+import { ProductsRepository } from '../repositories/products.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
 import { ProductAlreadyExistsError } from '../errors/product-already-exists.error';
 
