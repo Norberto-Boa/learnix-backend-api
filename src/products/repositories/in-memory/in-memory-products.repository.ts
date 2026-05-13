@@ -32,8 +32,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
   async findById(id: string, schoolId: string) {
     const product = this.items.find(
-      (item) =>
-        item.id === id && item.schoolId === schoolId && item.deletedAt === null,
+      (item) => item.id === id && item.schoolId === schoolId && !item.deletedAt,
     );
 
     return product ?? null;
@@ -109,7 +108,7 @@ export class InMemoryProductsRepository implements ProductsRepository {
     db?: DbContext,
   ): Promise<Product> {
     const itemIndex = this.items.findIndex(
-      (item) => item.id && item.schoolId === schoolId && item.deletedAt,
+      (item) => item.id && item.schoolId === schoolId && !item.deletedAt,
     );
 
     const currentItem = this.items[itemIndex];

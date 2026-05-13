@@ -27,6 +27,8 @@ export class UpdateProductUseCase {
   ) {
     const product = await this.productsRepository.findById(id, schoolId);
 
+    console.log('Producto encontrado ' + product?.id);
+
     if (!product) {
       throw new ProductNotFoundError();
     }
