@@ -5,6 +5,7 @@ import type {
   UpdateProductRepositoryData,
 } from '../products.repository';
 import { Product } from '../../domain/product';
+import type { DbContext } from '@/prisma/shared/db-context';
 
 export class InMemoryProductsRepository implements ProductsRepository {
   public items: Product[] = [];
@@ -99,6 +100,29 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
       return true;
     }).length;
+  }
+
+  async update(
+    id: string,
+    schoolId: string,
+    data: UpdateProductRepositoryData,
+    db?: DbContext,
+  ): Promise<Product> {
+    const itemIndex = this.items.findIndex(
+      (item) => item.id && item.schoolId === schoolId && item.deletedAt,
+    );
+
+    const currentItem = this.items[itemIndex];
+
+    const updateItem: Product = {
+      ...currentItem,
+      ...(data.name !== undefined && { name: data.name }),
+      ...(data.code !== undefined && { code: data.code }),
+      ...(data.price !== undefined && { price: data.price }),
+      updatedAt: new Date(),
+    };
+
+    return updateItem;
   }
 
   async delete(id: string, schoolId: string): Promise<void> {

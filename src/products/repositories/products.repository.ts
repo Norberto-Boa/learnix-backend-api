@@ -37,5 +37,12 @@ export abstract class ProductsRepository {
     params: Pick<FindManyProductsParams, 'search'>,
   ): Promise<number>;
 
+  abstract update(
+    id: string,
+    schoolId: string,
+    data: UpdateProductRepositoryData,
+    db?: DbContext,
+  ): Promise<Product>;
+
   abstract delete(id: string, schoolId: string, tx?: DbContext): Promise<void>;
 }

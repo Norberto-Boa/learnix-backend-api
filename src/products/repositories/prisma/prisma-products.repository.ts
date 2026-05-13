@@ -3,6 +3,7 @@ import type {
   CreateProductRepositoryData,
   FindManyProductsParams,
   ProductsRepository,
+  UpdateProductRepositoryData,
 } from '../products.repository';
 import { PrismaService } from '@/prisma/prisma.service';
 import type { DbContext } from '@/prisma/shared/db-context';
@@ -126,6 +127,32 @@ export class PrismaProductsRepository implements ProductsRepository {
         }),
       },
     });
+  }
+
+  async update(
+    id: string,
+    schoolId: string,
+    data: UpdateProductRepositoryData,
+    db?: DbContext,
+  ): Promise<Product> {
+    const client = this.getClient(db);
+
+    const product = await client.product.update({
+      where: {
+        id,
+        schoolId,
+      },
+      data: {
+        ...(data.name !== undefined && { name: data.name }),
+        ...(data.code !== undefined && { code: data.code }),
+        ...(data.price !== undefined && { price: data.price }),
+      },
+    });
+
+    return {
+      ...product,
+      price: Number(product.price),
+    };
   }
 
   async delete(id: string, schoolId: string, db?: DbContext): Promise<void> {
