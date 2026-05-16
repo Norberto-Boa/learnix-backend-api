@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
@@ -29,6 +30,11 @@ import {
 } from './dto/update-product.dto';
 import { DeleteProductUseCase } from './use-cases/delete-product.use-case';
 import { GetProductUseCase } from './use-cases/get-product.use-case';
+import { FetchProductsUseCase } from './use-cases/fetch-products.use-case';
+import {
+  getProductsQuerySchema,
+  type GetProductsQueryDTO,
+} from './dto/get-products-query.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -39,6 +45,7 @@ export class ProductsController {
     private readonly updateProductUseCase: UpdateProductUseCase,
     private readonly deleteProductUseCase: DeleteProductUseCase,
     private readonly getProductUseCase: GetProductUseCase,
+    private readonly fetchProductsUseCase: FetchProductsUseCase,
   ) {}
 
   @Post()
@@ -161,7 +168,11 @@ export class ProductsController {
   }
 
   @Get('id')
+  @UseGuards(RolesGuard)
   @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @ApiOperation({ summary: 'Get product by id' })
+  @ApiResponse({ status: 200, description: 'Product successfully found' })
+  @ApiResponse({ status: 404, description: 'Product not found' })
   async get(
     @Param('id') id: string,
     @GetSchoolId('schoolId') schoolId: string,
@@ -169,5 +180,24 @@ export class ProductsController {
     const { product } = await this.getProductUseCase.execute({ id }, schoolId);
 
     return { product };
+  }
+
+  @Get()
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  @ApiOperation({ summary: 'Fetch products' })
+  @ApiResponse({ status: 200, description: 'Products successfully fetched' })
+  async fecth(
+    @Query(new ZodValidationPipe(getProductsQuerySchema))
+    { page, limit, search }: GetProductsQueryDTO,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    return this.fetchProductsUseCase.execute(
+      {
+        page,
+        limit,
+        search,
+      },
+      schoolId,
+    );
   }
 }
