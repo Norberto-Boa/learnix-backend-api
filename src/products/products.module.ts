@@ -5,6 +5,7 @@ import { ProductsRepository } from './repositories/products.repository';
 import { PrismaProductsRepository } from './repositories/prisma/prisma-products.repository';
 import { UpdateProductUseCase } from './use-cases/update-product.use-case';
 import { DeleteProductUseCase } from './use-cases/delete-product.use-case';
+import { GetProductUseCase } from './use-cases/get-product.use-case';
 
 @Module({
   controllers: [ProductsController],
@@ -12,6 +13,7 @@ import { DeleteProductUseCase } from './use-cases/delete-product.use-case';
     CreateProductUseCase,
     UpdateProductUseCase,
     DeleteProductUseCase,
+    GetProductUseCase,
     {
       provide: ProductsRepository,
       useClass: PrismaProductsRepository,

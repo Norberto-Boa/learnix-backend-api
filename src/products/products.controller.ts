@@ -28,6 +28,7 @@ import {
   type UpdateProductDto,
 } from './dto/update-product.dto';
 import { DeleteProductUseCase } from './use-cases/delete-product.use-case';
+import { GetProductUseCase } from './use-cases/get-product.use-case';
 
 @Controller('products')
 export class ProductsController {
@@ -37,6 +38,7 @@ export class ProductsController {
     private readonly createProductUseCase: CreateProductUseCase,
     private readonly updateProductUseCase: UpdateProductUseCase,
     private readonly deleteProductUseCase: DeleteProductUseCase,
+    private readonly getProductUseCase: GetProductUseCase,
   ) {}
 
   @Post()
@@ -156,5 +158,16 @@ export class ProductsController {
         Message: 'Deleted product successfully!',
       };
     });
+  }
+
+  @Get('id')
+  @Roles('MANAGER', 'ADMIN', 'CLERK')
+  async get(
+    @Param('id') id: string,
+    @GetSchoolId('schoolId') schoolId: string,
+  ) {
+    const { product } = await this.getProductUseCase.execute({ id }, schoolId);
+
+    return { product };
   }
 }
