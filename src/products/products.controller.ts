@@ -27,7 +27,7 @@ import {
   updateProductSchema,
   type UpdateProductDto,
 } from './dto/update-product.dto';
-import type { DeleteProductUseCase } from './use-cases/delete-product.use-case';
+import { DeleteProductUseCase } from './use-cases/delete-product.use-case';
 
 @Controller('products')
 export class ProductsController {
