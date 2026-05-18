@@ -78,3 +78,14 @@ export const PENALTY_MODE = {
 } as const
 
 export type PENALTY_MODE = (typeof PENALTY_MODE)[keyof typeof PENALTY_MODE]
+
+
+export const CHARGE_STATUS = {
+  PENDING: 'PENDING',
+  INVOICED: 'INVOICED',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type CHARGE_STATUS = (typeof CHARGE_STATUS)[keyof typeof CHARGE_STATUS]

@@ -61,18 +61,19 @@ model School {
   academicYears AcademicYear[]
   students      Student[]
 
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  deletedAt        DateTime?
-  documentTypes    DocumentType[]
-  studentDocuments StudentDocument[]
-  grades           Grade[]
-  classrooms       Classroom[]
-  enrollments      enrollment[]
-  feeTypes         FeeType[]
-  feeStructures    FeeStructure[]
-  penaltyPolicies  PenaltyPolicy[]
-  products         Product[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  documentTypes     DocumentType[]
+  studentDocuments  StudentDocument[]
+  grades            Grade[]
+  classrooms        Classroom[]
+  enrollments       Enrollment[]
+  feeTypes          FeeType[]
+  feeStructures     FeeStructure[]
+  penaltyPolicies   PenaltyPolicy[]
+  products          Product[]
+  enrollmentCharges EnrollmentCharge[]
 
   @@map("schools")
 }
@@ -130,13 +131,14 @@ model AcademicYear {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  deletedAt       DateTime?
-  classrooms      Classroom[]
-  enrollments     enrollment[]
-  feeStructures   FeeStructure[]
-  penaltyPolicies PenaltyPolicy[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  classrooms        Classroom[]
+  enrollments       Enrollment[]
+  feeStructures     FeeStructure[]
+  penaltyPolicies   PenaltyPolicy[]
+  enrollmentCharges EnrollmentCharge[]
 
   @@unique([year, schoolId])
   @@map("academic_years")
@@ -176,7 +178,7 @@ model Student {
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   studentDocuments StudentDocument[]
-  enrollments      enrollment[]
+  enrollments      Enrollment[]
 
   @@unique([registrationNumber, schoolId])
   @@map("students")
@@ -243,13 +245,13 @@ model Classroom {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   deletedAt   DateTime?
-  enrollments enrollment[]
+  enrollments Enrollment[]
 
   @@unique([schoolId, name, gradeId, academicYearId])
   @@map("classrooms")
 }
 
-model enrollment {
+model Enrollment {
   id String @id @default(uuid())
 
   studentId String
@@ -266,9 +268,10 @@ model enrollment {
 
   status ENROLLMENT_STATUS @default(ACTIVE)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  deletedAt         DateTime?
+  enrollmentCharges EnrollmentCharge[]
 
   @@unique([schoolId, studentId, academicYearId])
   @@map("enrollments")
@@ -295,12 +298,13 @@ model FeeType {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   deletedAt         DateTime?
   feeStructures     FeeStructure[]
-  penaltyFeeType    PenaltyPolicy[] @relation("PenaltyPolicy_penaltyFeeType")
-  penaltyFeeTrigger PenaltyPolicy[] @relation("PenaltyPolicy_triggerFeeType")
+  penaltyFeeType    PenaltyPolicy[]    @relation("PenaltyPolicy_penaltyFeeType")
+  penaltyFeeTrigger PenaltyPolicy[]    @relation("PenaltyPolicy_triggerFeeType")
+  enrollmentCharges EnrollmentCharge[]
 
   @@unique([schoolId, code])
   @@map("fee_types")
@@ -391,4 +395,54 @@ model Product {
 
   @@unique([schoolId, name])
   @@map("products")
+}
+
+enum CHARGE_STATUS {
+  PENDING
+  INVOICED
+  PARTIALLY_PAID
+  PAID
+  CANCELLED
+}
+
+model EnrollmentCharge {
+  id String @id @default(uuid())
+
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id])
+
+  feeTypeId String
+  feeType   FeeType @relation(fields: [feeTypeId], references: [id])
+
+  academicYearId String
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+
+  referenceYear  Int
+  referenceMonth Int
+
+  dueDate DateTime
+
+  baseAmount Decimal @db.Decimal(10, 2)
+
+  penaltyAmount Decimal @default(0) @db.Decimal(10, 2)
+
+  totalAmount Decimal @db.Decimal(10, 2)
+
+  paidAmount Decimal @default(0) @db.Decimal(10, 2)
+
+  balanceAmount Decimal @db.Decimal(10, 2)
+
+  status CHARGE_STATUS @default(PENDING)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([enrollmentId, feeTypeId, referenceYear, referenceMonth])
+  @@index([schoolId, academicYearId, status])
+  @@index([schoolId, referenceYear, referenceMonth])
+  @@map("enrollment_charges")
 }

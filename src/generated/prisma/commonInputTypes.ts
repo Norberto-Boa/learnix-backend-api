@@ -416,6 +416,23 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedIntNullableFilter<$PrismaModel>
 }
 
+export type EnumCHARGE_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.CHARGE_STATUS | Prisma.EnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel> | $Enums.CHARGE_STATUS
+}
+
+export type EnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CHARGE_STATUS | Prisma.EnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.CHARGE_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -802,6 +819,23 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
+}
+
+export type NestedEnumCHARGE_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.CHARGE_STATUS | Prisma.EnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel> | $Enums.CHARGE_STATUS
+}
+
+export type NestedEnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CHARGE_STATUS | Prisma.EnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CHARGE_STATUS[] | Prisma.ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.CHARGE_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
 }
 
 

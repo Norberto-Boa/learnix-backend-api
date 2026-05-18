@@ -393,11 +393,12 @@ export const ModelName = {
   StudentDocument: 'StudentDocument',
   Grade: 'Grade',
   Classroom: 'Classroom',
-  enrollment: 'enrollment',
+  Enrollment: 'Enrollment',
   FeeType: 'FeeType',
   FeeStructure: 'FeeStructure',
   PenaltyPolicy: 'PenaltyPolicy',
-  Product: 'Product'
+  Product: 'Product',
+  EnrollmentCharge: 'EnrollmentCharge'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment" | "feeType" | "feeStructure" | "penaltyPolicy" | "product"
+    modelProps: "school" | "user" | "auditLog" | "academicYear" | "documentType" | "student" | "studentDocument" | "grade" | "classroom" | "enrollment" | "feeType" | "feeStructure" | "penaltyPolicy" | "product" | "enrollmentCharge"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1083,76 +1084,76 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    enrollment: {
-      payload: Prisma.$enrollmentPayload<ExtArgs>
-      fields: Prisma.enrollmentFieldRefs
+    Enrollment: {
+      payload: Prisma.$EnrollmentPayload<ExtArgs>
+      fields: Prisma.EnrollmentFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.enrollmentFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload> | null
+          args: Prisma.EnrollmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.enrollmentFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         findFirst: {
-          args: Prisma.enrollmentFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload> | null
+          args: Prisma.EnrollmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.enrollmentFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         findMany: {
-          args: Prisma.enrollmentFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>[]
+          args: Prisma.EnrollmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>[]
         }
         create: {
-          args: Prisma.enrollmentCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         createMany: {
-          args: Prisma.enrollmentCreateManyArgs<ExtArgs>
+          args: Prisma.EnrollmentCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.enrollmentCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>[]
+          args: Prisma.EnrollmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>[]
         }
         delete: {
-          args: Prisma.enrollmentDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         update: {
-          args: Prisma.enrollmentUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         deleteMany: {
-          args: Prisma.enrollmentDeleteManyArgs<ExtArgs>
+          args: Prisma.EnrollmentDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.enrollmentUpdateManyArgs<ExtArgs>
+          args: Prisma.EnrollmentUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.enrollmentUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>[]
+          args: Prisma.EnrollmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>[]
         }
         upsert: {
-          args: Prisma.enrollmentUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$enrollmentPayload>
+          args: Prisma.EnrollmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentPayload>
         }
         aggregate: {
           args: Prisma.EnrollmentAggregateArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AggregateEnrollment>
         }
         groupBy: {
-          args: Prisma.enrollmentGroupByArgs<ExtArgs>
+          args: Prisma.EnrollmentGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EnrollmentGroupByOutputType>[]
         }
         count: {
-          args: Prisma.enrollmentCountArgs<ExtArgs>
+          args: Prisma.EnrollmentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.EnrollmentCountAggregateOutputType> | number
         }
       }
@@ -1453,6 +1454,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    EnrollmentCharge: {
+      payload: Prisma.$EnrollmentChargePayload<ExtArgs>
+      fields: Prisma.EnrollmentChargeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EnrollmentChargeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EnrollmentChargeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        findFirst: {
+          args: Prisma.EnrollmentChargeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EnrollmentChargeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        findMany: {
+          args: Prisma.EnrollmentChargeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>[]
+        }
+        create: {
+          args: Prisma.EnrollmentChargeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        createMany: {
+          args: Prisma.EnrollmentChargeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EnrollmentChargeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>[]
+        }
+        delete: {
+          args: Prisma.EnrollmentChargeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        update: {
+          args: Prisma.EnrollmentChargeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        deleteMany: {
+          args: Prisma.EnrollmentChargeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EnrollmentChargeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EnrollmentChargeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>[]
+        }
+        upsert: {
+          args: Prisma.EnrollmentChargeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EnrollmentChargePayload>
+        }
+        aggregate: {
+          args: Prisma.EnrollmentChargeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEnrollmentCharge>
+        }
+        groupBy: {
+          args: Prisma.EnrollmentChargeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EnrollmentChargeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EnrollmentChargeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EnrollmentChargeCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1706,6 +1781,29 @@ export const ProductScalarFieldEnum = {
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+export const EnrollmentChargeScalarFieldEnum = {
+  id: 'id',
+  enrollmentId: 'enrollmentId',
+  feeTypeId: 'feeTypeId',
+  academicYearId: 'academicYearId',
+  referenceYear: 'referenceYear',
+  referenceMonth: 'referenceMonth',
+  dueDate: 'dueDate',
+  baseAmount: 'baseAmount',
+  penaltyAmount: 'penaltyAmount',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  balanceAmount: 'balanceAmount',
+  status: 'status',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type EnrollmentChargeScalarFieldEnum = (typeof EnrollmentChargeScalarFieldEnum)[keyof typeof EnrollmentChargeScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1942,6 +2040,20 @@ export type ListEnumPENALTY_MODEFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
+ * Reference to a field of type 'CHARGE_STATUS'
+ */
+export type EnumCHARGE_STATUSFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CHARGE_STATUS'>
+    
+
+
+/**
+ * Reference to a field of type 'CHARGE_STATUS[]'
+ */
+export type ListEnumCHARGE_STATUSFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CHARGE_STATUS[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2058,11 +2170,12 @@ export type GlobalOmitConfig = {
   studentDocument?: Prisma.StudentDocumentOmit
   grade?: Prisma.GradeOmit
   classroom?: Prisma.ClassroomOmit
-  enrollment?: Prisma.enrollmentOmit
+  enrollment?: Prisma.EnrollmentOmit
   feeType?: Prisma.FeeTypeOmit
   feeStructure?: Prisma.FeeStructureOmit
   penaltyPolicy?: Prisma.PenaltyPolicyOmit
   product?: Prisma.ProductOmit
+  enrollmentCharge?: Prisma.EnrollmentChargeOmit
 }
 
 /* Types for Logging */

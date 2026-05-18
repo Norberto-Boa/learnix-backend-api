@@ -218,6 +218,7 @@ export type FeeTypeWhereInput = {
   feeStructures?: Prisma.FeeStructureListRelationFilter
   penaltyFeeType?: Prisma.PenaltyPolicyListRelationFilter
   penaltyFeeTrigger?: Prisma.PenaltyPolicyListRelationFilter
+  enrollmentCharges?: Prisma.EnrollmentChargeListRelationFilter
 }
 
 export type FeeTypeOrderByWithRelationInput = {
@@ -234,6 +235,7 @@ export type FeeTypeOrderByWithRelationInput = {
   feeStructures?: Prisma.FeeStructureOrderByRelationAggregateInput
   penaltyFeeType?: Prisma.PenaltyPolicyOrderByRelationAggregateInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyOrderByRelationAggregateInput
+  enrollmentCharges?: Prisma.EnrollmentChargeOrderByRelationAggregateInput
 }
 
 export type FeeTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +256,7 @@ export type FeeTypeWhereUniqueInput = Prisma.AtLeast<{
   feeStructures?: Prisma.FeeStructureListRelationFilter
   penaltyFeeType?: Prisma.PenaltyPolicyListRelationFilter
   penaltyFeeTrigger?: Prisma.PenaltyPolicyListRelationFilter
+  enrollmentCharges?: Prisma.EnrollmentChargeListRelationFilter
 }, "id" | "schoolId_code">
 
 export type FeeTypeOrderByWithAggregationInput = {
@@ -299,6 +302,7 @@ export type FeeTypeCreateInput = {
   feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateInput = {
@@ -314,6 +318,7 @@ export type FeeTypeUncheckedCreateInput = {
   feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUpdateInput = {
@@ -329,6 +334,7 @@ export type FeeTypeUpdateInput = {
   feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateInput = {
@@ -344,6 +350,7 @@ export type FeeTypeUncheckedUpdateInput = {
   feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeCreateManyInput = {
@@ -525,6 +532,20 @@ export type FeeTypeUpdateOneRequiredWithoutPenaltyFeeTypeNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FeeTypeUpdateToOneWithWhereWithoutPenaltyFeeTypeInput, Prisma.FeeTypeUpdateWithoutPenaltyFeeTypeInput>, Prisma.FeeTypeUncheckedUpdateWithoutPenaltyFeeTypeInput>
 }
 
+export type FeeTypeCreateNestedOneWithoutEnrollmentChargesInput = {
+  create?: Prisma.XOR<Prisma.FeeTypeCreateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedCreateWithoutEnrollmentChargesInput>
+  connectOrCreate?: Prisma.FeeTypeCreateOrConnectWithoutEnrollmentChargesInput
+  connect?: Prisma.FeeTypeWhereUniqueInput
+}
+
+export type FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput = {
+  create?: Prisma.XOR<Prisma.FeeTypeCreateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedCreateWithoutEnrollmentChargesInput>
+  connectOrCreate?: Prisma.FeeTypeCreateOrConnectWithoutEnrollmentChargesInput
+  upsert?: Prisma.FeeTypeUpsertWithoutEnrollmentChargesInput
+  connect?: Prisma.FeeTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FeeTypeUpdateToOneWithWhereWithoutEnrollmentChargesInput, Prisma.FeeTypeUpdateWithoutEnrollmentChargesInput>, Prisma.FeeTypeUncheckedUpdateWithoutEnrollmentChargesInput>
+}
+
 export type FeeTypeCreateWithoutSchoolInput = {
   id?: string
   name: string
@@ -537,6 +558,7 @@ export type FeeTypeCreateWithoutSchoolInput = {
   feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateWithoutSchoolInput = {
@@ -551,6 +573,7 @@ export type FeeTypeUncheckedCreateWithoutSchoolInput = {
   feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeCreateOrConnectWithoutSchoolInput = {
@@ -606,6 +629,7 @@ export type FeeTypeCreateWithoutFeeStructuresInput = {
   school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
   penaltyFeeType?: Prisma.PenaltyPolicyCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateWithoutFeeStructuresInput = {
@@ -620,6 +644,7 @@ export type FeeTypeUncheckedCreateWithoutFeeStructuresInput = {
   deletedAt?: Date | string | null
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutPenaltyFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeCreateOrConnectWithoutFeeStructuresInput = {
@@ -650,6 +675,7 @@ export type FeeTypeUpdateWithoutFeeStructuresInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateWithoutFeeStructuresInput = {
@@ -664,6 +690,7 @@ export type FeeTypeUncheckedUpdateWithoutFeeStructuresInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeCreateWithoutPenaltyFeeTriggerInput = {
@@ -678,6 +705,7 @@ export type FeeTypeCreateWithoutPenaltyFeeTriggerInput = {
   school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
   feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyCreateNestedManyWithoutPenaltyFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateWithoutPenaltyFeeTriggerInput = {
@@ -692,6 +720,7 @@ export type FeeTypeUncheckedCreateWithoutPenaltyFeeTriggerInput = {
   deletedAt?: Date | string | null
   feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutPenaltyFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeCreateOrConnectWithoutPenaltyFeeTriggerInput = {
@@ -711,6 +740,7 @@ export type FeeTypeCreateWithoutPenaltyFeeTypeInput = {
   school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
   feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeUncheckedCreateWithoutPenaltyFeeTypeInput = {
@@ -725,6 +755,7 @@ export type FeeTypeUncheckedCreateWithoutPenaltyFeeTypeInput = {
   deletedAt?: Date | string | null
   feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutTriggerFeeTypeInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedCreateNestedManyWithoutFeeTypeInput
 }
 
 export type FeeTypeCreateOrConnectWithoutPenaltyFeeTypeInput = {
@@ -755,6 +786,7 @@ export type FeeTypeUpdateWithoutPenaltyFeeTriggerInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
   feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUpdateManyWithoutPenaltyFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateWithoutPenaltyFeeTriggerInput = {
@@ -769,6 +801,7 @@ export type FeeTypeUncheckedUpdateWithoutPenaltyFeeTriggerInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutPenaltyFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUpsertWithoutPenaltyFeeTypeInput = {
@@ -794,6 +827,7 @@ export type FeeTypeUpdateWithoutPenaltyFeeTypeInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
   feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateWithoutPenaltyFeeTypeInput = {
@@ -807,6 +841,83 @@ export type FeeTypeUncheckedUpdateWithoutPenaltyFeeTypeInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
+  penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeNestedInput
+}
+
+export type FeeTypeCreateWithoutEnrollmentChargesInput = {
+  id?: string
+  name: string
+  code: string
+  category?: $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  school: Prisma.SchoolCreateNestedOneWithoutFeeTypesInput
+  feeStructures?: Prisma.FeeStructureCreateNestedManyWithoutFeeTypeInput
+  penaltyFeeType?: Prisma.PenaltyPolicyCreateNestedManyWithoutPenaltyFeeTypeInput
+  penaltyFeeTrigger?: Prisma.PenaltyPolicyCreateNestedManyWithoutTriggerFeeTypeInput
+}
+
+export type FeeTypeUncheckedCreateWithoutEnrollmentChargesInput = {
+  id?: string
+  name: string
+  code: string
+  category?: $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: boolean
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedCreateNestedManyWithoutFeeTypeInput
+  penaltyFeeType?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutPenaltyFeeTypeInput
+  penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedCreateNestedManyWithoutTriggerFeeTypeInput
+}
+
+export type FeeTypeCreateOrConnectWithoutEnrollmentChargesInput = {
+  where: Prisma.FeeTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.FeeTypeCreateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedCreateWithoutEnrollmentChargesInput>
+}
+
+export type FeeTypeUpsertWithoutEnrollmentChargesInput = {
+  update: Prisma.XOR<Prisma.FeeTypeUpdateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedUpdateWithoutEnrollmentChargesInput>
+  create: Prisma.XOR<Prisma.FeeTypeCreateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedCreateWithoutEnrollmentChargesInput>
+  where?: Prisma.FeeTypeWhereInput
+}
+
+export type FeeTypeUpdateToOneWithWhereWithoutEnrollmentChargesInput = {
+  where?: Prisma.FeeTypeWhereInput
+  data: Prisma.XOR<Prisma.FeeTypeUpdateWithoutEnrollmentChargesInput, Prisma.FeeTypeUncheckedUpdateWithoutEnrollmentChargesInput>
+}
+
+export type FeeTypeUpdateWithoutEnrollmentChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumFEE_TYPE_CATEGORYFieldUpdateOperationsInput | $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutFeeTypesNestedInput
+  feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
+  penaltyFeeType?: Prisma.PenaltyPolicyUpdateManyWithoutPenaltyFeeTypeNestedInput
+  penaltyFeeTrigger?: Prisma.PenaltyPolicyUpdateManyWithoutTriggerFeeTypeNestedInput
+}
+
+export type FeeTypeUncheckedUpdateWithoutEnrollmentChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.EnumFEE_TYPE_CATEGORYFieldUpdateOperationsInput | $Enums.FEE_TYPE_CATEGORY
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
+  penaltyFeeType?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutTriggerFeeTypeNestedInput
 }
 
@@ -833,6 +944,7 @@ export type FeeTypeUpdateWithoutSchoolInput = {
   feeStructures?: Prisma.FeeStructureUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateWithoutSchoolInput = {
@@ -847,6 +959,7 @@ export type FeeTypeUncheckedUpdateWithoutSchoolInput = {
   feeStructures?: Prisma.FeeStructureUncheckedUpdateManyWithoutFeeTypeNestedInput
   penaltyFeeType?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutPenaltyFeeTypeNestedInput
   penaltyFeeTrigger?: Prisma.PenaltyPolicyUncheckedUpdateManyWithoutTriggerFeeTypeNestedInput
+  enrollmentCharges?: Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeNestedInput
 }
 
 export type FeeTypeUncheckedUpdateManyWithoutSchoolInput = {
@@ -869,12 +982,14 @@ export type FeeTypeCountOutputType = {
   feeStructures: number
   penaltyFeeType: number
   penaltyFeeTrigger: number
+  enrollmentCharges: number
 }
 
 export type FeeTypeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   feeStructures?: boolean | FeeTypeCountOutputTypeCountFeeStructuresArgs
   penaltyFeeType?: boolean | FeeTypeCountOutputTypeCountPenaltyFeeTypeArgs
   penaltyFeeTrigger?: boolean | FeeTypeCountOutputTypeCountPenaltyFeeTriggerArgs
+  enrollmentCharges?: boolean | FeeTypeCountOutputTypeCountEnrollmentChargesArgs
 }
 
 /**
@@ -908,6 +1023,13 @@ export type FeeTypeCountOutputTypeCountPenaltyFeeTriggerArgs<ExtArgs extends run
   where?: Prisma.PenaltyPolicyWhereInput
 }
 
+/**
+ * FeeTypeCountOutputType without action
+ */
+export type FeeTypeCountOutputTypeCountEnrollmentChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EnrollmentChargeWhereInput
+}
+
 
 export type FeeTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -923,6 +1045,7 @@ export type FeeTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   feeStructures?: boolean | Prisma.FeeType$feeStructuresArgs<ExtArgs>
   penaltyFeeType?: boolean | Prisma.FeeType$penaltyFeeTypeArgs<ExtArgs>
   penaltyFeeTrigger?: boolean | Prisma.FeeType$penaltyFeeTriggerArgs<ExtArgs>
+  enrollmentCharges?: boolean | Prisma.FeeType$enrollmentChargesArgs<ExtArgs>
   _count?: boolean | Prisma.FeeTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feeType"]>
 
@@ -970,6 +1093,7 @@ export type FeeTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   feeStructures?: boolean | Prisma.FeeType$feeStructuresArgs<ExtArgs>
   penaltyFeeType?: boolean | Prisma.FeeType$penaltyFeeTypeArgs<ExtArgs>
   penaltyFeeTrigger?: boolean | Prisma.FeeType$penaltyFeeTriggerArgs<ExtArgs>
+  enrollmentCharges?: boolean | Prisma.FeeType$enrollmentChargesArgs<ExtArgs>
   _count?: boolean | Prisma.FeeTypeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FeeTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -986,6 +1110,7 @@ export type $FeeTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     feeStructures: Prisma.$FeeStructurePayload<ExtArgs>[]
     penaltyFeeType: Prisma.$PenaltyPolicyPayload<ExtArgs>[]
     penaltyFeeTrigger: Prisma.$PenaltyPolicyPayload<ExtArgs>[]
+    enrollmentCharges: Prisma.$EnrollmentChargePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1395,6 +1520,7 @@ export interface Prisma__FeeTypeClient<T, Null = never, ExtArgs extends runtime.
   feeStructures<T extends Prisma.FeeType$feeStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeType$feeStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeeStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   penaltyFeeType<T extends Prisma.FeeType$penaltyFeeTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeType$penaltyFeeTypeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PenaltyPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   penaltyFeeTrigger<T extends Prisma.FeeType$penaltyFeeTriggerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeType$penaltyFeeTriggerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PenaltyPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  enrollmentCharges<T extends Prisma.FeeType$enrollmentChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeType$enrollmentChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1898,6 +2024,30 @@ export type FeeType$penaltyFeeTriggerArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.PenaltyPolicyScalarFieldEnum | Prisma.PenaltyPolicyScalarFieldEnum[]
+}
+
+/**
+ * FeeType.enrollmentCharges
+ */
+export type FeeType$enrollmentChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EnrollmentCharge
+   */
+  select?: Prisma.EnrollmentChargeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EnrollmentCharge
+   */
+  omit?: Prisma.EnrollmentChargeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EnrollmentChargeInclude<ExtArgs> | null
+  where?: Prisma.EnrollmentChargeWhereInput
+  orderBy?: Prisma.EnrollmentChargeOrderByWithRelationInput | Prisma.EnrollmentChargeOrderByWithRelationInput[]
+  cursor?: Prisma.EnrollmentChargeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EnrollmentChargeScalarFieldEnum | Prisma.EnrollmentChargeScalarFieldEnum[]
 }
 
 /**

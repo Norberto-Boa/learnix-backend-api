@@ -63,10 +63,10 @@ export type Grade = Prisma.GradeModel
  */
 export type Classroom = Prisma.ClassroomModel
 /**
- * Model enrollment
+ * Model Enrollment
  * 
  */
-export type enrollment = Prisma.enrollmentModel
+export type Enrollment = Prisma.EnrollmentModel
 /**
  * Model FeeType
  * 
@@ -87,3 +87,8 @@ export type PenaltyPolicy = Prisma.PenaltyPolicyModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model EnrollmentCharge
+ * 
+ */
+export type EnrollmentCharge = Prisma.EnrollmentChargeModel
