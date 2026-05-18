@@ -21,6 +21,7 @@ import { FeeTypesModule } from './fee-types/fee-types.module';
 import { FeeStructuresModule } from './fee-structures/fee-structures.module';
 import { PenaltyPoliciesModule } from './penalty-policies/penalty-policies.module';
 import { ProductsModule } from './products/products.module';
+import { EnrollmentChargesModule } from './enrollment-charges/enrollment-charges.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { ProductsModule } from './products/products.module';
     FeeStructuresModule,
     PenaltyPoliciesModule,
     ProductsModule,
+    EnrollmentChargesModule,
   ],
   providers: [
     {
