@@ -57,7 +57,7 @@ export abstract class EnrollmentChargesRepository {
   abstract findDuplicatedCharge(params: {
     enrollmentId: string;
     feeTypeId: string;
-    referenceYear: string;
+    referenceYear: number;
     referenceMonth: number;
   }): Promise<EnrollmentCharge | null>;
 
@@ -67,9 +67,11 @@ export abstract class EnrollmentChargesRepository {
   ): Promise<EnrollmentCharge[]>;
 
   abstract update(
+    id: string,
+    schoolId: string,
     data: UpdateEnrollmentChargeInput,
     tx?: DbContext,
-  ): Promise<EnrollmentCharge[]>;
+  ): Promise<EnrollmentCharge>;
 
   abstract cancel(
     id: string,
