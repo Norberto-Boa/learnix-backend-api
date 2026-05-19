@@ -10,6 +10,18 @@ import type { DbContext } from '@/prisma/shared/db-context';
 export class inMemoryEnrollmentChargesRepository implements EnrollmentChargesRepository {
   public items: EnrollmentCharge[] = [];
 
+  private findIndexOrThrow(id: string, schoolId: string): number {
+    const enrollmentChargeIndex = this.items.findIndex((item) => {
+      return item.id === id && item.schoolId === schoolId && !item.deletedAt;
+    });
+
+    if (enrollmentChargeIndex < 0) {
+      throw new Error('Enrollment charge not found');
+    }
+
+    return enrollmentChargeIndex;
+  }
+
   async save(
     data: CreateEnrollmentChargeInput,
     schoolId: string,
@@ -133,9 +145,7 @@ export class inMemoryEnrollmentChargesRepository implements EnrollmentChargesRep
     data: UpdateEnrollmentChargeInput,
     _tx?: DbContext,
   ): Promise<EnrollmentCharge> {
-    const enrollmentChargeIndex = this.items.findIndex((item) => {
-      return (item.id === id, item.schoolId === schoolId, !item.deletedAt);
-    });
+    const enrollmentChargeIndex = this.findIndexOrThrow(id, schoolId);
 
     const current = this.items[enrollmentChargeIndex];
 
@@ -162,10 +172,7 @@ export class inMemoryEnrollmentChargesRepository implements EnrollmentChargesRep
     schoolId: string,
     _tx?: DbContext,
   ): Promise<EnrollmentCharge> {
-    const enrollmentChargeIndex = this.items.findIndex((item) => {
-      return item.id === id && item.schoolId === schoolId && !item.deletedAt;
-    });
-
+    const enrollmentChargeIndex = this.findIndexOrThrow(id, schoolId);
     const current = this.items[enrollmentChargeIndex];
 
     const canceled: EnrollmentCharge = {
@@ -180,9 +187,7 @@ export class inMemoryEnrollmentChargesRepository implements EnrollmentChargesRep
   }
 
   async delete(id: string, schoolId: string, _tx?: DbContext): Promise<void> {
-    const enrollmentChargeIndex = this.items.findIndex((item) => {
-      return item.id === id && item.schoolId === schoolId && !item.deletedAt;
-    });
+    const enrollmentChargeIndex = this.findIndexOrThrow(id, schoolId);
 
     const current = this.items[enrollmentChargeIndex];
 
