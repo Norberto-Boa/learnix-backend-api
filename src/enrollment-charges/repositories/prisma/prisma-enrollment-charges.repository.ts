@@ -140,6 +140,7 @@ export class PrismaEnrollmentChargesRepository implements EnrollmentChargesRepos
       where: {
         id,
         schoolId,
+        deletedAt: null,
       },
       data: {
         dueDate: data.dueDate,
