@@ -441,6 +441,7 @@ model EnrollmentCharge {
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
+  @@unique([id, schoolId])
   @@unique([enrollmentId, feeTypeId, referenceYear, referenceMonth])
   @@index([schoolId, academicYearId, status])
   @@index([schoolId, referenceYear, referenceMonth])
