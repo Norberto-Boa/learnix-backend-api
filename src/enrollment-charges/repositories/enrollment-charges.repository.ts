@@ -46,7 +46,7 @@ export abstract class EnrollmentChargesRepository {
   abstract save(
     data: CreateEnrollmentChargeInput,
     schoolId: string,
-    db: DbContext,
+    db?: DbContext,
   ): Promise<EnrollmentCharge>;
 
   abstract findById(
@@ -70,13 +70,13 @@ export abstract class EnrollmentChargesRepository {
     id: string,
     schoolId: string,
     data: UpdateEnrollmentChargeInput,
-    tx?: DbContext,
+    db?: DbContext,
   ): Promise<EnrollmentCharge>;
 
   abstract cancel(
     id: string,
     schoolId: string,
-    tx?: DbContext,
+    db?: DbContext,
   ): Promise<EnrollmentCharge>;
 
   abstract delete(id: string, schoolId: string, tx?: DbContext): Promise<void>;
