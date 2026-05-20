@@ -38,7 +38,7 @@ describe('UpdateProductUseCase', () => {
   });
 
   it('Should not be able to update non-existent product', async () => {
-    expect(() =>
+    await expect(() =>
       sut.execute({ id: 'non-existent-product', name: 'Uniform' }, 'school-1'),
     ).rejects.toBeInstanceOf(ProductNotFoundError);
   });
@@ -46,7 +46,7 @@ describe('UpdateProductUseCase', () => {
   it('Should not be able to update product from another school!', async () => {
     const product = await productsRepository.save(productFactory(), 'school-1');
 
-    expect(() =>
+    await expect(() =>
       sut.execute({ id: product.id, name: 'Uniform' }, 'school-2'),
     ).rejects.toBeInstanceOf(ProductNotFoundError);
   });
