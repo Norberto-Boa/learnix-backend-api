@@ -24,6 +24,7 @@ export class FetchEnrollmentChargesUseCase {
   ) {}
 
   async execute(
+    schoolId: string,
     {
       academicYearId,
       enrollmentId,
@@ -33,7 +34,6 @@ export class FetchEnrollmentChargesUseCase {
       referenceYear,
       status,
     }: FetchEnrollmentChargesUseCaseRequest,
-    schoolId: string,
   ): Promise<FetchEnrollmentChargesUseCaseResponse> {
     const take = limit ?? 10;
 

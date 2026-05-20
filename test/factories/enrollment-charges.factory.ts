@@ -26,7 +26,7 @@ export function enrollmentChargeFactory(
     referenceYear:
       overrides.referenceYear ?? faker.number.int({ min: 2000, max: 2026 }),
     referenceMonth:
-      overrides.referenceYear ?? faker.number.int({ min: 0, max: 12 }),
+      overrides.referenceMonth ?? faker.number.int({ min: 0, max: 12 }),
     status: overrides.status ?? 'PENDING',
     dueDate: overrides.dueDate ?? faker.date.future(),
     baseAmount:
