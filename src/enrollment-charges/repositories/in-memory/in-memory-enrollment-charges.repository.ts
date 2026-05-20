@@ -25,7 +25,7 @@ export class InMemoryEnrollmentChargesRepository implements EnrollmentChargesRep
   async save(
     data: CreateEnrollmentChargeInput,
     schoolId: string,
-    _db: DbContext,
+    _db?: DbContext,
   ): Promise<EnrollmentCharge> {
     const enrollmentCharge: EnrollmentCharge = {
       id: crypto.randomUUID(),

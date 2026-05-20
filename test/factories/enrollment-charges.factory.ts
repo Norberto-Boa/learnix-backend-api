@@ -1,4 +1,4 @@
-import type { ENROLLMENT_STATUS } from '@/generated/prisma/enums';
+import type { CHARGE_STATUS } from '@/generated/prisma/enums';
 import { faker } from '@faker-js/faker';
 
 type EnrollmentChargeFactoryOverrides = Partial<{
@@ -13,7 +13,7 @@ type EnrollmentChargeFactoryOverrides = Partial<{
 
   baseAmount: number;
   penaltyAmount?: number;
-  status: ENROLLMENT_STATUS;
+  status: CHARGE_STATUS;
 }>;
 
 export function enrollmentChargeFactory(
@@ -31,6 +31,6 @@ export function enrollmentChargeFactory(
     dueDate: overrides.dueDate ?? faker.date.future(),
     baseAmount:
       overrides.baseAmount ?? faker.number.float({ min: 1000, max: 3000 }),
-    penaltyAmount: overrides.penaltyAmount,
+    penaltyAmount: overrides.penaltyAmount ?? 0,
   };
 }
