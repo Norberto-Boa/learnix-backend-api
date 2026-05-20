@@ -9,6 +9,7 @@ import { AcademicYearsRepository } from '../../academic-years/repositories/acade
 import { EnrollmentNotFoundError } from '@/enrollments/errors/enrollment-not-found.error';
 import { FeeTypeNotFoundError } from '@/fee-types/errors/fee-type-not-found.error';
 import { AcademicYearNotFoundError } from '@/academic-years/errors/academic-year-not-found.error';
+import { EnrollmentAcademicYearDoesNotMatchAcademicYearError } from '@/enrollment-charges/errors/enrollment-academic-year-does-not-match-academic-year.error';
 
 interface CreateEnrollmentChargeUseCaseRequest {
   enrollmentId: string;
@@ -73,6 +74,10 @@ export class CreateEnrollmentChargeUseCase {
 
     if (!academicYear) {
       throw new AcademicYearNotFoundError();
+    }
+
+    if (enrollment.academicYearId !== academicYearId) {
+      throw new EnrollmentAcademicYearDoesNotMatchAcademicYearError();
     }
 
     const duplicateCharge =

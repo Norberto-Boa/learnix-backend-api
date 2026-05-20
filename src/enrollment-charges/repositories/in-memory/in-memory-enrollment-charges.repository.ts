@@ -7,7 +7,7 @@ import {
 } from '../enrollment-charges.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
 
-export class inMemoryEnrollmentChargesRepository implements EnrollmentChargesRepository {
+export class InMemoryEnrollmentChargesRepository implements EnrollmentChargesRepository {
   public items: EnrollmentCharge[] = [];
 
   private findIndexOrThrow(id: string, schoolId: string): number {
