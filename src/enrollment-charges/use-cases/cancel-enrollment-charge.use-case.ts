@@ -5,6 +5,7 @@ import type { DbContext } from '@/prisma/shared/db-context';
 import { EnrollmentNotFoundError } from '@/enrollments/errors/enrollment-not-found.error';
 import { EnrollmentChargeAlreadyCancelled } from '@/enrollment-charges/errors/enrollment-charge-already-cancelled.error';
 import { EnrollmentChargeWithPaymentCannotBeCancelled } from '@/enrollment-charges/errors/enrollment-charge-with-payment-cannot-be-cancelled.error';
+import { EnrollmentChargeNotFoundError } from '@/enrollment-charges/errors/enrollment-charge-not-found.error';
 
 interface CancelEnrollmentChargeUseCaseRequest {
   id: string;
@@ -31,7 +32,7 @@ export class CancelEnrollmentChargeUseCase {
     );
 
     if (!enrollmentCharge) {
-      throw new EnrollmentNotFoundError();
+      throw new EnrollmentChargeNotFoundError();
     }
 
     if (enrollmentCharge.status === 'CANCELLED') {
