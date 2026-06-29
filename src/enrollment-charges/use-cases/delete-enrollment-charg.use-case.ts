@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { EnrollmentChargesRepository } from '../repositories/enrollment-charges.repository';
 import type { DbContext } from '@/prisma/shared/db-context';
-import { EnrollmentNotFoundError } from '@/enrollments/errors/enrollment-not-found.error';
 import { OnlyPendingEnrollmentChargesCanBeDeleted } from '@/enrollment-charges/errors/only-pending-enrollment-charges-can-be-deleted.error';
+import { EnrollmentChargeNotFoundError } from '../errors/enrollment-charge-not-found.error';
 
 interface DeleteEnrollmentChargeUseCaseRequest {
   id: string;
@@ -25,7 +25,7 @@ export class DeleteEnrollmentChargeUseCase {
     );
 
     if (!enrollmentCharge) {
-      throw new EnrollmentNotFoundError();
+      throw new EnrollmentChargeNotFoundError();
     }
 
     if (enrollmentCharge.status !== 'PENDING') {
