@@ -19,7 +19,7 @@ interface CreateEnrollmentChargeUseCaseRequest {
   referenceYear: number;
   referenceMonth: number;
 
-  dueDate: Date;
+  dueDate: string;
 
   baseAmount: number;
   penaltyAmount?: number;
@@ -103,7 +103,7 @@ export class CreateEnrollmentChargeUseCase {
         academicYearId,
         referenceMonth,
         referenceYear,
-        dueDate,
+        dueDate: new Date(dueDate),
         baseAmount,
         penaltyAmount: penaltyAmount ?? 0,
         totalAmount,

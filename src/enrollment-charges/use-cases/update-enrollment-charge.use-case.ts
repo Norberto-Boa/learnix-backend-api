@@ -14,7 +14,7 @@ interface UpdateEnrollmentChargeUseCaseRequest {
 
 export interface UpdateEnrollmentChargeUseCaseResponse {
   old: EnrollmentCharge;
-  new: EnrollmentCharge;
+  updated: EnrollmentCharge;
 }
 
 @Injectable()
@@ -74,7 +74,7 @@ export class UpdateEnrollmentChargeUseCase {
 
     return {
       old: enrollmentCharge,
-      new: updatedEnrollmentCharge,
+      updated: updatedEnrollmentCharge,
     };
   }
 }
