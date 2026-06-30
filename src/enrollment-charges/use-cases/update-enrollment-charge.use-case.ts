@@ -7,7 +7,7 @@ import { TotalAmountCannotBeLessThanPaidAmountError } from '@/enrollment-charges
 import type { DbContext } from '@/prisma/shared/db-context';
 
 interface UpdateEnrollmentChargeUseCaseRequest {
-  dueDate?: Date;
+  dueDate?: string;
   baseAmount?: number;
   penaltyAmount?: number;
 }
@@ -64,7 +64,7 @@ export class UpdateEnrollmentChargeUseCase {
         schoolId,
         {
           balanceAmount,
-          dueDate,
+          ...(dueDate && { dueDate: new Date(dueDate) }),
           baseAmount: updatedBaseAmount,
           penaltyAmount: updatedPenaltyAmount,
           totalAmount,
