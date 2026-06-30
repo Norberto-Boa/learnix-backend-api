@@ -225,6 +225,7 @@ export type StudentWhereInput = {
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   studentDocuments?: Prisma.StudentDocumentListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
 }
 
 export type StudentOrderByWithRelationInput = {
@@ -241,6 +242,7 @@ export type StudentOrderByWithRelationInput = {
   school?: Prisma.SchoolOrderByWithRelationInput
   studentDocuments?: Prisma.StudentDocumentOrderByRelationAggregateInput
   enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
+  invoices?: Prisma.InvoiceOrderByRelationAggregateInput
 }
 
 export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -261,6 +263,7 @@ export type StudentWhereUniqueInput = Prisma.AtLeast<{
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   studentDocuments?: Prisma.StudentDocumentListRelationFilter
   enrollments?: Prisma.EnrollmentListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
 }, "id" | "registrationNumber_schoolId">
 
 export type StudentOrderByWithAggregationInput = {
@@ -308,6 +311,7 @@ export type StudentCreateInput = {
   school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
   studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateInput = {
@@ -323,6 +327,7 @@ export type StudentUncheckedCreateInput = {
   deletedAt?: Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUpdateInput = {
@@ -338,6 +343,7 @@ export type StudentUpdateInput = {
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
   studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type StudentUncheckedUpdateInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateManyInput = {
@@ -530,6 +537,20 @@ export type StudentUpdateOneRequiredWithoutEnrollmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutEnrollmentsInput, Prisma.StudentUpdateWithoutEnrollmentsInput>, Prisma.StudentUncheckedUpdateWithoutEnrollmentsInput>
 }
 
+export type StudentCreateNestedOneWithoutInvoicesInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutInvoicesInput, Prisma.StudentUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutInvoicesInput
+  connect?: Prisma.StudentWhereUniqueInput
+}
+
+export type StudentUpdateOneRequiredWithoutInvoicesNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutInvoicesInput, Prisma.StudentUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutInvoicesInput
+  upsert?: Prisma.StudentUpsertWithoutInvoicesInput
+  connect?: Prisma.StudentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutInvoicesInput, Prisma.StudentUpdateWithoutInvoicesInput>, Prisma.StudentUncheckedUpdateWithoutInvoicesInput>
+}
+
 export type StudentCreateWithoutSchoolInput = {
   id?: string
   name: string
@@ -542,6 +563,7 @@ export type StudentCreateWithoutSchoolInput = {
   deletedAt?: Date | string | null
   studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutSchoolInput = {
@@ -556,6 +578,7 @@ export type StudentUncheckedCreateWithoutSchoolInput = {
   deletedAt?: Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutSchoolInput = {
@@ -612,6 +635,7 @@ export type StudentCreateWithoutStudentDocumentsInput = {
   deletedAt?: Date | string | null
   school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutStudentDocumentsInput = {
@@ -626,6 +650,7 @@ export type StudentUncheckedCreateWithoutStudentDocumentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutStudentDocumentsInput = {
@@ -656,6 +681,7 @@ export type StudentUpdateWithoutStudentDocumentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutStudentDocumentsInput = {
@@ -670,6 +696,7 @@ export type StudentUncheckedUpdateWithoutStudentDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutEnrollmentsInput = {
@@ -684,6 +711,7 @@ export type StudentCreateWithoutEnrollmentsInput = {
   deletedAt?: Date | string | null
   school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
   studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutEnrollmentsInput = {
@@ -698,6 +726,7 @@ export type StudentUncheckedCreateWithoutEnrollmentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutEnrollmentsInput = {
@@ -728,6 +757,7 @@ export type StudentUpdateWithoutEnrollmentsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
   studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutEnrollmentsInput = {
@@ -742,6 +772,83 @@ export type StudentUncheckedUpdateWithoutEnrollmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentCreateWithoutInvoicesInput = {
+  id?: string
+  name: string
+  registrationNumber: string
+  dateOfBirth: Date | string
+  gender: $Enums.GENDER
+  status?: $Enums.STUDENT_STATUS
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  school: Prisma.SchoolCreateNestedOneWithoutStudentsInput
+  studentDocuments?: Prisma.StudentDocumentCreateNestedManyWithoutStudentInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+}
+
+export type StudentUncheckedCreateWithoutInvoicesInput = {
+  id?: string
+  name: string
+  registrationNumber: string
+  dateOfBirth: Date | string
+  gender: $Enums.GENDER
+  status?: $Enums.STUDENT_STATUS
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedCreateNestedManyWithoutStudentInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentCreateOrConnectWithoutInvoicesInput = {
+  where: Prisma.StudentWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentCreateWithoutInvoicesInput, Prisma.StudentUncheckedCreateWithoutInvoicesInput>
+}
+
+export type StudentUpsertWithoutInvoicesInput = {
+  update: Prisma.XOR<Prisma.StudentUpdateWithoutInvoicesInput, Prisma.StudentUncheckedUpdateWithoutInvoicesInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutInvoicesInput, Prisma.StudentUncheckedCreateWithoutInvoicesInput>
+  where?: Prisma.StudentWhereInput
+}
+
+export type StudentUpdateToOneWithWhereWithoutInvoicesInput = {
+  where?: Prisma.StudentWhereInput
+  data: Prisma.XOR<Prisma.StudentUpdateWithoutInvoicesInput, Prisma.StudentUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type StudentUpdateWithoutInvoicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
+  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  school?: Prisma.SchoolUpdateOneRequiredWithoutStudentsNestedInput
+  studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentUncheckedUpdateWithoutInvoicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  registrationNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  dateOfBirth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.EnumGENDERFieldUpdateOperationsInput | $Enums.GENDER
+  status?: Prisma.EnumSTUDENT_STATUSFieldUpdateOperationsInput | $Enums.STUDENT_STATUS
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateManySchoolInput = {
@@ -768,6 +875,7 @@ export type StudentUpdateWithoutSchoolInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentDocuments?: Prisma.StudentDocumentUpdateManyWithoutStudentNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutSchoolInput = {
@@ -782,6 +890,7 @@ export type StudentUncheckedUpdateWithoutSchoolInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   studentDocuments?: Prisma.StudentDocumentUncheckedUpdateManyWithoutStudentNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateManyWithoutSchoolInput = {
@@ -804,11 +913,13 @@ export type StudentUncheckedUpdateManyWithoutSchoolInput = {
 export type StudentCountOutputType = {
   studentDocuments: number
   enrollments: number
+  invoices: number
 }
 
 export type StudentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   studentDocuments?: boolean | StudentCountOutputTypeCountStudentDocumentsArgs
   enrollments?: boolean | StudentCountOutputTypeCountEnrollmentsArgs
+  invoices?: boolean | StudentCountOutputTypeCountInvoicesArgs
 }
 
 /**
@@ -835,6 +946,13 @@ export type StudentCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.T
   where?: Prisma.EnrollmentWhereInput
 }
 
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceWhereInput
+}
+
 
 export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -850,6 +968,7 @@ export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   studentDocuments?: boolean | Prisma.Student$studentDocumentsArgs<ExtArgs>
   enrollments?: boolean | Prisma.Student$enrollmentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Student$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
@@ -899,6 +1018,7 @@ export type StudentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   studentDocuments?: boolean | Prisma.Student$studentDocumentsArgs<ExtArgs>
   enrollments?: boolean | Prisma.Student$enrollmentsArgs<ExtArgs>
+  invoices?: boolean | Prisma.Student$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StudentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -914,6 +1034,7 @@ export type $StudentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     school: Prisma.$SchoolPayload<ExtArgs>
     studentDocuments: Prisma.$StudentDocumentPayload<ExtArgs>[]
     enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
+    invoices: Prisma.$InvoicePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1323,6 +1444,7 @@ export interface Prisma__StudentClient<T, Null = never, ExtArgs extends runtime.
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   studentDocuments<T extends Prisma.Student$studentDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$studentDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   enrollments<T extends Prisma.Student$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoices<T extends Prisma.Student$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1803,6 +1925,30 @@ export type Student$enrollmentsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.EnrollmentScalarFieldEnum | Prisma.EnrollmentScalarFieldEnum[]
+}
+
+/**
+ * Student.invoices
+ */
+export type Student$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
+  orderBy?: Prisma.InvoiceOrderByWithRelationInput | Prisma.InvoiceOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
 }
 
 /**

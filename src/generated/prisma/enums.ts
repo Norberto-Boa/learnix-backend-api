@@ -89,3 +89,23 @@ export const CHARGE_STATUS = {
 } as const
 
 export type CHARGE_STATUS = (typeof CHARGE_STATUS)[keyof typeof CHARGE_STATUS]
+
+
+export const INVOICE_STATUS = {
+  PENDING: 'PENDING',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type INVOICE_STATUS = (typeof INVOICE_STATUS)[keyof typeof INVOICE_STATUS]
+
+
+export const INVOICE_ITEM_TYPE = {
+  ENROLLMENT_CHARGE: 'ENROLLMENT_CHARGE',
+  PRODUCT: 'PRODUCT',
+  MANUAL: 'MANUAL',
+  CREDIT_APPLICATION: 'CREDIT_APPLICATION'
+} as const
+
+export type INVOICE_ITEM_TYPE = (typeof INVOICE_ITEM_TYPE)[keyof typeof INVOICE_ITEM_TYPE]

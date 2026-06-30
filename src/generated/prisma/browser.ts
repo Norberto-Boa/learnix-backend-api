@@ -92,3 +92,13 @@ export type Product = Prisma.ProductModel
  * 
  */
 export type EnrollmentCharge = Prisma.EnrollmentChargeModel
+/**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model InvoiceItem
+ * 
+ */
+export type InvoiceItem = Prisma.InvoiceItemModel

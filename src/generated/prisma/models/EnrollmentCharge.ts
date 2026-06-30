@@ -340,6 +340,7 @@ export type EnrollmentChargeWhereInput = {
   feeType?: Prisma.XOR<Prisma.FeeTypeScalarRelationFilter, Prisma.FeeTypeWhereInput>
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
+  invoiceItems?: Prisma.InvoiceItemListRelationFilter
 }
 
 export type EnrollmentChargeOrderByWithRelationInput = {
@@ -364,10 +365,12 @@ export type EnrollmentChargeOrderByWithRelationInput = {
   feeType?: Prisma.FeeTypeOrderByWithRelationInput
   academicYear?: Prisma.AcademicYearOrderByWithRelationInput
   school?: Prisma.SchoolOrderByWithRelationInput
+  invoiceItems?: Prisma.InvoiceItemOrderByRelationAggregateInput
 }
 
 export type EnrollmentChargeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  id_schoolId?: Prisma.EnrollmentChargeIdSchoolIdCompoundUniqueInput
   enrollmentId_feeTypeId_referenceYear_referenceMonth?: Prisma.EnrollmentChargeEnrollmentIdFeeTypeIdReferenceYearReferenceMonthCompoundUniqueInput
   AND?: Prisma.EnrollmentChargeWhereInput | Prisma.EnrollmentChargeWhereInput[]
   OR?: Prisma.EnrollmentChargeWhereInput[]
@@ -392,7 +395,8 @@ export type EnrollmentChargeWhereUniqueInput = Prisma.AtLeast<{
   feeType?: Prisma.XOR<Prisma.FeeTypeScalarRelationFilter, Prisma.FeeTypeWhereInput>
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
-}, "id" | "enrollmentId_feeTypeId_referenceYear_referenceMonth">
+  invoiceItems?: Prisma.InvoiceItemListRelationFilter
+}, "id" | "id_schoolId" | "enrollmentId_feeTypeId_referenceYear_referenceMonth">
 
 export type EnrollmentChargeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -460,6 +464,7 @@ export type EnrollmentChargeCreateInput = {
   feeType: Prisma.FeeTypeCreateNestedOneWithoutEnrollmentChargesInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutEnrollmentChargesInput
   school: Prisma.SchoolCreateNestedOneWithoutEnrollmentChargesInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUncheckedCreateInput = {
@@ -480,6 +485,7 @@ export type EnrollmentChargeUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUpdateInput = {
@@ -500,6 +506,7 @@ export type EnrollmentChargeUpdateInput = {
   feeType?: Prisma.FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateInput = {
@@ -520,6 +527,7 @@ export type EnrollmentChargeUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeCreateManyInput = {
@@ -586,6 +594,11 @@ export type EnrollmentChargeListRelationFilter = {
 
 export type EnrollmentChargeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type EnrollmentChargeIdSchoolIdCompoundUniqueInput = {
+  id: string
+  schoolId: string
 }
 
 export type EnrollmentChargeEnrollmentIdFeeTypeIdReferenceYearReferenceMonthCompoundUniqueInput = {
@@ -673,6 +686,11 @@ export type EnrollmentChargeSumOrderByAggregateInput = {
   totalAmount?: Prisma.SortOrder
   paidAmount?: Prisma.SortOrder
   balanceAmount?: Prisma.SortOrder
+}
+
+export type EnrollmentChargeNullableScalarRelationFilter = {
+  is?: Prisma.EnrollmentChargeWhereInput | null
+  isNot?: Prisma.EnrollmentChargeWhereInput | null
 }
 
 export type EnrollmentChargeCreateNestedManyWithoutSchoolInput = {
@@ -847,6 +865,22 @@ export type EnumCHARGE_STATUSFieldUpdateOperationsInput = {
   set?: $Enums.CHARGE_STATUS
 }
 
+export type EnrollmentChargeCreateNestedOneWithoutInvoiceItemsInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentChargeCreateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedCreateWithoutInvoiceItemsInput>
+  connectOrCreate?: Prisma.EnrollmentChargeCreateOrConnectWithoutInvoiceItemsInput
+  connect?: Prisma.EnrollmentChargeWhereUniqueInput
+}
+
+export type EnrollmentChargeUpdateOneWithoutInvoiceItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.EnrollmentChargeCreateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedCreateWithoutInvoiceItemsInput>
+  connectOrCreate?: Prisma.EnrollmentChargeCreateOrConnectWithoutInvoiceItemsInput
+  upsert?: Prisma.EnrollmentChargeUpsertWithoutInvoiceItemsInput
+  disconnect?: Prisma.EnrollmentChargeWhereInput | boolean
+  delete?: Prisma.EnrollmentChargeWhereInput | boolean
+  connect?: Prisma.EnrollmentChargeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EnrollmentChargeUpdateToOneWithWhereWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUpdateWithoutInvoiceItemsInput>, Prisma.EnrollmentChargeUncheckedUpdateWithoutInvoiceItemsInput>
+}
+
 export type EnrollmentChargeCreateWithoutSchoolInput = {
   id?: string
   referenceYear: number
@@ -864,6 +898,7 @@ export type EnrollmentChargeCreateWithoutSchoolInput = {
   enrollment: Prisma.EnrollmentCreateNestedOneWithoutEnrollmentChargesInput
   feeType: Prisma.FeeTypeCreateNestedOneWithoutEnrollmentChargesInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutEnrollmentChargesInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUncheckedCreateWithoutSchoolInput = {
@@ -883,6 +918,7 @@ export type EnrollmentChargeUncheckedCreateWithoutSchoolInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeCreateOrConnectWithoutSchoolInput = {
@@ -951,6 +987,7 @@ export type EnrollmentChargeCreateWithoutAcademicYearInput = {
   enrollment: Prisma.EnrollmentCreateNestedOneWithoutEnrollmentChargesInput
   feeType: Prisma.FeeTypeCreateNestedOneWithoutEnrollmentChargesInput
   school: Prisma.SchoolCreateNestedOneWithoutEnrollmentChargesInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUncheckedCreateWithoutAcademicYearInput = {
@@ -970,6 +1007,7 @@ export type EnrollmentChargeUncheckedCreateWithoutAcademicYearInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeCreateOrConnectWithoutAcademicYearInput = {
@@ -1015,6 +1053,7 @@ export type EnrollmentChargeCreateWithoutEnrollmentInput = {
   feeType: Prisma.FeeTypeCreateNestedOneWithoutEnrollmentChargesInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutEnrollmentChargesInput
   school: Prisma.SchoolCreateNestedOneWithoutEnrollmentChargesInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUncheckedCreateWithoutEnrollmentInput = {
@@ -1034,6 +1073,7 @@ export type EnrollmentChargeUncheckedCreateWithoutEnrollmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeCreateOrConnectWithoutEnrollmentInput = {
@@ -1079,6 +1119,7 @@ export type EnrollmentChargeCreateWithoutFeeTypeInput = {
   enrollment: Prisma.EnrollmentCreateNestedOneWithoutEnrollmentChargesInput
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutEnrollmentChargesInput
   school: Prisma.SchoolCreateNestedOneWithoutEnrollmentChargesInput
+  invoiceItems?: Prisma.InvoiceItemCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeUncheckedCreateWithoutFeeTypeInput = {
@@ -1098,6 +1139,7 @@ export type EnrollmentChargeUncheckedCreateWithoutFeeTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedCreateNestedManyWithoutEnrolllmentChargeInput
 }
 
 export type EnrollmentChargeCreateOrConnectWithoutFeeTypeInput = {
@@ -1124,6 +1166,102 @@ export type EnrollmentChargeUpdateWithWhereUniqueWithoutFeeTypeInput = {
 export type EnrollmentChargeUpdateManyWithWhereWithoutFeeTypeInput = {
   where: Prisma.EnrollmentChargeScalarWhereInput
   data: Prisma.XOR<Prisma.EnrollmentChargeUpdateManyMutationInput, Prisma.EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeInput>
+}
+
+export type EnrollmentChargeCreateWithoutInvoiceItemsInput = {
+  id?: string
+  referenceYear: number
+  referenceMonth: number
+  dueDate: Date | string
+  baseAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CHARGE_STATUS
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  enrollment: Prisma.EnrollmentCreateNestedOneWithoutEnrollmentChargesInput
+  feeType: Prisma.FeeTypeCreateNestedOneWithoutEnrollmentChargesInput
+  academicYear: Prisma.AcademicYearCreateNestedOneWithoutEnrollmentChargesInput
+  school: Prisma.SchoolCreateNestedOneWithoutEnrollmentChargesInput
+}
+
+export type EnrollmentChargeUncheckedCreateWithoutInvoiceItemsInput = {
+  id?: string
+  enrollmentId: string
+  feeTypeId: string
+  academicYearId: string
+  referenceYear: number
+  referenceMonth: number
+  dueDate: Date | string
+  baseAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.CHARGE_STATUS
+  schoolId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+}
+
+export type EnrollmentChargeCreateOrConnectWithoutInvoiceItemsInput = {
+  where: Prisma.EnrollmentChargeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EnrollmentChargeCreateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedCreateWithoutInvoiceItemsInput>
+}
+
+export type EnrollmentChargeUpsertWithoutInvoiceItemsInput = {
+  update: Prisma.XOR<Prisma.EnrollmentChargeUpdateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedUpdateWithoutInvoiceItemsInput>
+  create: Prisma.XOR<Prisma.EnrollmentChargeCreateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedCreateWithoutInvoiceItemsInput>
+  where?: Prisma.EnrollmentChargeWhereInput
+}
+
+export type EnrollmentChargeUpdateToOneWithWhereWithoutInvoiceItemsInput = {
+  where?: Prisma.EnrollmentChargeWhereInput
+  data: Prisma.XOR<Prisma.EnrollmentChargeUpdateWithoutInvoiceItemsInput, Prisma.EnrollmentChargeUncheckedUpdateWithoutInvoiceItemsInput>
+}
+
+export type EnrollmentChargeUpdateWithoutInvoiceItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceYear?: Prisma.IntFieldUpdateOperationsInput | number
+  referenceMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  baseAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCHARGE_STATUSFieldUpdateOperationsInput | $Enums.CHARGE_STATUS
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollment?: Prisma.EnrollmentUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  feeType?: Prisma.FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  school?: Prisma.SchoolUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+}
+
+export type EnrollmentChargeUncheckedUpdateWithoutInvoiceItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  enrollmentId?: Prisma.StringFieldUpdateOperationsInput | string
+  feeTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  academicYearId?: Prisma.StringFieldUpdateOperationsInput | string
+  referenceYear?: Prisma.IntFieldUpdateOperationsInput | number
+  referenceMonth?: Prisma.IntFieldUpdateOperationsInput | number
+  dueDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  baseAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  penaltyAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  paidAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  balanceAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumCHARGE_STATUSFieldUpdateOperationsInput | $Enums.CHARGE_STATUS
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EnrollmentChargeCreateManySchoolInput = {
@@ -1162,6 +1300,7 @@ export type EnrollmentChargeUpdateWithoutSchoolInput = {
   enrollment?: Prisma.EnrollmentUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   feeType?: Prisma.FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateWithoutSchoolInput = {
@@ -1181,6 +1320,7 @@ export type EnrollmentChargeUncheckedUpdateWithoutSchoolInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateManyWithoutSchoolInput = {
@@ -1238,6 +1378,7 @@ export type EnrollmentChargeUpdateWithoutAcademicYearInput = {
   enrollment?: Prisma.EnrollmentUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   feeType?: Prisma.FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateWithoutAcademicYearInput = {
@@ -1257,6 +1398,7 @@ export type EnrollmentChargeUncheckedUpdateWithoutAcademicYearInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateManyWithoutAcademicYearInput = {
@@ -1314,6 +1456,7 @@ export type EnrollmentChargeUpdateWithoutEnrollmentInput = {
   feeType?: Prisma.FeeTypeUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateWithoutEnrollmentInput = {
@@ -1333,6 +1476,7 @@ export type EnrollmentChargeUncheckedUpdateWithoutEnrollmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateManyWithoutEnrollmentInput = {
@@ -1390,6 +1534,7 @@ export type EnrollmentChargeUpdateWithoutFeeTypeInput = {
   enrollment?: Prisma.EnrollmentUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutEnrollmentChargesNestedInput
   school?: Prisma.SchoolUpdateOneRequiredWithoutEnrollmentChargesNestedInput
+  invoiceItems?: Prisma.InvoiceItemUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateWithoutFeeTypeInput = {
@@ -1409,6 +1554,7 @@ export type EnrollmentChargeUncheckedUpdateWithoutFeeTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  invoiceItems?: Prisma.InvoiceItemUncheckedUpdateManyWithoutEnrolllmentChargeNestedInput
 }
 
 export type EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeInput = {
@@ -1430,6 +1576,35 @@ export type EnrollmentChargeUncheckedUpdateManyWithoutFeeTypeInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type EnrollmentChargeCountOutputType
+ */
+
+export type EnrollmentChargeCountOutputType = {
+  invoiceItems: number
+}
+
+export type EnrollmentChargeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  invoiceItems?: boolean | EnrollmentChargeCountOutputTypeCountInvoiceItemsArgs
+}
+
+/**
+ * EnrollmentChargeCountOutputType without action
+ */
+export type EnrollmentChargeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EnrollmentChargeCountOutputType
+   */
+  select?: Prisma.EnrollmentChargeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EnrollmentChargeCountOutputType without action
+ */
+export type EnrollmentChargeCountOutputTypeCountInvoiceItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceItemWhereInput
+}
 
 
 export type EnrollmentChargeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1454,6 +1629,8 @@ export type EnrollmentChargeSelect<ExtArgs extends runtime.Types.Extensions.Inte
   feeType?: boolean | Prisma.FeeTypeDefaultArgs<ExtArgs>
   academicYear?: boolean | Prisma.AcademicYearDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  invoiceItems?: boolean | Prisma.EnrollmentCharge$invoiceItemsArgs<ExtArgs>
+  _count?: boolean | Prisma.EnrollmentChargeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["enrollmentCharge"]>
 
 export type EnrollmentChargeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1530,6 +1707,8 @@ export type EnrollmentChargeInclude<ExtArgs extends runtime.Types.Extensions.Int
   feeType?: boolean | Prisma.FeeTypeDefaultArgs<ExtArgs>
   academicYear?: boolean | Prisma.AcademicYearDefaultArgs<ExtArgs>
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
+  invoiceItems?: boolean | Prisma.EnrollmentCharge$invoiceItemsArgs<ExtArgs>
+  _count?: boolean | Prisma.EnrollmentChargeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EnrollmentChargeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   enrollment?: boolean | Prisma.EnrollmentDefaultArgs<ExtArgs>
@@ -1551,6 +1730,7 @@ export type $EnrollmentChargePayload<ExtArgs extends runtime.Types.Extensions.In
     feeType: Prisma.$FeeTypePayload<ExtArgs>
     academicYear: Prisma.$AcademicYearPayload<ExtArgs>
     school: Prisma.$SchoolPayload<ExtArgs>
+    invoiceItems: Prisma.$InvoiceItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1968,6 +2148,7 @@ export interface Prisma__EnrollmentChargeClient<T, Null = never, ExtArgs extends
   feeType<T extends Prisma.FeeTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeeTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__FeeTypeClient<runtime.Types.Result.GetResult<Prisma.$FeeTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   academicYear<T extends Prisma.AcademicYearDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicYearDefaultArgs<ExtArgs>>): Prisma.Prisma__AcademicYearClient<runtime.Types.Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  invoiceItems<T extends Prisma.EnrollmentCharge$invoiceItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EnrollmentCharge$invoiceItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2407,6 +2588,30 @@ export type EnrollmentChargeDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many EnrollmentCharges to delete.
    */
   limit?: number
+}
+
+/**
+ * EnrollmentCharge.invoiceItems
+ */
+export type EnrollmentCharge$invoiceItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InvoiceItem
+   */
+  select?: Prisma.InvoiceItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InvoiceItem
+   */
+  omit?: Prisma.InvoiceItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceItemInclude<ExtArgs> | null
+  where?: Prisma.InvoiceItemWhereInput
+  orderBy?: Prisma.InvoiceItemOrderByWithRelationInput | Prisma.InvoiceItemOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceItemScalarFieldEnum | Prisma.InvoiceItemScalarFieldEnum[]
 }
 
 /**

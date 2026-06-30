@@ -65,7 +65,9 @@ export const ModelName = {
   FeeStructure: 'FeeStructure',
   PenaltyPolicy: 'PenaltyPolicy',
   Product: 'Product',
-  EnrollmentCharge: 'EnrollmentCharge'
+  EnrollmentCharge: 'EnrollmentCharge',
+  Invoice: 'Invoice',
+  InvoiceItem: 'InvoiceItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -319,6 +321,43 @@ export const EnrollmentChargeScalarFieldEnum = {
 } as const
 
 export type EnrollmentChargeScalarFieldEnum = (typeof EnrollmentChargeScalarFieldEnum)[keyof typeof EnrollmentChargeScalarFieldEnum]
+
+
+export const InvoiceScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  studentId: 'studentId',
+  enrollmentId: 'enrollmentId',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  balanceAmount: 'balanceAmount',
+  issuedAt: 'issuedAt',
+  dueDate: 'dueDate',
+  status: 'status',
+  schoolId: 'schoolId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+export const InvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  type: 'type',
+  enrollmentChargeId: 'enrollmentChargeId',
+  productId: 'productId',
+  description: 'description',
+  unitAmount: 'unitAmount',
+  quantity: 'quantity',
+  totalAmount: 'totalAmount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
 
 
 export const SortOrder = {

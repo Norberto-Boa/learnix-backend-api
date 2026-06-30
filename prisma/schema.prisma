@@ -74,6 +74,7 @@ model School {
   penaltyPolicies   PenaltyPolicy[]
   products          Product[]
   enrollmentCharges EnrollmentCharge[]
+  invoices          Invoice[]
 
   @@map("schools")
 }
@@ -179,6 +180,7 @@ model Student {
   deletedAt        DateTime?
   studentDocuments StudentDocument[]
   enrollments      Enrollment[]
+  invoices         Invoice[]
 
   @@unique([registrationNumber, schoolId])
   @@map("students")
@@ -272,6 +274,7 @@ model Enrollment {
   updatedAt         DateTime           @updatedAt
   deletedAt         DateTime?
   enrollmentCharges EnrollmentCharge[]
+  invoices          Invoice[]
 
   @@unique([schoolId, studentId, academicYearId])
   @@map("enrollments")
@@ -389,9 +392,10 @@ model Product {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  deletedAt    DateTime?
+  invoiceItems InvoiceItem[]
 
   @@unique([schoolId, name])
   @@map("products")
@@ -437,13 +441,90 @@ model EnrollmentCharge {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id])
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  deletedAt    DateTime?
+  invoiceItems InvoiceItem[]
 
   @@unique([id, schoolId])
   @@unique([enrollmentId, feeTypeId, referenceYear, referenceMonth])
   @@index([schoolId, academicYearId, status])
   @@index([schoolId, referenceYear, referenceMonth])
   @@map("enrollment_charges")
+}
+
+enum INVOICE_STATUS {
+  PENDING
+  PARTIALLY_PAID
+  PAID
+  CANCELLED
+}
+
+enum INVOICE_ITEM_TYPE {
+  ENROLLMENT_CHARGE
+  PRODUCT
+  MANUAL
+  CREDIT_APPLICATION
+}
+
+model Invoice {
+  id String @id @default(uuid())
+
+  invoiceNumber String
+
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+
+  enrollment   Enrollment? @relation(fields: [enrollmentId], references: [id])
+  enrollmentId String?
+
+  totalAmount   Decimal @db.Decimal(10, 2)
+  paidAmount    Decimal @default(0) @db.Decimal(10, 2)
+  balanceAmount Decimal @db.Decimal(10, 2)
+
+  issuedAt DateTime @default(now())
+  dueDate  DateTime
+
+  status INVOICE_STATUS @default(PENDING)
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
+
+  items InvoiceItem[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@unique([schoolId, invoiceNumber])
+  @@index([schoolId, studentId, status])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id String @id @default(uuid())
+
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+
+  type INVOICE_ITEM_TYPE
+
+  enrollmentChargeId String?
+  enrolllmentCharge  EnrollmentCharge? @relation(fields: [enrollmentChargeId], references: [id])
+
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+
+  description String
+  unitAmount  Decimal @db.Decimal(10, 2)
+  quantity    Int     @default(1)
+  totalAmount Decimal @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([invoiceId])
+  @@index(enrollmentChargeId)
+  @@index(productId)
+  @@map("invoice_items")
 }

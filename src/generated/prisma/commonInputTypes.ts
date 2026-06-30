@@ -433,6 +433,40 @@ export type EnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
 }
 
+export type EnumINVOICE_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_STATUS | Prisma.EnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel> | $Enums.INVOICE_STATUS
+}
+
+export type EnumINVOICE_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_STATUS | Prisma.EnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.INVOICE_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel>
+}
+
+export type EnumINVOICE_ITEM_TYPEFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_ITEM_TYPE | Prisma.EnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel> | $Enums.INVOICE_ITEM_TYPE
+}
+
+export type EnumINVOICE_ITEM_TYPEWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_ITEM_TYPE | Prisma.EnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_ITEM_TYPEWithAggregatesFilter<$PrismaModel> | $Enums.INVOICE_ITEM_TYPE
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -836,6 +870,40 @@ export type NestedEnumCHARGE_STATUSWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCHARGE_STATUSFilter<$PrismaModel>
+}
+
+export type NestedEnumINVOICE_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_STATUS | Prisma.EnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel> | $Enums.INVOICE_STATUS
+}
+
+export type NestedEnumINVOICE_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_STATUS | Prisma.EnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_STATUS[] | Prisma.ListEnumINVOICE_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.INVOICE_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumINVOICE_STATUSFilter<$PrismaModel>
+}
+
+export type NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_ITEM_TYPE | Prisma.EnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel> | $Enums.INVOICE_ITEM_TYPE
+}
+
+export type NestedEnumINVOICE_ITEM_TYPEWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.INVOICE_ITEM_TYPE | Prisma.EnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  in?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  notIn?: $Enums.INVOICE_ITEM_TYPE[] | Prisma.ListEnumINVOICE_ITEM_TYPEFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumINVOICE_ITEM_TYPEWithAggregatesFilter<$PrismaModel> | $Enums.INVOICE_ITEM_TYPE
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumINVOICE_ITEM_TYPEFilter<$PrismaModel>
 }
 
 
